@@ -3082,36 +3082,21 @@ End
 		Sub Action()
 		  dim sql as string
 		  dim data as RecordSet
+		  dim current_date as string
 		  
-		  if me.State = CheckBox.CheckedStates.Unchecked then
-		    init_lists_tab
-		  else
-		    sql = "SELECT * FROM as_at_date WHERE list_date >= '" + LDatePicker.list(LDatePicker.ListIndex) + "' and list_date <= '" + left(LDatePicker.list(LDatePicker.ListIndex),4) + "-12-31'"
+		  if me.State = CheckBox.CheckedStates.Checked then
+		    current_date = LDatePicker.list(LDatePicker.ListIndex) 
+		    sql = "SELECT * FROM as_at_date WHERE list_date >= '" + current_date + "' and list_date <= '" + left(current_date,4) + "-12-31'"
 		    data = app.ratingsDB.SQLSelect(sql)
 		    data.MoveLast
-		    MsgBox data.IdxField(2)
-		    
-		    ' find all as at dates for current year, sort by date, go to last
-		    ' find seedings for last date of current year
-		    if false then 'seedings_present then
+		    sql = "SELECT * FROM list_entry WHERE as_at_date_id = '" + data.IdxField(1).StringValue + "'"
+		    data = app.ratingsDB.SQLSelect(sql)
+		    if data.RecordCount > 0  then
 		      ' change state to lists for end of current year
 		    else
 		      me.State = CheckBox.CheckedStates.Unchecked
-		      init_lists_tab
 		    end if
 		  end if
-		  
-		  
-		  'ratingsDB.SQLExecute("CREATE TABLE rating_change(id Integer, tournament_id Integer, player_id Integer, start_rating Float, rating_status VarChar, prov_rating Float, "+_
-		  '"expected_wins Float, games Smallint, wins Float, end_rating Float, grade VarChar, placing Smallint, seeding Smallint, PRIMARY KEY(id));")
-		  'ratingsDB.SQLExecute("CREATE TABLE tournament(id Integer, tournament_name VarChar, as_at_date_id Integer, UNIQUE(tournament_name, as_at_date_id), PRIMARY KEY(id));")
-		  'ratingsDB.SQLExecute("CREATE TABLE player(id Integer, name VarChar, club_id Integer, last_tournament_id Integer DEFAULT 'NULL', UNIQUE(name, club_id), PRIMARY KEY(id));")
-		  'ratingsDB.SQLExecute("CREATE TABLE club(id Integer, club_name VarChar, club_abbrev VarChar, UNIQUE(club_name), UNIQUE(club_abbrev), PRIMARY KEY(id));")
-		  'ratingsDB.SQLExecute("CREATE TABLE as_at_date(id Integer, list_date VarChar, UNIQUE(list_date), PRIMARY KEY(id));")
-		  'ratingsDB.SQLExecute("CREATE TABLE rated_game(id Integer, tournament_id Integer, player1_id Integer, player2_id Integer, PRIMARY KEY(id));")
-		  'ratingsDB.SQLExecute("CREATE TABLE list_entry(id Integer, player_id Integer, as_at_date_id Integer, ranking Smallint, PRIMARY KEY(id));")
-		  'ratingsDB.SQLExecute("CREATE TABLE lifetime_award(id Integer, player_id Integer, award VarChar, year_id Integer, PRIMARY KEY(id));")
-		  'ratingsDB.SQLExecute("CREATE TABLE year(id Integer, active_year Integer, UNIQUE(active_year), PRIMARY KEY(id));")
 		  
 		End Sub
 	#tag EndEvent
