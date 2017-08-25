@@ -2121,6 +2121,90 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub load_lists()
+		  dim i as integer
+		  dim current_date,last_seed,sql as string
+		  dim data as recordset
+		  dim last_seeds as new Dictionary
+		  
+		  if me.LDatePicker.ListIndex > 0 then
+		    sql = "SELECT player_id,ranking FROM list_entry JOIN as_at_date ON list_entry.as_at_date_id=as_at_date.id WHERE as_at_date.list_date='"+me.LDatePicker.list(me.LDatePicker.ListIndex-1)+"'"
+		    data = app.ratingsDB.SQLSelect(sql)
+		    
+		    if data.RecordCount > 0 then
+		      PrevListSavedText.text = "✔︎"
+		      for i=1 to data.RecordCount
+		        last_seeds.value(data.IdxField(1).StringValue) = data.IdxField(2).StringValue
+		        data.MoveNext
+		      next
+		    else
+		      PrevListSavedText.Text = "✘︎"
+		    end if
+		  else
+		    PrevListSavedText.Text = ""
+		  end if
+		  
+		  if End_of_year_check.State = CheckBox.CheckedStates.Unchecked then
+		    current_date = me.LDatePicker.list(me.LDatePicker.ListIndex)
+		    
+		    sql = "SELECT * FROM list_entry JOIN as_at_date ON list_entry.as_at_date_id=as_at_date.id WHERE as_at_date.list_date='"+current_date+"'"
+		    data = app.ratingsDB.SQLSelect(sql)
+		    
+		    if data.RecordCount > 0 then
+		      ListSavedText.text = "✔︎"
+		    else
+		      ListSavedText.Text = "✘︎"
+		    end if
+		  else
+		    current_date = left(me.LDatePicker.list(me.LDatePicker.ListIndex),4)+"-12-31"
+		  end if
+		  
+		  ListDetails.DeleteAllRows
+		  
+		  mainwindow.Refresh
+		  
+		  sql = "SELECT player.id,player.name FROM player "+_
+		  "LEFT JOIN tournament ON player.last_tournament_id=tournament.id LEFT JOIN as_at_date ON tournament.as_at_date_id=as_at_date.id "+_
+		  "WHERE player.last_tournament_id='NULL' or '"+current_date+"' < as_at_date.list_date"
+		  data = app.ratingsDB.SQLSelect(sql)
+		  
+		  while not data.EOF
+		    if me.LDatePicker.ListIndex = 0 then
+		      last_seed = data.IdxField(1).StringValue
+		    elseif last_seeds.HasKey(data.IdxField(1).StringValue) then
+		      last_seed = last_seeds.value(data.IdxField(1).StringValue)
+		    else
+		      last_seed = "9999"
+		    end if
+		    add_player_to_list(val(data.IdxField(1).StringValue),data.IdxField(2).StringValue,current_date,last_seed)
+		    data.MoveNext
+		  wend
+		  
+		  EqualCount.Text = "0"
+		  ListDetails.ColumnSortDirection(2) = Listbox.SortDescending
+		  ListDetails.SortedColumn = 2
+		  ListDetails.Sort
+		  for i=1 to ListDetails.ListCount
+		    if listdetails.Cellbold(i-1, 1) then
+		      
+		      EqualCount.Text = str(val(EqualCount.text)+1)
+		    end if
+		    if i < ListDetails.ListCount then
+		      if round(val(ListDetails.cell(i-1,2)))=round(val(ListDetails.cell(i,2))) then
+		        if val(ListDetails.cell(i-1,7)) > 0 then
+		          ListDetails.Cell(i,7) = str(val(ListDetails.cell(i-1,7))+1)
+		        else
+		          ListDetails.Cell(i-1,7) = "1"
+		          ListDetails.Cell(i,7) = "2"
+		        end if
+		      end if
+		    end if
+		  next
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub load_player_details(player_id as integer)
 		  PlayerDetails.DeleteAllRows
 		  
@@ -2982,79 +3066,7 @@ End
 #tag Events LDatePicker
 	#tag Event
 		Sub Change()
-		  dim i as integer
-		  dim last_seed,sql as string
-		  dim data as recordset
-		  dim last_seeds as new Dictionary
-		  
-		  if me.ListIndex > 0 then
-		    sql = "SELECT player_id,ranking FROM list_entry JOIN as_at_date ON list_entry.as_at_date_id=as_at_date.id WHERE as_at_date.list_date='"+me.list(me.ListIndex-1)+"'"
-		    data = app.ratingsDB.SQLSelect(sql)
-		    
-		    if data.RecordCount > 0 then
-		      PrevListSavedText.text = "✔︎"
-		      for i=1 to data.RecordCount
-		        last_seeds.value(data.IdxField(1).StringValue) = data.IdxField(2).StringValue
-		        data.MoveNext
-		      next
-		    else
-		      PrevListSavedText.Text = "✘︎"
-		    end if
-		  else
-		    PrevListSavedText.Text = ""
-		  end if
-		  
-		  sql = "SELECT * FROM list_entry JOIN as_at_date ON list_entry.as_at_date_id=as_at_date.id WHERE as_at_date.list_date='"+me.list(me.ListIndex)+"'"
-		  data = app.ratingsDB.SQLSelect(sql)
-		  
-		  if data.RecordCount > 0 then
-		    ListSavedText.text = "✔︎"
-		  else
-		    ListSavedText.Text = "✘︎"
-		  end if
-		  
-		  ListDetails.DeleteAllRows
-		  
-		  mainwindow.Refresh
-		  
-		  sql = "SELECT player.id,player.name FROM player "+_
-		  "LEFT JOIN tournament ON player.last_tournament_id=tournament.id LEFT JOIN as_at_date ON tournament.as_at_date_id=as_at_date.id "+_
-		  "WHERE player.last_tournament_id='NULL' or '"+me.list(me.ListIndex)+"' < as_at_date.list_date"
-		  data = app.ratingsDB.SQLSelect(sql)
-		  
-		  while not data.EOF
-		    if me.ListIndex = 0 then
-		      last_seed = data.IdxField(1).StringValue
-		    elseif last_seeds.HasKey(data.IdxField(1).StringValue) then
-		      last_seed = last_seeds.value(data.IdxField(1).StringValue)
-		    else
-		      last_seed = "9999"
-		    end if
-		    add_player_to_list(val(data.IdxField(1).StringValue),data.IdxField(2).StringValue,me.list(me.ListIndex),last_seed)
-		    data.MoveNext
-		  wend
-		  
-		  EqualCount.Text = "0"
-		  ListDetails.ColumnSortDirection(2) = Listbox.SortDescending
-		  ListDetails.SortedColumn = 2
-		  ListDetails.Sort
-		  for i=1 to ListDetails.ListCount
-		    if listdetails.Cellbold(i-1, 1) then
-		      
-		      EqualCount.Text = str(val(EqualCount.text)+1)
-		    end if
-		    if i < ListDetails.ListCount then
-		      if round(val(ListDetails.cell(i-1,2)))=round(val(ListDetails.cell(i,2))) then
-		        if val(ListDetails.cell(i-1,7)) > 0 then
-		          ListDetails.Cell(i,7) = str(val(ListDetails.cell(i-1,7))+1)
-		        else
-		          ListDetails.Cell(i-1,7) = "1"
-		          ListDetails.Cell(i,7) = "2"
-		        end if
-		      end if
-		    end if
-		  next
-		  
+		  load_lists
 		  
 		End Sub
 	#tag EndEvent
@@ -3092,10 +3104,14 @@ End
 		    sql = "SELECT * FROM list_entry WHERE as_at_date_id = '" + data.IdxField(1).StringValue + "'"
 		    data = app.ratingsDB.SQLSelect(sql)
 		    if data.RecordCount > 0  then
-		      ' change state to lists for end of current year
+		      'display end of year date
+		      load_lists
 		    else
 		      me.State = CheckBox.CheckedStates.Unchecked
 		    end if
+		  else
+		    'display current date
+		    load_lists
 		  end if
 		  
 		End Sub
