@@ -1363,7 +1363,11 @@ End
 		  dim ratings_records as new JSONItem
 		  dim d as new Date
 		  
-		  list_date = LDatePicker.List(LDatePicker.ListIndex)
+		  if End_of_year_check.State = CheckBox.CheckedStates.Unchecked then
+		    list_date = LDatePicker.List(LDatePicker.ListIndex)
+		  else
+		    list_date = left(LDatePicker.List(LDatePicker.ListIndex),4)+"-12-31"
+		  end if
 		  d.SQLDate = list_date
 		  
 		  allratings.Value("Date") = "as at "+d.LongDate
@@ -1428,7 +1432,11 @@ End
 		  dim list_date,last_masters,last_nationals,output1,output2,output3 as string
 		  dim nats, tts, wcs as Boolean
 		  
-		  list_date = LDatePicker.List(LDatePicker.ListIndex)
+		  if End_of_year_check.State = CheckBox.CheckedStates.Unchecked then
+		    list_date = LDatePicker.List(LDatePicker.ListIndex)
+		  else
+		    list_date = left(LDatePicker.List(LDatePicker.ListIndex),4)+"-12-31"
+		  end if
 		  nats = isnats(list_date)
 		  wcs = nats and iswcs(list_date)
 		  tts = not wcs
@@ -2406,15 +2414,18 @@ End
 		  dim i as integer
 		  dim row as new DatabaseRecord
 		  
-		  app.ratingsDB.SQLExecute("DELETE FROM list_entry WHERE as_at_date_id = "+LDatePicker.rowTag(LDatePicker.ListIndex))
-		  
-		  for i = 1 to ListDetails.ListCount
-		    row.Column("player_id") = ListDetails.cell(i-1,0)
-		    row.Column("as_at_date_id") = LDatePicker.rowTag(LDatePicker.ListIndex)
-		    row.Column("ranking") = str(i)
-		    app.ratingsDB.InsertRecord("list_entry", row)
-		  next
-		  ListSavedText.text = "✔︎"
+		  if End_of_year_check.State = CheckBox.CheckedStates.Unchecked then
+		    
+		    app.ratingsDB.SQLExecute("DELETE FROM list_entry WHERE as_at_date_id = "+LDatePicker.rowTag(LDatePicker.ListIndex))
+		    
+		    for i = 1 to ListDetails.ListCount
+		      row.Column("player_id") = ListDetails.cell(i-1,0)
+		      row.Column("as_at_date_id") = LDatePicker.rowTag(LDatePicker.ListIndex)
+		      row.Column("ranking") = str(i)
+		      app.ratingsDB.InsertRecord("list_entry", row)
+		    next
+		    ListSavedText.text = "✔︎"
+		  end if
 		  
 		End Sub
 	#tag EndMethod

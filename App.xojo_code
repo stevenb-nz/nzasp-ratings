@@ -29,6 +29,7 @@ Inherits Application
 		    TournamentSaveExpectancies.Enabled = true
 		  end if
 		  
+		  
 		  sortcheck = true
 		  for i = 1 to MainWindow.ListDetails.ListCount-1
 		    if val(MainWindow.ListDetails.Cell(i-1,2)) < val(MainWindow.ListDetails.Cell(i,2)) then
@@ -36,6 +37,9 @@ Inherits Application
 		    end if
 		  next
 		  ListsSaveSeeds.Enabled = sortcheck
+		  if MainWindow.End_of_year_check.State = CheckBox.CheckedStates.Checked then
+		    ListsSaveSeeds.Enabled = false
+		  end if
 		  ListsExportLists.Enabled = sortcheck
 		  
 		End Sub
@@ -76,7 +80,7 @@ Inherits Application
 			
 			n = MsgBox("Do you really want to delete all data?", 36)
 			If n = 6 Then
-			 ratingsDB.Close
+			ratingsDB.Close
 			ratingsDB.DatabaseFile.Delete
 			newDB
 			End If
