@@ -956,6 +956,40 @@ Begin Window MainWindow
          Visible         =   True
          Width           =   100
       End
+      Begin Label LEoYLabel
+         AutoDeactivate  =   True
+         Bold            =   False
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "MainTabPanel"
+         Italic          =   False
+         Left            =   57
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   7
+         TabPanelIndex   =   4
+         Text            =   ""
+         TextAlign       =   0
+         TextColor       =   &c00000000
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   39
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   100
+      End
    End
 End
 #tag EndWindow
@@ -1957,6 +1991,11 @@ End
 		  
 		  LDatePicker.DeleteAllRows
 		  End_of_year_check.State = CheckBox.CheckedStates.Unchecked
+		  LDatePicker.Visible = true
+		  ListSavedText.Visible = true
+		  AsAtDateChange.Visible = true
+		  LEoYLabel.Bold = true
+		  LEoYLabel.Visible = false
 		  
 		  sql = "SELECT id,list_date from as_at_date ORDER by list_date"
 		  data = app.ratingsDB.SQLSelect(sql)
@@ -3115,13 +3154,20 @@ End
 		    sql = "SELECT * FROM list_entry WHERE as_at_date_id = '" + data.IdxField(1).StringValue + "'"
 		    data = app.ratingsDB.SQLSelect(sql)
 		    if data.RecordCount > 0  then
-		      'display end of year date
+		      LEoYLabel.Text = left(current_date,4) + "-12-31"
+		      LDatePicker.Visible = false
+		      ListSavedText.Visible = false
+		      AsAtDateChange.Visible = false
+		      LEoYLabel.Visible = true
 		      load_lists
 		    else
 		      me.State = CheckBox.CheckedStates.Unchecked
 		    end if
 		  else
-		    'display current date
+		    LDatePicker.Visible = true
+		    ListSavedText.Visible = true
+		    AsAtDateChange.Visible = true
+		    LEoYLabel.Visible = false
 		    load_lists
 		  end if
 		  
