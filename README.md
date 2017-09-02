@@ -1,1 +1,2 @@
-# nzasp-ratings
+# NZASP Ratings System Software
+
