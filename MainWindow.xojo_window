@@ -53,7 +53,7 @@ Begin Window MainWindow
       TextUnit        =   0
       Top             =   0
       Underline       =   False
-      Value           =   3
+      Value           =   0
       Visible         =   True
       Width           =   1200
       Begin Listbox AwardDetails
@@ -2324,12 +2324,6 @@ End
 		  name = params(0)
 		  club = if(params.Ubound > 0, params(1), "")
 		  
-		  if get_name_id(name) < 1 then
-		    n = MsgBox("Is "+name+" new to the NZ rating system?", 36)
-		    If n <> 6 Then
-		      return
-		    end if
-		  end if
 		  name_id = app.get_name_id(name)
 		  
 		  if club<>"" then
