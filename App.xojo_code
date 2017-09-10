@@ -181,9 +181,11 @@ Inherits Application
 			end if
 			wend
 			t.Close
+			if u <> "" then
 			n = MsgBox("Are all of "+u+" new to the NZ rating system?", 36)
 			If n <> 6 Then
 			return true
+			end if
 			end if
 			t = TextInputStream.Open(f)
 			while not t.EOF
