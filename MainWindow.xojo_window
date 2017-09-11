@@ -275,6 +275,7 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   2
          TabPanelIndex   =   1
+         TabStop         =   True
          Text            =   ""
          TextAlign       =   2
          TextColor       =   &c00000000
@@ -331,6 +332,7 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   4
          TabPanelIndex   =   1
+         TabStop         =   True
          Text            =   ""
          TextAlign       =   2
          TextColor       =   &c00000000
@@ -387,6 +389,7 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   6
          TabPanelIndex   =   1
+         TabStop         =   True
          Text            =   ""
          TextAlign       =   2
          TextColor       =   &c00000000
@@ -452,6 +455,7 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   8
          TabPanelIndex   =   1
+         TabStop         =   True
          Text            =   ""
          TextAlign       =   2
          TextColor       =   &c00000000
@@ -486,6 +490,7 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   9
          TabPanelIndex   =   1
+         TabStop         =   True
          Text            =   ""
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -757,6 +762,7 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   4
          TabPanelIndex   =   2
+         TabStop         =   True
          Text            =   "(Deceased)"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -844,6 +850,7 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   3
          TabPanelIndex   =   4
+         TabStop         =   True
          Text            =   ""
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -878,6 +885,7 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   4
          TabPanelIndex   =   4
+         TabStop         =   True
          Text            =   ""
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -912,6 +920,7 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   5
          TabPanelIndex   =   4
+         TabStop         =   True
          Text            =   ""
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -978,6 +987,7 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   7
          TabPanelIndex   =   4
+         TabStop         =   True
          Text            =   ""
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -2328,16 +2338,11 @@ End
 		  
 		  if club<>"" then
 		    if get_club_id(club) < 1 then
-		      n = MsgBox("Is "+club+" a valid club abbreviation?", 36)
-		      If n <> 6 Then
-		        return
-		      else
-		        dim newClub as new NewClubDialog
-		        newClub.ClubName.Text = ""
-		        newClub.ClubAbbreviation.Text = club
-		        newClub.ShowModal
-		        clubname = newClub.NewClubName
-		      end if
+		      dim newClub as new NewClubDialog
+		      newClub.ClubName.Text = ""
+		      newClub.ClubAbbreviation.Text = club
+		      newClub.ShowModal
+		      clubname = newClub.NewClubName
 		    end if
 		    club_id = app.get_club_id(club,clubname)
 		    app.ratingsDB.SQLExecute("UPDATE player SET club_id="+str(club_id)+" WHERE id="+str(name_id))

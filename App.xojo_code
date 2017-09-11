@@ -164,7 +164,7 @@ Inherits Application
 		Function TournamentImportPlayers() As Boolean Handles TournamentImportPlayers.Action
 			dim f as FolderItem
 			dim t as TextInputStream
-			dim name,s,u as String
+			dim club,name,s,u,v as String
 			dim n as integer
 			dim params(-1) as string
 			
@@ -175,14 +175,20 @@ Inherits Application
 			s = t.ReadLine
 			params = s.Split(",")
 			name = params(0)
-			'club = if(params.Ubound > 0, params(1), "")
+			
 			if MainWindow.get_name_id(name) < 1 then
 			u = u+name+", "
+			end if
+			club = if(params.Ubound > 0, params(1), "")
+			if club<>"" then
+			if MainWindow.get_club_id(club) < 1 then
+			v = v+club+", "
+			end if
 			end if
 			wend
 			t.Close
 			if u <> "" then
-			n = MsgBox("Are all of "+u+" new to the NZ rating system?", 36)
+			n = MsgBox("Are all of "+u+" new to the NZ rating system, and are all of "+v+" valid club abbreviations?", 36)
 			If n <> 6 Then
 			return true
 			end if
