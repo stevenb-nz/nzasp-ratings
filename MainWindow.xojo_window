@@ -53,7 +53,7 @@ Begin Window MainWindow
       TextUnit        =   0
       Top             =   0
       Underline       =   False
-      Value           =   0
+      Value           =   3
       Visible         =   True
       Width           =   1200
       Begin Listbox AwardDetails
@@ -275,7 +275,6 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   2
          TabPanelIndex   =   1
-         TabStop         =   True
          Text            =   ""
          TextAlign       =   2
          TextColor       =   &c00000000
@@ -332,7 +331,6 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   4
          TabPanelIndex   =   1
-         TabStop         =   True
          Text            =   ""
          TextAlign       =   2
          TextColor       =   &c00000000
@@ -389,7 +387,6 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   6
          TabPanelIndex   =   1
-         TabStop         =   True
          Text            =   ""
          TextAlign       =   2
          TextColor       =   &c00000000
@@ -455,7 +452,6 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   8
          TabPanelIndex   =   1
-         TabStop         =   True
          Text            =   ""
          TextAlign       =   2
          TextColor       =   &c00000000
@@ -490,7 +486,6 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   9
          TabPanelIndex   =   1
-         TabStop         =   True
          Text            =   ""
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -762,7 +757,6 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   4
          TabPanelIndex   =   2
-         TabStop         =   True
          Text            =   "(Deceased)"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -850,7 +844,6 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   3
          TabPanelIndex   =   4
-         TabStop         =   True
          Text            =   ""
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -885,7 +878,6 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   4
          TabPanelIndex   =   4
-         TabStop         =   True
          Text            =   ""
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -920,7 +912,6 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   5
          TabPanelIndex   =   4
-         TabStop         =   True
          Text            =   ""
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -987,7 +978,6 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   7
          TabPanelIndex   =   4
-         TabStop         =   True
          Text            =   ""
          TextAlign       =   0
          TextColor       =   &c00000000

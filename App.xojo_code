@@ -41,6 +41,7 @@ Inherits Application
 		    ListsSaveSeeds.Enabled = false
 		  end if
 		  ListsExportLists.Enabled = sortcheck
+		  ListsCustomList.Enabled = sortcheck
 		  
 		End Sub
 	#tag EndEvent
@@ -85,6 +86,14 @@ Inherits Application
 			newDB
 			End If
 			
+			Return True
+			
+		End Function
+	#tag EndMenuHandler
+
+	#tag MenuHandler
+		Function ListsCustomList() As Boolean Handles ListsCustomList.Action
+			'show modal to get start of qualifying period, number of games in such, number of majors in such
 			Return True
 			
 		End Function

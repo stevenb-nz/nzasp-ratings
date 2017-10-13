@@ -190,6 +190,13 @@ Begin Menu MainMenuBar
          AutoEnable = False
          Visible = True
       End
+      Begin MenuItem ListsCustomList
+         SpecialMenu = 0
+         Text = "Custom List"
+         Index = -2147483648
+         AutoEnable = True
+         Visible = True
+      End
    End
 End
 #tag EndMenu
