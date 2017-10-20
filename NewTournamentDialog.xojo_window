@@ -90,7 +90,6 @@ Begin Window NewTournamentDialog
       Selectable      =   False
       TabIndex        =   1
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Create a new tournament with the following name and end date?\n"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -125,7 +124,6 @@ Begin Window NewTournamentDialog
       Selectable      =   False
       TabIndex        =   2
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   ""
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -247,7 +245,7 @@ End
 		  selected_date = format(val(MainWindow.TYear.text),"0000")+"-"+format(val(MainWindow.TMonth.text),"00")+"-"+format(val(MainWindow.TDay.text),"00")
 		  i = app.get_tournament_id(TournamentName.text, selected_date)
 		  
-		  f1 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Tournaments").Child(selected_date+" "+TournamentName.text+" results.csv")
+		  f1 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Tournaments").Child(selected_date+" "+TournamentName.text+" entries.csv")
 		  if not f1.exists then
 		    saveFile1 = TextOutputStream.Create(f1)
 		    output1="Player,Club"
@@ -261,7 +259,7 @@ End
 		    saveFile2.WriteLine (output2)
 		    savefile2.Close
 		  end if
-		  f3 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Tournaments").Child(selected_date+" "+TournamentName.text+" entries.csv")
+		  f3 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Tournaments").Child(selected_date+" "+TournamentName.text+" results.csv")
 		  if not f3.exists then
 		    saveFile3 = TextOutputStream.Create(f3)
 		    output3="Player,Wins,Place,Grade"
