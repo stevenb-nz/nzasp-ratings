@@ -240,9 +240,35 @@ End
 		Sub Action()
 		  dim selected_date as string
 		  dim i as integer
+		  dim f1,f2,f3 as FolderItem
+		  dim savefile1,savefile2,savefile3 as TextOutputStream
+		  dim output1,output2,output3 as string
 		  
 		  selected_date = format(val(MainWindow.TYear.text),"0000")+"-"+format(val(MainWindow.TMonth.text),"00")+"-"+format(val(MainWindow.TDay.text),"00")
 		  i = app.get_tournament_id(TournamentName.text, selected_date)
+		  
+		  f1 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Tournaments").Child(selected_date+" "+TournamentName.text+" results.csv")
+		  if not f1.exists then
+		    saveFile1 = TextOutputStream.Create(f1)
+		    output1="Player,Club"
+		    saveFile1.WriteLine (output1)
+		    savefile1.Close
+		  end if
+		  f2 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Tournaments").Child(selected_date+" "+TournamentName.text+" pairings.csv")
+		  if not f2.exists then
+		    saveFile2 = TextOutputStream.Create(f2)
+		    output2="Player1,Player2"
+		    saveFile2.WriteLine (output2)
+		    savefile2.Close
+		  end if
+		  f3 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Tournaments").Child(selected_date+" "+TournamentName.text+" entries.csv")
+		  if not f3.exists then
+		    saveFile3 = TextOutputStream.Create(f3)
+		    output3="Player,Wins,Place,Grade"
+		    saveFile3.WriteLine (output3)
+		    savefile3.Close
+		  end if
+		  
 		  self.close
 		  
 		End Sub
