@@ -44,7 +44,7 @@ Begin Window MainWindow
       Panels          =   ""
       Scope           =   0
       SmallTabs       =   False
-      TabDefinition   =   "Tournament\rPlayer\rAwards\rLists"
+      TabDefinition   =   "Tournament\rPlayer\rAwards\rLists\rClubs"
       TabIndex        =   0
       TabPanelIndex   =   0
       TabStop         =   True
