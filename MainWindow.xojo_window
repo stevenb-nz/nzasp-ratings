@@ -44,7 +44,7 @@ Begin Window MainWindow
       Panels          =   ""
       Scope           =   0
       SmallTabs       =   False
-      TabDefinition   =   "Tournament\rPlayer\rAwards\rLists\rClubs"
+      TabDefinition   =   "Tournament\rClubs\rPlayer\rAwards\rLists"
       TabIndex        =   0
       TabPanelIndex   =   0
       TabStop         =   True
@@ -53,7 +53,7 @@ Begin Window MainWindow
       TextUnit        =   0
       Top             =   0
       Underline       =   False
-      Value           =   3
+      Value           =   4
       Visible         =   True
       Width           =   1200
       Begin Listbox AwardDetails
@@ -94,7 +94,7 @@ Begin Window MainWindow
          SelectionType   =   0
          ShowDropIndicator=   False
          TabIndex        =   0
-         TabPanelIndex   =   3
+         TabPanelIndex   =   4
          TabStop         =   True
          TextFont        =   "System"
          TextSize        =   0.0
@@ -128,7 +128,7 @@ Begin Window MainWindow
          LockTop         =   True
          Scope           =   0
          TabIndex        =   1
-         TabPanelIndex   =   3
+         TabPanelIndex   =   4
          TabStop         =   True
          TextFont        =   "System"
          TextSize        =   0.0
@@ -159,7 +159,7 @@ Begin Window MainWindow
          LockTop         =   True
          Scope           =   0
          TabIndex        =   2
-         TabPanelIndex   =   3
+         TabPanelIndex   =   4
          TabStop         =   True
          TextFont        =   "System"
          TextSize        =   0.0
@@ -190,7 +190,7 @@ Begin Window MainWindow
          LockTop         =   True
          Scope           =   0
          TabIndex        =   3
-         TabPanelIndex   =   3
+         TabPanelIndex   =   4
          TabStop         =   True
          TextFont        =   "System"
          TextSize        =   0.0
@@ -221,7 +221,7 @@ Begin Window MainWindow
          LockTop         =   True
          Scope           =   0
          TabIndex        =   4
-         TabPanelIndex   =   3
+         TabPanelIndex   =   4
          TabStop         =   True
          TextFont        =   "System"
          TextSize        =   0.0
@@ -609,7 +609,7 @@ Begin Window MainWindow
          SelectionType   =   0
          ShowDropIndicator=   False
          TabIndex        =   0
-         TabPanelIndex   =   2
+         TabPanelIndex   =   3
          TabStop         =   True
          TextFont        =   "System"
          TextSize        =   0.0
@@ -621,6 +621,323 @@ Begin Window MainWindow
          Width           =   1160
          _ScrollOffset   =   0
          _ScrollWidth    =   -1
+      End
+      Begin PushButton ToggleDeceasedButton
+         AutoDeactivate  =   True
+         Bold            =   False
+         ButtonStyle     =   "0"
+         Cancel          =   False
+         Caption         =   "Toggle Deceased"
+         Default         =   False
+         Enabled         =   False
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "MainTabPanel"
+         Italic          =   False
+         Left            =   1060
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   True
+         Scope           =   0
+         TabIndex        =   2
+         TabPanelIndex   =   3
+         TabStop         =   True
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   39
+         Underline       =   False
+         Visible         =   True
+         Width           =   120
+      End
+      Begin PopupMenu PlayerPicker
+         AutoDeactivate  =   True
+         Bold            =   False
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "MainTabPanel"
+         InitialValue    =   ""
+         Italic          =   False
+         Left            =   20
+         ListIndex       =   0
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   0
+         TabIndex        =   3
+         TabPanelIndex   =   3
+         TabStop         =   True
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   38
+         Underline       =   False
+         Visible         =   True
+         Width           =   240
+      End
+      Begin Label DeceasedLabel
+         AutoDeactivate  =   True
+         Bold            =   False
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "MainTabPanel"
+         Italic          =   False
+         Left            =   272
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   4
+         TabPanelIndex   =   3
+         Text            =   "(Deceased)"
+         TextAlign       =   0
+         TextColor       =   &c00000000
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   39
+         Transparent     =   True
+         Underline       =   False
+         Visible         =   False
+         Width           =   75
+      End
+      Begin PopupMenu LDatePicker
+         AutoDeactivate  =   True
+         Bold            =   False
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "MainTabPanel"
+         InitialValue    =   ""
+         Italic          =   False
+         Left            =   57
+         ListIndex       =   0
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   0
+         TabIndex        =   1
+         TabPanelIndex   =   5
+         TabStop         =   True
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   38
+         Underline       =   False
+         Visible         =   True
+         Width           =   120
+      End
+      Begin UpDownArrows AsAtDateChange
+         AcceptFocus     =   False
+         AutoDeactivate  =   True
+         Enabled         =   True
+         Height          =   23
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "MainTabPanel"
+         Left            =   226
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   0
+         TabIndex        =   2
+         TabPanelIndex   =   5
+         TabStop         =   True
+         Top             =   38
+         Visible         =   True
+         Width           =   13
+      End
+      Begin Label ListSavedText
+         AutoDeactivate  =   True
+         Bold            =   False
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "MainTabPanel"
+         Italic          =   False
+         Left            =   189
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   3
+         TabPanelIndex   =   5
+         Text            =   ""
+         TextAlign       =   0
+         TextColor       =   &c00000000
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   38
+         Transparent     =   True
+         Underline       =   False
+         Visible         =   True
+         Width           =   25
+      End
+      Begin Label PrevListSavedText
+         AutoDeactivate  =   True
+         Bold            =   False
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "MainTabPanel"
+         Italic          =   False
+         Left            =   20
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   4
+         TabPanelIndex   =   5
+         Text            =   ""
+         TextAlign       =   0
+         TextColor       =   &c00000000
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   39
+         Transparent     =   True
+         Underline       =   False
+         Visible         =   True
+         Width           =   25
+      End
+      Begin Label EqualCount
+         AutoDeactivate  =   True
+         Bold            =   False
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "MainTabPanel"
+         Italic          =   False
+         Left            =   251
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   5
+         TabPanelIndex   =   5
+         Text            =   ""
+         TextAlign       =   0
+         TextColor       =   &c00000000
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   39
+         Transparent     =   True
+         Underline       =   False
+         Visible         =   True
+         Width           =   50
+      End
+      Begin CheckBox End_of_year_check
+         AutoDeactivate  =   True
+         Bold            =   False
+         Caption         =   "End of year"
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "MainTabPanel"
+         Italic          =   False
+         Left            =   1080
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   0
+         State           =   0
+         TabIndex        =   6
+         TabPanelIndex   =   5
+         TabStop         =   True
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   39
+         Underline       =   False
+         Value           =   False
+         Visible         =   True
+         Width           =   100
+      End
+      Begin Label LEoYLabel
+         AutoDeactivate  =   True
+         Bold            =   False
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "MainTabPanel"
+         Italic          =   False
+         Left            =   57
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   7
+         TabPanelIndex   =   5
+         Text            =   ""
+         TextAlign       =   0
+         TextColor       =   &c00000000
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   39
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   100
       End
       Begin Listbox ListDetails
          AutoDeactivate  =   True
@@ -660,7 +977,7 @@ Begin Window MainWindow
          SelectionType   =   0
          ShowDropIndicator=   False
          TabIndex        =   0
-         TabPanelIndex   =   4
+         TabPanelIndex   =   5
          TabStop         =   True
          TextFont        =   "System"
          TextSize        =   0.0
@@ -672,323 +989,6 @@ Begin Window MainWindow
          Width           =   1160
          _ScrollOffset   =   0
          _ScrollWidth    =   -1
-      End
-      Begin PushButton ToggleDeceasedButton
-         AutoDeactivate  =   True
-         Bold            =   False
-         ButtonStyle     =   "0"
-         Cancel          =   False
-         Caption         =   "Toggle Deceased"
-         Default         =   False
-         Enabled         =   False
-         Height          =   20
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "MainTabPanel"
-         Italic          =   False
-         Left            =   1060
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   False
-         LockRight       =   True
-         LockTop         =   True
-         Scope           =   0
-         TabIndex        =   2
-         TabPanelIndex   =   2
-         TabStop         =   True
-         TextFont        =   "System"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   39
-         Underline       =   False
-         Visible         =   True
-         Width           =   120
-      End
-      Begin PopupMenu PlayerPicker
-         AutoDeactivate  =   True
-         Bold            =   False
-         DataField       =   ""
-         DataSource      =   ""
-         Enabled         =   True
-         Height          =   20
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "MainTabPanel"
-         InitialValue    =   ""
-         Italic          =   False
-         Left            =   20
-         ListIndex       =   0
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   False
-         LockTop         =   True
-         Scope           =   0
-         TabIndex        =   3
-         TabPanelIndex   =   2
-         TabStop         =   True
-         TextFont        =   "System"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   38
-         Underline       =   False
-         Visible         =   True
-         Width           =   240
-      End
-      Begin Label DeceasedLabel
-         AutoDeactivate  =   True
-         Bold            =   False
-         DataField       =   ""
-         DataSource      =   ""
-         Enabled         =   True
-         Height          =   20
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "MainTabPanel"
-         Italic          =   False
-         Left            =   272
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   False
-         LockTop         =   True
-         Multiline       =   False
-         Scope           =   0
-         Selectable      =   False
-         TabIndex        =   4
-         TabPanelIndex   =   2
-         Text            =   "(Deceased)"
-         TextAlign       =   0
-         TextColor       =   &c00000000
-         TextFont        =   "System"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   39
-         Transparent     =   True
-         Underline       =   False
-         Visible         =   False
-         Width           =   75
-      End
-      Begin PopupMenu LDatePicker
-         AutoDeactivate  =   True
-         Bold            =   False
-         DataField       =   ""
-         DataSource      =   ""
-         Enabled         =   True
-         Height          =   20
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "MainTabPanel"
-         InitialValue    =   ""
-         Italic          =   False
-         Left            =   57
-         ListIndex       =   0
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   False
-         LockTop         =   True
-         Scope           =   0
-         TabIndex        =   1
-         TabPanelIndex   =   4
-         TabStop         =   True
-         TextFont        =   "System"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   38
-         Underline       =   False
-         Visible         =   True
-         Width           =   120
-      End
-      Begin UpDownArrows AsAtDateChange
-         AcceptFocus     =   False
-         AutoDeactivate  =   True
-         Enabled         =   True
-         Height          =   23
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "MainTabPanel"
-         Left            =   226
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   False
-         LockTop         =   True
-         Scope           =   0
-         TabIndex        =   2
-         TabPanelIndex   =   4
-         TabStop         =   True
-         Top             =   38
-         Visible         =   True
-         Width           =   13
-      End
-      Begin Label ListSavedText
-         AutoDeactivate  =   True
-         Bold            =   False
-         DataField       =   ""
-         DataSource      =   ""
-         Enabled         =   True
-         Height          =   20
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "MainTabPanel"
-         Italic          =   False
-         Left            =   189
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   False
-         LockTop         =   True
-         Multiline       =   False
-         Scope           =   0
-         Selectable      =   False
-         TabIndex        =   3
-         TabPanelIndex   =   4
-         Text            =   ""
-         TextAlign       =   0
-         TextColor       =   &c00000000
-         TextFont        =   "System"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   38
-         Transparent     =   True
-         Underline       =   False
-         Visible         =   True
-         Width           =   25
-      End
-      Begin Label PrevListSavedText
-         AutoDeactivate  =   True
-         Bold            =   False
-         DataField       =   ""
-         DataSource      =   ""
-         Enabled         =   True
-         Height          =   20
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "MainTabPanel"
-         Italic          =   False
-         Left            =   20
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   False
-         LockTop         =   True
-         Multiline       =   False
-         Scope           =   0
-         Selectable      =   False
-         TabIndex        =   4
-         TabPanelIndex   =   4
-         Text            =   ""
-         TextAlign       =   0
-         TextColor       =   &c00000000
-         TextFont        =   "System"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   39
-         Transparent     =   True
-         Underline       =   False
-         Visible         =   True
-         Width           =   25
-      End
-      Begin Label EqualCount
-         AutoDeactivate  =   True
-         Bold            =   False
-         DataField       =   ""
-         DataSource      =   ""
-         Enabled         =   True
-         Height          =   20
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "MainTabPanel"
-         Italic          =   False
-         Left            =   251
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   False
-         LockTop         =   True
-         Multiline       =   False
-         Scope           =   0
-         Selectable      =   False
-         TabIndex        =   5
-         TabPanelIndex   =   4
-         Text            =   ""
-         TextAlign       =   0
-         TextColor       =   &c00000000
-         TextFont        =   "System"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   39
-         Transparent     =   True
-         Underline       =   False
-         Visible         =   True
-         Width           =   50
-      End
-      Begin CheckBox End_of_year_check
-         AutoDeactivate  =   True
-         Bold            =   False
-         Caption         =   "End of year"
-         DataField       =   ""
-         DataSource      =   ""
-         Enabled         =   True
-         Height          =   20
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "MainTabPanel"
-         Italic          =   False
-         Left            =   1080
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   False
-         LockTop         =   True
-         Scope           =   0
-         State           =   0
-         TabIndex        =   6
-         TabPanelIndex   =   4
-         TabStop         =   True
-         TextFont        =   "System"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   39
-         Underline       =   False
-         Value           =   False
-         Visible         =   True
-         Width           =   100
-      End
-      Begin Label LEoYLabel
-         AutoDeactivate  =   True
-         Bold            =   False
-         DataField       =   ""
-         DataSource      =   ""
-         Enabled         =   True
-         Height          =   20
-         HelpTag         =   ""
-         Index           =   -2147483648
-         InitialParent   =   "MainTabPanel"
-         Italic          =   False
-         Left            =   57
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   False
-         LockTop         =   True
-         Multiline       =   False
-         Scope           =   0
-         Selectable      =   False
-         TabIndex        =   7
-         TabPanelIndex   =   4
-         Text            =   ""
-         TextAlign       =   0
-         TextColor       =   &c00000000
-         TextFont        =   "System"
-         TextSize        =   0.0
-         TextUnit        =   0
-         Top             =   39
-         Transparent     =   False
-         Underline       =   False
-         Visible         =   True
-         Width           =   100
       End
    End
 End
@@ -1474,7 +1474,7 @@ End
 		  nats = isnats(list_date)
 		  wcs = nats and iswcs(list_date)
 		  tts = not wcs
-		  if nats then 
+		  if nats then
 		    last_nationals = last_nats(list_date)
 		    if wcs then
 		      last_masters = last_mast(list_date)
@@ -2582,10 +2582,12 @@ End
 		  case 0
 		    init_tournament_tab
 		  case 1
-		    init_player_tab
+		    init_club_tab
 		  case 2
-		    init_awards_tab
+		    init_player_tab
 		  case 3
+		    init_awards_tab
+		  case 4
 		    init_lists_tab
 		  end
 		End Sub
@@ -3007,61 +3009,6 @@ End
 		End Function
 	#tag EndEvent
 #tag EndEvents
-#tag Events ListDetails
-	#tag Event
-		Function CompareRows(row1 as Integer, row2 as Integer, column as Integer, ByRef result as Integer) As Boolean
-		  select case column
-		  case 2
-		    If Val( me.Cell(row1, column )) < Val( me.Cell(row2, column)) Then
-		      result = -1
-		    ElseIf Val(me.Cell(row1, column)) > Val( Me.Cell(row2, column)) Then
-		      result = 1
-		    Else
-		      if Val( me.Cell(row1, column+1 )) > Val( me.Cell(row2, column+1 )) Then
-		        result = -1
-		      elseif Val(me.Cell(row1, column+1 )) < Val( Me.Cell(row2, column+1 )) Then
-		        result = 1
-		      else
-		        me.Cellbold(row1, column-1) = true
-		        me.Cellbold(row2, column-1) = true
-		        result = 0
-		      end if
-		    End if
-		    return true
-		  case 4
-		    If Val( me.Cell(row1, column )) < Val( me.Cell(row2, column)) Then
-		      result = -1
-		    ElseIf Val(me.Cell(row1, column)) > Val( Me.Cell(row2, column)) Then
-		      result = 1
-		    Else
-		      result = 0
-		    End if
-		    return true
-		  case 5
-		    If Val( me.Cell(row1, column )) < Val( me.Cell(row2, column)) Then
-		      result = -1
-		    ElseIf Val(me.Cell(row1, column)) > Val( Me.Cell(row2, column)) Then
-		      result = 1
-		    Else
-		      result = 0
-		    End if
-		    return true
-		  case 6
-		    If Val( me.Cell(row1, column )) < Val( me.Cell(row2, column)) Then
-		      result = -1
-		    ElseIf Val(me.Cell(row1, column)) > Val( Me.Cell(row2, column)) Then
-		      result = 1
-		    Else
-		      result = 0
-		    End if
-		    return true
-		  else
-		    return false
-		  End select
-		  
-		End Function
-	#tag EndEvent
-#tag EndEvents
 #tag Events ToggleDeceasedButton
 	#tag Event
 		Sub Action()
@@ -3136,7 +3083,7 @@ End
 		  dim current_date as string
 		  
 		  if me.State = CheckBox.CheckedStates.Checked then
-		    current_date = LDatePicker.list(LDatePicker.ListIndex) 
+		    current_date = LDatePicker.list(LDatePicker.ListIndex)
 		    sql = "SELECT * FROM as_at_date WHERE list_date >= '" + current_date + "' and list_date <= '" + left(current_date,4) + "-12-31'"
 		    data = app.ratingsDB.SQLSelect(sql)
 		    data.MoveLast
@@ -3161,6 +3108,61 @@ End
 		  end if
 		  
 		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events ListDetails
+	#tag Event
+		Function CompareRows(row1 as Integer, row2 as Integer, column as Integer, ByRef result as Integer) As Boolean
+		  select case column
+		  case 2
+		    If Val( me.Cell(row1, column )) < Val( me.Cell(row2, column)) Then
+		      result = -1
+		    ElseIf Val(me.Cell(row1, column)) > Val( Me.Cell(row2, column)) Then
+		      result = 1
+		    Else
+		      if Val( me.Cell(row1, column+1 )) > Val( me.Cell(row2, column+1 )) Then
+		        result = -1
+		      elseif Val(me.Cell(row1, column+1 )) < Val( Me.Cell(row2, column+1 )) Then
+		        result = 1
+		      else
+		        me.Cellbold(row1, column-1) = true
+		        me.Cellbold(row2, column-1) = true
+		        result = 0
+		      end if
+		    End if
+		    return true
+		  case 4
+		    If Val( me.Cell(row1, column )) < Val( me.Cell(row2, column)) Then
+		      result = -1
+		    ElseIf Val(me.Cell(row1, column)) > Val( Me.Cell(row2, column)) Then
+		      result = 1
+		    Else
+		      result = 0
+		    End if
+		    return true
+		  case 5
+		    If Val( me.Cell(row1, column )) < Val( me.Cell(row2, column)) Then
+		      result = -1
+		    ElseIf Val(me.Cell(row1, column)) > Val( Me.Cell(row2, column)) Then
+		      result = 1
+		    Else
+		      result = 0
+		    End if
+		    return true
+		  case 6
+		    If Val( me.Cell(row1, column )) < Val( me.Cell(row2, column)) Then
+		      result = -1
+		    ElseIf Val(me.Cell(row1, column)) > Val( Me.Cell(row2, column)) Then
+		      result = 1
+		    Else
+		      result = 0
+		    End if
+		    return true
+		  else
+		    return false
+		  End select
+		  
+		End Function
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
