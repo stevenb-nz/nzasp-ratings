@@ -121,14 +121,14 @@ Begin Menu MainMenuBar
          AutoEnable = True
          Visible = True
       End
-      Begin MenuItem TournamentImportPlayers
+      Begin MenuItem TournamentImportEntries
          SpecialMenu = 0
-         Text = "Import Players..."
+         Text = "Import Entries..."
          Index = -2147483648
          AutoEnable = False
          Visible = True
       End
-      Begin MenuItem TournamentImportpairings
+      Begin MenuItem TournamentImportPairings
          SpecialMenu = 0
          Text = "Import Pairings..."
          Index = -2147483648

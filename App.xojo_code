@@ -14,15 +14,15 @@ Inherits Application
 		  dim sortcheck as boolean
 		  
 		  if MainWindow.TournamentPicker.ListIndex < 0 then
-		    TournamentImportPlayers.Enabled = false
-		    TournamentImportpairings.Enabled = false
+		    TournamentImportEntries.Enabled = false
+		    TournamentImportPairings.Enabled = false
 		    TournamentImportResults.Enabled = false
 		    TournamentResetTournament.Enabled = false
 		    TournamentDeleteTournament.Enabled = false
 		    TournamentSaveExpectancies.Enabled = false
 		  else
-		    TournamentImportPlayers.Enabled = true
-		    TournamentImportpairings.Enabled = true
+		    TournamentImportEntries.Enabled = true
+		    TournamentImportPairings.Enabled = true
 		    TournamentImportResults.Enabled = true
 		    TournamentResetTournament.Enabled = true
 		    TournamentDeleteTournament.Enabled = true
@@ -133,44 +133,7 @@ Inherits Application
 	#tag EndMenuHandler
 
 	#tag MenuHandler
-		Function TournamentImportpairings() As Boolean Handles TournamentImportpairings.Action
-			dim f as FolderItem
-			dim t as TextInputStream
-			dim s,splitstring(-1) as String
-			dim n,tournament_id as integer
-			
-			tournament_id = mainwindow.TournamentPicker.RowTag(mainwindow.TournamentPicker.ListIndex)
-			ratingsDB.SQLExecute("DELETE FROM rated_game WHERE tournament_id = "+str(tournament_id))
-			
-			f = GetOpenFolderItem("")
-			if f <> nil then
-			t = TextInputStream.Open(f)
-			while not t.EOF
-			s = t.ReadLine
-			splitstring = s.Split(",")
-			if MainWindow.get_name_id(splitstring(0)) = 0 or MainWindow.get_name_id(splitstring(1)) = 0 then
-			MsgBox "Unrecognised name in "+s
-			t.Close
-			return true
-			end if
-			wend
-			t.Close
-			t = TextInputStream.Open(f)
-			while not t.EOF
-			s = t.ReadLine
-			MainWindow.process_pair(s)
-			wend
-			t.Close
-			MainWindow.calculate_expectancies
-			MainWindow.load_tournament
-			end if
-			Return True
-			
-		End Function
-	#tag EndMenuHandler
-
-	#tag MenuHandler
-		Function TournamentImportPlayers() As Boolean Handles TournamentImportPlayers.Action
+		Function TournamentImportEntries() As Boolean Handles TournamentImportEntries.Action
 			dim f as FolderItem
 			dim t as TextInputStream
 			dim club,name,s,u,v as String
@@ -210,6 +173,43 @@ Inherits Application
 			t.Close
 			MainWindow.load_tournament
 			MainWindow.set_seedings
+			end if
+			Return True
+			
+		End Function
+	#tag EndMenuHandler
+
+	#tag MenuHandler
+		Function TournamentImportPairings() As Boolean Handles TournamentImportPairings.Action
+			dim f as FolderItem
+			dim t as TextInputStream
+			dim s,splitstring(-1) as String
+			dim n,tournament_id as integer
+			
+			tournament_id = mainwindow.TournamentPicker.RowTag(mainwindow.TournamentPicker.ListIndex)
+			ratingsDB.SQLExecute("DELETE FROM rated_game WHERE tournament_id = "+str(tournament_id))
+			
+			f = GetOpenFolderItem("")
+			if f <> nil then
+			t = TextInputStream.Open(f)
+			while not t.EOF
+			s = t.ReadLine
+			splitstring = s.Split(",")
+			if MainWindow.get_name_id(splitstring(0)) = 0 or MainWindow.get_name_id(splitstring(1)) = 0 then
+			MsgBox "Unrecognised name in "+s
+			t.Close
+			return true
+			end if
+			wend
+			t.Close
+			t = TextInputStream.Open(f)
+			while not t.EOF
+			s = t.ReadLine
+			MainWindow.process_pair(s)
+			wend
+			t.Close
+			MainWindow.calculate_expectancies
+			MainWindow.load_tournament
 			end if
 			Return True
 			
