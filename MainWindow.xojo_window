@@ -53,7 +53,7 @@ Begin Window MainWindow
       TextUnit        =   0
       Top             =   0
       Underline       =   False
-      Value           =   4
+      Value           =   2
       Visible         =   True
       Width           =   1200
       Begin Listbox AwardDetails
@@ -665,7 +665,7 @@ Begin Window MainWindow
          InitialParent   =   "MainTabPanel"
          InitialValue    =   ""
          Italic          =   False
-         Left            =   20
+         Left            =   67
          ListIndex       =   0
          LockBottom      =   False
          LockedInPosition=   False
@@ -679,7 +679,7 @@ Begin Window MainWindow
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   38
+         Top             =   39
          Underline       =   False
          Visible         =   True
          Width           =   240
@@ -695,7 +695,7 @@ Begin Window MainWindow
          Index           =   -2147483648
          InitialParent   =   "MainTabPanel"
          Italic          =   False
-         Left            =   272
+         Left            =   319
          LockBottom      =   False
          LockedInPosition=   False
          LockLeft        =   True
@@ -989,6 +989,40 @@ Begin Window MainWindow
          Width           =   1160
          _ScrollOffset   =   0
          _ScrollWidth    =   -1
+      End
+      Begin Label ClubLabel
+         AutoDeactivate  =   True
+         Bold            =   False
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "MainTabPanel"
+         Italic          =   False
+         Left            =   20
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   5
+         TabPanelIndex   =   3
+         Text            =   ""
+         TextAlign       =   2
+         TextColor       =   &c00000000
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   39
+         Transparent     =   True
+         Underline       =   False
+         Visible         =   True
+         Width           =   35
       End
    End
 End
@@ -2253,10 +2287,15 @@ End
 
 	#tag Method, Flags = &h0
 		Sub load_player_details(player_id as integer)
-		  PlayerDetails.DeleteAllRows
-		  
 		  dim sql as string
 		  dim data as RecordSet
+		  
+		  sql = "SELECT club_abbrev FROM club JOIN player ON player.club_id=club.id WHERE player.id="+str(player_id)
+		  data = app.ratingsDB.SQLSelect(sql)
+		  
+		  ClubLabel.Text = data.IdxField(1).StringValue
+		  
+		  PlayerDetails.DeleteAllRows
 		  
 		  sql = "SELECT rating_change.id,as_at_date.list_date,tournament.tournament_name,rating_change.start_rating,rating_change.games,"+_
 		  "rating_change.wins,rating_change.end_rating,rating_change.grade,rating_change.placing FROM rating_change "+_
@@ -2281,6 +2320,10 @@ End
 		    PlayerDetails.cell(PlayerDetails.ListCount-i,10) = str(val(PlayerDetails.cell(PlayerDetails.ListCount-i+1,10))+val(PlayerDetails.cell(PlayerDetails.ListCount-i,4)))
 		    PlayerDetails.cell(PlayerDetails.ListCount-i,11) = format(val(PlayerDetails.cell(PlayerDetails.ListCount-i,9))/val(PlayerDetails.cell(PlayerDetails.ListCount-i,10)),"#%")
 		  next
+		  
+		  
+		  'ratingsDB.SQLExecute("CREATE TABLE player(id Integer, name VarChar, club_id Integer, last_tournament_id Integer DEFAULT 'NULL', UNIQUE(name, club_id), PRIMARY KEY(id));")
+		  'ratingsDB.SQLExecute("CREATE TABLE club(id Integer, club_name VarChar, club_abbrev VarChar, UNIQUE(club_name), UNIQUE(club_abbrev), PRIMARY KEY(id));")
 		  
 		End Sub
 	#tag EndMethod
