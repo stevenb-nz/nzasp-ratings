@@ -53,7 +53,7 @@ Begin Window MainWindow
       TextUnit        =   0
       Top             =   0
       Underline       =   False
-      Value           =   1
+      Value           =   2
       Visible         =   True
       Width           =   1200
       Begin Listbox AwardDetails
@@ -2095,6 +2095,21 @@ End
 
 	#tag Method, Flags = &h0
 		Sub init_club_tab()
+		  dim sql as string
+		  dim data as RecordSet
+		  dim i as integer
+		  
+		  ClubDetails.DeleteAllRows
+		  ClubPicker.DeleteAllRows
+		  
+		  sql = "SELECT id,club_name,club_abbrev from club ORDER by club_abbrev"
+		  data = app.ratingsDB.SQLSelect(sql)
+		  
+		  for i = 1 to data.RecordCount
+		    ClubPicker.AddRow(data.IdxField(3).StringValue+" - "+data.IdxField(2).StringValue)
+		    ClubPicker.RowTag(i-1) = data.IdxField(1).StringValue
+		    data.MoveNext
+		  next
 		  
 		End Sub
 	#tag EndMethod
@@ -2149,7 +2164,7 @@ End
 
 	#tag Method, Flags = &h0
 		Sub init_player_tab()
-		  dim sql,playervalue as string
+		  dim sql as string
 		  dim data as RecordSet
 		  dim i as integer
 		  
