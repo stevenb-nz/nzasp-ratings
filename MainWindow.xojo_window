@@ -53,7 +53,7 @@ Begin Window MainWindow
       TextUnit        =   0
       Top             =   0
       Underline       =   False
-      Value           =   2
+      Value           =   1
       Visible         =   True
       Width           =   1200
       Begin Listbox AwardDetails
@@ -425,7 +425,7 @@ Begin Window MainWindow
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   39
+         Top             =   38
          Underline       =   False
          Visible         =   True
          Width           =   320
@@ -1023,6 +1023,88 @@ Begin Window MainWindow
          Underline       =   False
          Visible         =   True
          Width           =   35
+      End
+      Begin PopupMenu ClubPicker
+         AutoDeactivate  =   True
+         Bold            =   False
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "MainTabPanel"
+         InitialValue    =   ""
+         Italic          =   False
+         Left            =   20
+         ListIndex       =   0
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   0
+         TabIndex        =   0
+         TabPanelIndex   =   2
+         TabStop         =   True
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   38
+         Underline       =   False
+         Visible         =   True
+         Width           =   160
+      End
+      Begin Listbox ClubDetails
+         AutoDeactivate  =   True
+         AutoHideScrollbars=   True
+         Bold            =   False
+         Border          =   True
+         ColumnCount     =   1
+         ColumnsResizable=   False
+         ColumnWidths    =   ""
+         DataField       =   ""
+         DataSource      =   ""
+         DefaultRowHeight=   -1
+         Enabled         =   True
+         EnableDrag      =   False
+         EnableDragReorder=   False
+         GridLinesHorizontal=   0
+         GridLinesVertical=   0
+         HasHeading      =   False
+         HeadingIndex    =   -1
+         Height          =   710
+         HelpTag         =   ""
+         Hierarchical    =   False
+         Index           =   -2147483648
+         InitialParent   =   "MainTabPanel"
+         InitialValue    =   ""
+         Italic          =   False
+         Left            =   20
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         RequiresSelection=   False
+         Scope           =   0
+         ScrollbarHorizontal=   False
+         ScrollBarVertical=   True
+         SelectionType   =   0
+         ShowDropIndicator=   False
+         TabIndex        =   1
+         TabPanelIndex   =   2
+         TabStop         =   True
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   70
+         Underline       =   False
+         UseFocusRing    =   True
+         Visible         =   True
+         Width           =   1160
+         _ScrollOffset   =   0
+         _ScrollWidth    =   -1
       End
    End
 End
