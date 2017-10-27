@@ -53,7 +53,7 @@ Begin Window MainWindow
       TextUnit        =   0
       Top             =   0
       Underline       =   False
-      Value           =   2
+      Value           =   1
       Visible         =   True
       Width           =   1200
       Begin Listbox AwardDetails
@@ -2282,6 +2282,30 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub load_club_details(club_id as integer)
+		  dim sql as string
+		  dim data as RecordSet
+		  
+		  clubDetails.DeleteAllRows
+		  
+		  sql = "SELECT name,last_tournament_id FROM player WHERE club_id="+str(club_id)+" ORDER BY name"
+		  data = app.ratingsDB.SQLSelect(sql)
+		  
+		  dim i as integer
+		  
+		  for i = 1 to data.RecordCount
+		    if data.IdxField(2).StringValue="NULL" then
+		      clubDetails.AddRow(data.idxfield(1).stringvalue)
+		    else 
+		      clubDetails.AddRow(data.idxfield(1).stringvalue+" (deceased)")
+		    end if
+		    data.MoveNext
+		  next
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub load_deceased_status(player_id as integer)
 		  dim sql as string
 		  dim data as RecordSet
@@ -2417,10 +2441,6 @@ End
 		    PlayerDetails.cell(PlayerDetails.ListCount-i,10) = str(val(PlayerDetails.cell(PlayerDetails.ListCount-i+1,10))+val(PlayerDetails.cell(PlayerDetails.ListCount-i,4)))
 		    PlayerDetails.cell(PlayerDetails.ListCount-i,11) = format(val(PlayerDetails.cell(PlayerDetails.ListCount-i,9))/val(PlayerDetails.cell(PlayerDetails.ListCount-i,10)),"#%")
 		  next
-		  
-		  
-		  'ratingsDB.SQLExecute("CREATE TABLE player(id Integer, name VarChar, club_id Integer, last_tournament_id Integer DEFAULT 'NULL', UNIQUE(name, club_id), PRIMARY KEY(id));")
-		  'ratingsDB.SQLExecute("CREATE TABLE club(id Integer, club_name VarChar, club_abbrev VarChar, UNIQUE(club_name), UNIQUE(club_abbrev), PRIMARY KEY(id));")
 		  
 		End Sub
 	#tag EndMethod
@@ -3303,6 +3323,18 @@ End
 		  End select
 		  
 		End Function
+	#tag EndEvent
+#tag EndEvents
+#tag Events ClubPicker
+	#tag Event
+		Sub Change()
+		  if me.ListIndex < 0 then
+		    ClubDetails.DeleteAllRows
+		  else
+		    load_club_details(me.RowTag(me.ListIndex))
+		  end if
+		  
+		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
