@@ -93,7 +93,7 @@ Inherits Application
 
 	#tag MenuHandler
 		Function ListsCustomList() As Boolean Handles ListsCustomList.Action
-			'show modal to get start of qualifying period, number of games in such, number of majors in such
+			MainWindow.export_custom_list
 			Return True
 			
 		End Function
