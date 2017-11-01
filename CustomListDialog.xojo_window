@@ -205,7 +205,7 @@ End
 	#tag Event
 		Sub Open()
 		  OKButton.Enabled = false
-		  DateDisplay.Text = MainWindow.TWeekDay.Text + " " + MainWindow.TDay.Text + "/" + MainWindow.TMonth.Text + "/" + MainWindow.TYear.Text
+		  DateDisplay.Text = MainWindow.LDatePicker.Text
 		  
 		End Sub
 	#tag EndEvent
