@@ -1463,134 +1463,135 @@ End
 
 	#tag Method, Flags = &h0
 		Sub export_custom_list()
-		  'show modal to get start of qualifying period, number of games in such, number of majors in such
-		  dim eileen_mclean_games,i,majors_score,ranking,wcs_qual_games as integer
-		  dim f1,f2,f3 as FolderItem
-		  dim savefile1,savefile2,savefile3 as TextOutputStream
-		  dim list_date,last_masters,last_nationals,output1,output2,output3 as string
-		  dim nats, tts, wcs as Boolean
+		  CustomListDialog.ShowModal
 		  
-		  if End_of_year_check.State = CheckBox.CheckedStates.Unchecked then
-		    list_date = LDatePicker.List(LDatePicker.ListIndex)
-		  else
-		    list_date = left(LDatePicker.List(LDatePicker.ListIndex),4)+"-12-31"
-		  end if
-		  nats = isnats(list_date)
-		  wcs = nats and iswcs(list_date)
-		  tts = not wcs
-		  if nats then
-		    last_nationals = last_nats(list_date)
-		    if wcs then
-		      last_masters = last_mast(list_date)
-		    end if
-		  end if
-		  
-		  f1 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Rankings").Child(list_date+" Rankings.csv")
-		  f2 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Rankings").Child(list_date+" Ratings by rating.csv")
-		  if wcs then
-		    f3 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Rankings").Child(list_date+" Worlds qualifiers.csv")
-		  end if
-		  saveFile1 = TextOutputStream.Create(f1)
-		  saveFile2 = TextOutputStream.Create(f2)
-		  if wcs then
-		    saveFile3 = TextOutputStream.Create(f3)
-		  end if
-		  ranking = 0
-		  for i = 1 to ListDetails.ListCount
-		    output1=""
-		    if val(ListDetails.cell(i-1,4)) >= 40 then
-		      ranking = ranking + 1
-		      output1 = str(ranking)
-		      output1 = output1 + "," + ListDetails.cell(i-1,1) + get_current_award(val(ListDetails.cell(i-1,0)),left(list_date,4))
-		      output1 = output1 + "," + str(round(val(ListDetails.cell(i-1,2))))
-		      output1 = output1 + "," + ListDetails.cell(i-1,5)
-		      output1 = output1 + "," + ListDetails.cell(i-1,6)
-		      output1 = output1 + "," + str(round((val(ListDetails.cell(i-1,5))/val(ListDetails.cell(i-1,6)))*100))+"%"
-		      saveFile1.WriteLine (output1)
-		    end if
-		    output2=""
-		    if val(ListDetails.cell(i-1,4)) > 0 then
-		      output2 = ListDetails.cell(i-1,1) + get_current_award(val(ListDetails.cell(i-1,0)),left(list_date,4))
-		      output2 = output2 + "," + str(round(val(ListDetails.cell(i-1,2))))
-		      output2 = output2 + "," + get_list_seed(ListDetails.cell(i-1,7))
-		      output2 = output2 + "," + get_list_rating_status(val(ListDetails.cell(i-1,6)),val(ListDetails.cell(i-1,4)))
-		      output2 = output2 + "," + ListDetails.cell(i-1,5)
-		      output2 = output2 + "," + ListDetails.cell(i-1,6)
-		      output2 = output2 + "," + str(round((val(ListDetails.cell(i-1,5))/val(ListDetails.cell(i-1,6)))*100))+"%"
-		      saveFile2.WriteLine (output2)
-		    end if
-		    if wcs and val(ListDetails.cell(i-1,4)) > 39 then
-		      output3=""
-		      majors_score=get_majors_score(ListDetails.cell(i-1,0),list_date,last_masters,last_nationals)
-		      if majors_score > 1 then
-		        wcs_qual_games=count_wcs_qual_games(ListDetails.cell(i-1,0),list_date,last_nationals)
-		        if wcs_qual_games > 49 then
-		          output3 = ListDetails.cell(i-1,1) + get_current_award(val(ListDetails.cell(i-1,0)),left(list_date,4))
-		          output3 = output3 + "," + str(round(val(ListDetails.cell(i-1,2))))
-		          output3 = output3 + "," + get_list_seed(ListDetails.cell(i-1,7))
-		          output3 = output3 + "," + str(majors_score)
-		          output3 = output3 + "," + str(wcs_qual_games)
-		          saveFile3.WriteLine (output3)
-		        end if
-		      end if
-		    end if
-		  next
-		  savefile1.Close
-		  savefile2.Close
-		  if wcs then
-		    savefile3.Close
-		  end if
-		  
-		  ListDetails.ColumnSortDirection(1) = Listbox.SortAscending
-		  ListDetails.SortedColumn = 1
-		  ListDetails.Sort
-		  
-		  f1 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Rankings").Child(list_date+" All Ratings.csv")
-		  f2 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Rankings").Child(list_date+" Ratings by name.csv")
-		  if nats then
-		    f3 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Rankings").Child(list_date+" Eileen McLean prize.csv")
-		  end if
-		  saveFile1 = TextOutputStream.Create(f1)
-		  saveFile2 = TextOutputStream.Create(f2)
-		  if nats then
-		    saveFile3 = TextOutputStream.Create(f3)
-		  end if
-		  for i = 1 to ListDetails.ListCount
-		    output1=""
-		    output1 = ListDetails.cell(i-1,1) + get_current_award(val(ListDetails.cell(i-1,0)),left(list_date,4))
-		    output1 = output1 + "," + str(round(val(ListDetails.cell(i-1,2))))
-		    output1 = output1 + "," + get_list_seed(ListDetails.cell(i-1,7))
-		    output1 = output1 + "," + get_list_rating_status(val(ListDetails.cell(i-1,6)),val(ListDetails.cell(i-1,4)))
-		    output1 = output1 + "," + ListDetails.cell(i-1,5)
-		    output1 = output1 + "," + ListDetails.cell(i-1,6)
-		    output1 = output1 + "," + str(round((val(ListDetails.cell(i-1,5))/val(ListDetails.cell(i-1,6)))*100))+"%"
-		    saveFile1.WriteLine (output1)
-		    output2=""
-		    if val(ListDetails.cell(i-1,4)) > 0 then
-		      output2 = ListDetails.cell(i-1,1) + get_current_award(val(ListDetails.cell(i-1,0)),left(list_date,4))
-		      output2 = output2 + "," + str(round(val(ListDetails.cell(i-1,2))))
-		      output2 = output2 + "," + get_list_seed(ListDetails.cell(i-1,7))
-		      output2 = output2 + "," + get_list_rating_status(val(ListDetails.cell(i-1,6)),val(ListDetails.cell(i-1,4)))
-		      output2 = output2 + "," + ListDetails.cell(i-1,5)
-		      output2 = output2 + "," + ListDetails.cell(i-1,6)
-		      output2 = output2 + "," + str(round((val(ListDetails.cell(i-1,5))/val(ListDetails.cell(i-1,6)))*100))+"%"
-		      saveFile2.WriteLine (output2)
-		    end if
-		    if nats then
-		      output3=""
-		      eileen_mclean_games=count_eileen_mclean_games(ListDetails.cell(i-1,0),list_date,last_nationals)
-		      if eileen_mclean_games > 0 then
-		        output3 = ListDetails.cell(i-1,1) + get_current_award(val(ListDetails.cell(i-1,0)),left(list_date,4))
-		        output3 = output3 + "," + str(eileen_mclean_games)
-		        saveFile3.WriteLine (output3)
-		      end if
-		    end if
-		  next
-		  savefile1.Close
-		  savefile2.Close
-		  if nats then
-		    savefile3.Close
-		  end if
+		  'dim eileen_mclean_games,i,majors_score,ranking,wcs_qual_games as integer
+		  'dim f1,f2,f3 as FolderItem
+		  'dim savefile1,savefile2,savefile3 as TextOutputStream
+		  'dim list_date,last_masters,last_nationals,output1,output2,output3 as string
+		  'dim nats, tts, wcs as Boolean
+		  '
+		  'if End_of_year_check.State = CheckBox.CheckedStates.Unchecked then
+		  'list_date = LDatePicker.List(LDatePicker.ListIndex)
+		  'else
+		  'list_date = left(LDatePicker.List(LDatePicker.ListIndex),4)+"-12-31"
+		  'end if
+		  'nats = isnats(list_date)
+		  'wcs = nats and iswcs(list_date)
+		  'tts = not wcs
+		  'if nats then
+		  'last_nationals = last_nats(list_date)
+		  'if wcs then
+		  'last_masters = last_mast(list_date)
+		  'end if
+		  'end if
+		  '
+		  'f1 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Rankings").Child(list_date+" Rankings.csv")
+		  'f2 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Rankings").Child(list_date+" Ratings by rating.csv")
+		  'if wcs then
+		  'f3 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Rankings").Child(list_date+" Worlds qualifiers.csv")
+		  'end if
+		  'saveFile1 = TextOutputStream.Create(f1)
+		  'saveFile2 = TextOutputStream.Create(f2)
+		  'if wcs then
+		  'saveFile3 = TextOutputStream.Create(f3)
+		  'end if
+		  'ranking = 0
+		  'for i = 1 to ListDetails.ListCount
+		  'output1=""
+		  'if val(ListDetails.cell(i-1,4)) >= 40 then
+		  'ranking = ranking + 1
+		  'output1 = str(ranking)
+		  'output1 = output1 + "," + ListDetails.cell(i-1,1) + get_current_award(val(ListDetails.cell(i-1,0)),left(list_date,4))
+		  'output1 = output1 + "," + str(round(val(ListDetails.cell(i-1,2))))
+		  'output1 = output1 + "," + ListDetails.cell(i-1,5)
+		  'output1 = output1 + "," + ListDetails.cell(i-1,6)
+		  'output1 = output1 + "," + str(round((val(ListDetails.cell(i-1,5))/val(ListDetails.cell(i-1,6)))*100))+"%"
+		  'saveFile1.WriteLine (output1)
+		  'end if
+		  'output2=""
+		  'if val(ListDetails.cell(i-1,4)) > 0 then
+		  'output2 = ListDetails.cell(i-1,1) + get_current_award(val(ListDetails.cell(i-1,0)),left(list_date,4))
+		  'output2 = output2 + "," + str(round(val(ListDetails.cell(i-1,2))))
+		  'output2 = output2 + "," + get_list_seed(ListDetails.cell(i-1,7))
+		  'output2 = output2 + "," + get_list_rating_status(val(ListDetails.cell(i-1,6)),val(ListDetails.cell(i-1,4)))
+		  'output2 = output2 + "," + ListDetails.cell(i-1,5)
+		  'output2 = output2 + "," + ListDetails.cell(i-1,6)
+		  'output2 = output2 + "," + str(round((val(ListDetails.cell(i-1,5))/val(ListDetails.cell(i-1,6)))*100))+"%"
+		  'saveFile2.WriteLine (output2)
+		  'end if
+		  'if wcs and val(ListDetails.cell(i-1,4)) > 39 then
+		  'output3=""
+		  'majors_score=get_majors_score(ListDetails.cell(i-1,0),list_date,last_masters,last_nationals)
+		  'if majors_score > 1 then
+		  'wcs_qual_games=count_wcs_qual_games(ListDetails.cell(i-1,0),list_date,last_nationals)
+		  'if wcs_qual_games > 49 then
+		  'output3 = ListDetails.cell(i-1,1) + get_current_award(val(ListDetails.cell(i-1,0)),left(list_date,4))
+		  'output3 = output3 + "," + str(round(val(ListDetails.cell(i-1,2))))
+		  'output3 = output3 + "," + get_list_seed(ListDetails.cell(i-1,7))
+		  'output3 = output3 + "," + str(majors_score)
+		  'output3 = output3 + "," + str(wcs_qual_games)
+		  'saveFile3.WriteLine (output3)
+		  'end if
+		  'end if
+		  'end if
+		  'next
+		  'savefile1.Close
+		  'savefile2.Close
+		  'if wcs then
+		  'savefile3.Close
+		  'end if
+		  '
+		  'ListDetails.ColumnSortDirection(1) = Listbox.SortAscending
+		  'ListDetails.SortedColumn = 1
+		  'ListDetails.Sort
+		  '
+		  'f1 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Rankings").Child(list_date+" All Ratings.csv")
+		  'f2 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Rankings").Child(list_date+" Ratings by name.csv")
+		  'if nats then
+		  'f3 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Rankings").Child(list_date+" Eileen McLean prize.csv")
+		  'end if
+		  'saveFile1 = TextOutputStream.Create(f1)
+		  'saveFile2 = TextOutputStream.Create(f2)
+		  'if nats then
+		  'saveFile3 = TextOutputStream.Create(f3)
+		  'end if
+		  'for i = 1 to ListDetails.ListCount
+		  'output1=""
+		  'output1 = ListDetails.cell(i-1,1) + get_current_award(val(ListDetails.cell(i-1,0)),left(list_date,4))
+		  'output1 = output1 + "," + str(round(val(ListDetails.cell(i-1,2))))
+		  'output1 = output1 + "," + get_list_seed(ListDetails.cell(i-1,7))
+		  'output1 = output1 + "," + get_list_rating_status(val(ListDetails.cell(i-1,6)),val(ListDetails.cell(i-1,4)))
+		  'output1 = output1 + "," + ListDetails.cell(i-1,5)
+		  'output1 = output1 + "," + ListDetails.cell(i-1,6)
+		  'output1 = output1 + "," + str(round((val(ListDetails.cell(i-1,5))/val(ListDetails.cell(i-1,6)))*100))+"%"
+		  'saveFile1.WriteLine (output1)
+		  'output2=""
+		  'if val(ListDetails.cell(i-1,4)) > 0 then
+		  'output2 = ListDetails.cell(i-1,1) + get_current_award(val(ListDetails.cell(i-1,0)),left(list_date,4))
+		  'output2 = output2 + "," + str(round(val(ListDetails.cell(i-1,2))))
+		  'output2 = output2 + "," + get_list_seed(ListDetails.cell(i-1,7))
+		  'output2 = output2 + "," + get_list_rating_status(val(ListDetails.cell(i-1,6)),val(ListDetails.cell(i-1,4)))
+		  'output2 = output2 + "," + ListDetails.cell(i-1,5)
+		  'output2 = output2 + "," + ListDetails.cell(i-1,6)
+		  'output2 = output2 + "," + str(round((val(ListDetails.cell(i-1,5))/val(ListDetails.cell(i-1,6)))*100))+"%"
+		  'saveFile2.WriteLine (output2)
+		  'end if
+		  'if nats then
+		  'output3=""
+		  'eileen_mclean_games=count_eileen_mclean_games(ListDetails.cell(i-1,0),list_date,last_nationals)
+		  'if eileen_mclean_games > 0 then
+		  'output3 = ListDetails.cell(i-1,1) + get_current_award(val(ListDetails.cell(i-1,0)),left(list_date,4))
+		  'output3 = output3 + "," + str(eileen_mclean_games)
+		  'saveFile3.WriteLine (output3)
+		  'end if
+		  'end if
+		  'next
+		  'savefile1.Close
+		  'savefile2.Close
+		  'if nats then
+		  'savefile3.Close
+		  'end if
 		  
 		End Sub
 	#tag EndMethod
