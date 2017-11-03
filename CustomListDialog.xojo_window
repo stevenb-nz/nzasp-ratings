@@ -9,7 +9,7 @@ Begin Window CustomListDialog
    FullScreen      =   False
    FullScreenButton=   False
    HasBackColor    =   False
-   Height          =   433
+   Height          =   189
    ImplicitInstance=   True
    LiveResize      =   True
    MacProcID       =   0
@@ -25,50 +25,8 @@ Begin Window CustomListDialog
    Resizeable      =   False
    Title           =   "New Tournament"
    Visible         =   True
-   Width           =   500
-   Begin TextField TournamentName
-      AcceptTabs      =   False
-      Alignment       =   0
-      AutoDeactivate  =   True
-      AutomaticallyCheckSpelling=   False
-      BackColor       =   &cFFFFFF00
-      Bold            =   False
-      Border          =   True
-      CueText         =   ""
-      DataField       =   ""
-      DataSource      =   ""
-      Enabled         =   True
-      Format          =   ""
-      Height          =   22
-      HelpTag         =   ""
-      Index           =   -2147483648
-      Italic          =   False
-      Left            =   20
-      LimitText       =   0
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   True
-      LockTop         =   True
-      Mask            =   ""
-      Password        =   False
-      ReadOnly        =   False
-      Scope           =   0
-      TabIndex        =   0
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Text            =   ""
-      TextColor       =   &c00000000
-      TextFont        =   "System"
-      TextSize        =   0.0
-      TextUnit        =   0
-      Top             =   52
-      Underline       =   False
-      UseFocusRing    =   True
-      Visible         =   True
-      Width           =   298
-   End
-   Begin Label PromptLabel
+   Width           =   352
+   Begin Label PromptLabel1
       AutoDeactivate  =   True
       Bold            =   False
       DataField       =   ""
@@ -90,19 +48,19 @@ Begin Window CustomListDialog
       Selectable      =   False
       TabIndex        =   1
       TabPanelIndex   =   0
-      Text            =   "Create a new tournament with the following name and end date?\n"
+      Text            =   "Replace with on/off for qualifying period."
       TextAlign       =   0
       TextColor       =   &c00000000
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   20
+      Top             =   21
       Transparent     =   True
       Underline       =   False
       Visible         =   True
-      Width           =   460
+      Width           =   257
    End
-   Begin Label DateDisplay
+   Begin Label EndDateDisplay
       AutoDeactivate  =   True
       Bold            =   False
       DataField       =   ""
@@ -113,7 +71,7 @@ Begin Window CustomListDialog
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   330
+      Left            =   182
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -149,12 +107,12 @@ Begin Window CustomListDialog
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   400
-      LockBottom      =   False
+      Left            =   252
+      LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   False
       LockRight       =   True
-      LockTop         =   True
+      LockTop         =   False
       Scope           =   0
       TabIndex        =   3
       TabPanelIndex   =   0
@@ -162,7 +120,7 @@ Begin Window CustomListDialog
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   85
+      Top             =   149
       Underline       =   False
       Visible         =   True
       Width           =   80
@@ -180,11 +138,11 @@ Begin Window CustomListDialog
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   308
+      Left            =   160
       LockBottom      =   False
       LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   True
+      LockLeft        =   True
+      LockRight       =   False
       LockTop         =   True
       Scope           =   0
       TabIndex        =   4
@@ -193,10 +151,146 @@ Begin Window CustomListDialog
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   85
+      Top             =   149
       Underline       =   False
       Visible         =   True
       Width           =   80
+   End
+   Begin Label StartDateDisplay
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   5
+      TabPanelIndex   =   0
+      Text            =   ""
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   53
+      Transparent     =   True
+      Underline       =   False
+      Visible         =   True
+      Width           =   150
+   End
+   Begin Label PromptLabel2
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   6
+      TabPanelIndex   =   0
+      Text            =   "Replace with on/off for number of majors."
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   85
+      Transparent     =   True
+      Underline       =   False
+      Visible         =   True
+      Width           =   257
+   End
+   Begin Label OutOfMajors
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   182
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   7
+      TabPanelIndex   =   0
+      Text            =   ""
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   117
+      Transparent     =   True
+      Underline       =   False
+      Visible         =   True
+      Width           =   150
+   End
+   Begin Label RequiredMajors
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   8
+      TabPanelIndex   =   0
+      Text            =   ""
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   117
+      Transparent     =   True
+      Underline       =   False
+      Visible         =   True
+      Width           =   150
    End
 End
 #tag EndWindow
@@ -213,13 +307,6 @@ End
 
 #tag EndWindowCode
 
-#tag Events TournamentName
-	#tag Event
-		Sub TextChange()
-		  
-		End Sub
-	#tag EndEvent
-#tag EndEvents
 #tag Events OKButton
 	#tag Event
 		Sub Action()
