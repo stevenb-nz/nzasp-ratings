@@ -9,7 +9,7 @@ Begin Window CustomListDialog
    FullScreen      =   False
    FullScreenButton=   False
    HasBackColor    =   False
-   Height          =   189
+   Height          =   200
    ImplicitInstance=   True
    LiveResize      =   True
    MacProcID       =   0
@@ -25,7 +25,7 @@ Begin Window CustomListDialog
    Resizeable      =   False
    Title           =   "New Tournament"
    Visible         =   True
-   Width           =   352
+   Width           =   360
    Begin Label PromptLabel1
       AutoDeactivate  =   True
       Bold            =   False
@@ -107,7 +107,7 @@ Begin Window CustomListDialog
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   252
+      Left            =   260
       LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   False
@@ -120,7 +120,7 @@ Begin Window CustomListDialog
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   149
+      Top             =   160
       Underline       =   False
       Visible         =   True
       Width           =   80
@@ -138,7 +138,7 @@ Begin Window CustomListDialog
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   160
+      Left            =   168
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -151,7 +151,7 @@ Begin Window CustomListDialog
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   149
+      Top             =   160
       Underline       =   False
       Visible         =   True
       Width           =   80
