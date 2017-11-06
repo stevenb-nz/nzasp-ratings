@@ -31,7 +31,7 @@ Begin Window CustomListDialog
       Bold            =   False
       DataField       =   ""
       DataSource      =   ""
-      Enabled         =   True
+      Enabled         =   False
       Height          =   20
       HelpTag         =   ""
       Index           =   -2147483648
@@ -197,7 +197,7 @@ Begin Window CustomListDialog
       CueText         =   ""
       DataField       =   ""
       DataSource      =   ""
-      Enabled         =   True
+      Enabled         =   False
       Format          =   ""
       Height          =   22
       HelpTag         =   ""
@@ -239,7 +239,7 @@ Begin Window CustomListDialog
       CueText         =   ""
       DataField       =   ""
       DataSource      =   ""
-      Enabled         =   True
+      Enabled         =   False
       Format          =   ""
       Height          =   22
       HelpTag         =   ""
@@ -281,7 +281,7 @@ Begin Window CustomListDialog
       CueText         =   ""
       DataField       =   ""
       DataSource      =   ""
-      Enabled         =   True
+      Enabled         =   False
       Format          =   ""
       Height          =   22
       HelpTag         =   ""
@@ -324,7 +324,7 @@ Begin Window CustomListDialog
       CueText         =   ""
       DataField       =   ""
       DataSource      =   ""
-      Enabled         =   True
+      Enabled         =   False
       Format          =   ""
       Height          =   22
       HelpTag         =   ""
@@ -361,7 +361,7 @@ Begin Window CustomListDialog
       Bold            =   False
       DataField       =   ""
       DataSource      =   ""
-      Enabled         =   True
+      Enabled         =   False
       Height          =   20
       HelpTag         =   ""
       Index           =   -2147483648
@@ -395,7 +395,7 @@ Begin Window CustomListDialog
       Bold            =   False
       DataField       =   ""
       DataSource      =   ""
-      Enabled         =   True
+      Enabled         =   False
       Height          =   20
       HelpTag         =   ""
       Index           =   -2147483648
@@ -429,7 +429,7 @@ Begin Window CustomListDialog
       Bold            =   False
       DataField       =   ""
       DataSource      =   ""
-      Enabled         =   True
+      Enabled         =   False
       Height          =   21
       HelpTag         =   ""
       Index           =   -2147483648
@@ -463,7 +463,7 @@ Begin Window CustomListDialog
       Bold            =   False
       DataField       =   ""
       DataSource      =   ""
-      Enabled         =   True
+      Enabled         =   False
       Height          =   20
       HelpTag         =   ""
       Index           =   -2147483648
@@ -499,7 +499,7 @@ End
 	#tag Event
 		Sub Open()
 		  OKButton.Enabled = false
-		  DateDisplay.Text = MainWindow.LDatePicker.Text
+		  EndDateDisplay.Text = MainWindow.LDatePicker.Text
 		  
 		End Sub
 	#tag EndEvent
