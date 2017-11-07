@@ -31,13 +31,13 @@ Begin Window CustomListDialog
       Bold            =   False
       DataField       =   ""
       DataSource      =   ""
-      Enabled         =   False
+      Enabled         =   True
       Height          =   20
       HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   154
+      Left            =   197
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -48,17 +48,17 @@ Begin Window CustomListDialog
       Selectable      =   False
       TabIndex        =   0
       TabPanelIndex   =   0
-      Text            =   "Date of current tourney"
+      Text            =   "End of qp"
       TextAlign       =   0
       TextColor       =   &c00000000
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   87
+      Top             =   86
       Transparent     =   True
       Underline       =   False
-      Visible         =   True
-      Width           =   150
+      Visible         =   False
+      Width           =   66
    End
    Begin PushButton OKButton
       AutoDeactivate  =   True
@@ -197,7 +197,7 @@ Begin Window CustomListDialog
       CueText         =   ""
       DataField       =   ""
       DataSource      =   ""
-      Enabled         =   False
+      Enabled         =   True
       Format          =   ""
       Height          =   22
       HelpTag         =   ""
@@ -225,49 +225,7 @@ Begin Window CustomListDialog
       Top             =   52
       Underline       =   False
       UseFocusRing    =   True
-      Visible         =   True
-      Width           =   80
-   End
-   Begin TextField qpstartTextField
-      AcceptTabs      =   False
-      Alignment       =   0
-      AutoDeactivate  =   True
-      AutomaticallyCheckSpelling=   False
-      BackColor       =   &cFFFFFF00
-      Bold            =   False
-      Border          =   True
-      CueText         =   ""
-      DataField       =   ""
-      DataSource      =   ""
-      Enabled         =   False
-      Format          =   ""
-      Height          =   22
-      HelpTag         =   ""
-      Index           =   -2147483648
-      Italic          =   False
-      Left            =   20
-      LimitText       =   0
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      Mask            =   ""
-      Password        =   False
-      ReadOnly        =   False
-      Scope           =   0
-      TabIndex        =   3
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Text            =   ""
-      TextColor       =   &c00000000
-      TextFont        =   "System"
-      TextSize        =   0.0
-      TextUnit        =   0
-      Top             =   86
-      Underline       =   False
-      UseFocusRing    =   True
-      Visible         =   True
+      Visible         =   False
       Width           =   80
    End
    Begin TextField nmajorsrequiredTextField
@@ -281,7 +239,7 @@ Begin Window CustomListDialog
       CueText         =   ""
       DataField       =   ""
       DataSource      =   ""
-      Enabled         =   False
+      Enabled         =   True
       Format          =   ""
       Height          =   22
       HelpTag         =   ""
@@ -310,7 +268,7 @@ Begin Window CustomListDialog
       Top             =   151
       Underline       =   False
       UseFocusRing    =   True
-      Visible         =   True
+      Visible         =   False
       Width           =   40
    End
    Begin TextField outofnmajorsTextField
@@ -324,7 +282,7 @@ Begin Window CustomListDialog
       CueText         =   ""
       DataField       =   ""
       DataSource      =   ""
-      Enabled         =   False
+      Enabled         =   True
       Format          =   ""
       Height          =   22
       HelpTag         =   ""
@@ -353,7 +311,7 @@ Begin Window CustomListDialog
       Top             =   150
       Underline       =   False
       UseFocusRing    =   True
-      Visible         =   True
+      Visible         =   False
       Width           =   40
    End
    Begin Label gamesLabel
@@ -361,7 +319,7 @@ Begin Window CustomListDialog
       Bold            =   False
       DataField       =   ""
       DataSource      =   ""
-      Enabled         =   False
+      Enabled         =   True
       Height          =   20
       HelpTag         =   ""
       Index           =   -2147483648
@@ -387,7 +345,7 @@ Begin Window CustomListDialog
       Top             =   53
       Transparent     =   True
       Underline       =   False
-      Visible         =   True
+      Visible         =   False
       Width           =   153
    End
    Begin Label andLabel
@@ -395,13 +353,13 @@ Begin Window CustomListDialog
       Bold            =   False
       DataField       =   ""
       DataSource      =   ""
-      Enabled         =   False
+      Enabled         =   True
       Height          =   20
       HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   112
+      Left            =   155
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -421,7 +379,7 @@ Begin Window CustomListDialog
       Top             =   86
       Transparent     =   True
       Underline       =   False
-      Visible         =   True
+      Visible         =   False
       Width           =   30
    End
    Begin Label requiredLabel
@@ -429,7 +387,7 @@ Begin Window CustomListDialog
       Bold            =   False
       DataField       =   ""
       DataSource      =   ""
-      Enabled         =   False
+      Enabled         =   True
       Height          =   21
       HelpTag         =   ""
       Index           =   -2147483648
@@ -455,7 +413,7 @@ Begin Window CustomListDialog
       Top             =   151
       Transparent     =   True
       Underline       =   False
-      Visible         =   True
+      Visible         =   False
       Width           =   141
    End
    Begin Label majorsLabel
@@ -463,7 +421,7 @@ Begin Window CustomListDialog
       Bold            =   False
       DataField       =   ""
       DataSource      =   ""
-      Enabled         =   False
+      Enabled         =   True
       Height          =   20
       HelpTag         =   ""
       Index           =   -2147483648
@@ -489,8 +447,86 @@ Begin Window CustomListDialog
       Top             =   152
       Transparent     =   True
       Underline       =   False
-      Visible         =   True
+      Visible         =   False
       Width           =   45
+   End
+   Begin Label StartDateDisplay
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   45
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   9
+      TabPanelIndex   =   0
+      Text            =   "Start of qp"
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   86
+      Transparent     =   True
+      Underline       =   False
+      Visible         =   False
+      Width           =   73
+   End
+   Begin UpDownArrows UpDownArrows1
+      AcceptFocus     =   False
+      AutoDeactivate  =   True
+      Enabled         =   True
+      Height          =   23
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Scope           =   0
+      TabIndex        =   10
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Top             =   86
+      Visible         =   True
+      Width           =   13
+   End
+   Begin UpDownArrows UpDownArrows2
+      AcceptFocus     =   False
+      AutoDeactivate  =   True
+      Enabled         =   True
+      Height          =   23
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Left            =   130
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Scope           =   0
+      TabIndex        =   11
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Top             =   86
+      Visible         =   True
+      Width           =   13
    End
 End
 #tag EndWindow
@@ -503,6 +539,29 @@ End
 		  
 		End Sub
 	#tag EndEvent
+
+
+	#tag Method, Flags = &h0
+		Sub OKcheck()
+		  dim check as Boolean
+		  
+		  check = false
+		  if qpCheckBox.State = CheckBox.CheckedStates.Checked then
+		    'if qualifying period is set for more than 0 days, and games in qp is set for more than 0, then check = true
+		  end if
+		  if nmCheckBox.State = CheckBox.CheckedStates.Checked then
+		    if val(nmajorsrequiredTextField.text) > 0 and val(outofnmajorsTextField.text) > 0 and val(nmajorsrequiredTextField.text) <= val(outofnmajorsTextField.text) then
+		      check = true
+		    end if
+		  end if
+		  
+		  if check then
+		    OKButton.Enabled = true
+		  else
+		    OKButton.Enabled = false
+		  end if
+		End Sub
+	#tag EndMethod
 
 
 #tag EndWindowCode
@@ -518,6 +577,55 @@ End
 	#tag Event
 		Sub Action()
 		  self.Close
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events qpCheckBox
+	#tag Event
+		Sub Action()
+		  if me.state = CheckBox.CheckedStates.Checked then
+		    
+		    'make components visible
+		  else
+		    'hide components
+		  end if
+		  
+		  OKcheck
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events nmCheckBox
+	#tag Event
+		Sub Action()
+		  if me.state = CheckBox.CheckedStates.Checked then
+		    nmajorsrequiredTextField.Visible = true
+		    requiredLabel.Visible = true
+		    outofnmajorsTextField.Visible = true
+		    majorsLabel.Visible = true
+		  else
+		    nmajorsrequiredTextField.Visible = false
+		    requiredLabel.Visible = false
+		    outofnmajorsTextField.Visible = false
+		    majorsLabel.Visible = false
+		  end if
+		  
+		  OKcheck
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events nmajorsrequiredTextField
+	#tag Event
+		Sub TextChange()
+		  OKcheck
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events outofnmajorsTextField
+	#tag Event
+		Sub TextChange()
+		  OKcheck
 		  
 		End Sub
 	#tag EndEvent
