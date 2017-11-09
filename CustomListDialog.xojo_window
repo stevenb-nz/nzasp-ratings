@@ -37,7 +37,7 @@ Begin Window CustomListDialog
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   197
+      Left            =   200
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -48,7 +48,7 @@ Begin Window CustomListDialog
       Selectable      =   False
       TabIndex        =   0
       TabPanelIndex   =   0
-      Text            =   "End of qp"
+      Text            =   "9999-99-99"
       TextAlign       =   0
       TextColor       =   &c00000000
       TextFont        =   "System"
@@ -58,7 +58,7 @@ Begin Window CustomListDialog
       Transparent     =   True
       Underline       =   False
       Visible         =   False
-      Width           =   66
+      Width           =   85
    End
    Begin PushButton OKButton
       AutoDeactivate  =   True
@@ -342,7 +342,7 @@ Begin Window CustomListDialog
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   53
+      Top             =   52
       Transparent     =   True
       Underline       =   False
       Visible         =   False
@@ -359,7 +359,7 @@ Begin Window CustomListDialog
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   155
+      Left            =   158
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -472,7 +472,7 @@ Begin Window CustomListDialog
       Selectable      =   False
       TabIndex        =   9
       TabPanelIndex   =   0
-      Text            =   "Start of qp"
+      Text            =   "9999-99-99"
       TextAlign       =   0
       TextColor       =   &c00000000
       TextFont        =   "System"
@@ -482,9 +482,9 @@ Begin Window CustomListDialog
       Transparent     =   True
       Underline       =   False
       Visible         =   False
-      Width           =   73
+      Width           =   85
    End
-   Begin UpDownArrows UpDownArrows1
+   Begin UpDownArrows TournamentUpDownArrows
       AcceptFocus     =   False
       AutoDeactivate  =   True
       Enabled         =   True
@@ -503,10 +503,10 @@ Begin Window CustomListDialog
       TabPanelIndex   =   0
       TabStop         =   True
       Top             =   86
-      Visible         =   True
+      Visible         =   False
       Width           =   13
    End
-   Begin UpDownArrows UpDownArrows2
+   Begin UpDownArrows DayUpDownArrows
       AcceptFocus     =   False
       AutoDeactivate  =   True
       Enabled         =   True
@@ -514,7 +514,7 @@ Begin Window CustomListDialog
       HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
-      Left            =   130
+      Left            =   133
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -525,7 +525,7 @@ Begin Window CustomListDialog
       TabPanelIndex   =   0
       TabStop         =   True
       Top             =   86
-      Visible         =   True
+      Visible         =   False
       Width           =   13
    End
 End
@@ -537,6 +537,7 @@ End
 		  OKButton.Enabled = false
 		  EndDateDisplay.Text = MainWindow.LDatePicker.Text
 		  
+		  'StartDateDisplay.text = 
 		End Sub
 	#tag EndEvent
 
@@ -585,10 +586,21 @@ End
 	#tag Event
 		Sub Action()
 		  if me.state = CheckBox.CheckedStates.Checked then
-		    
-		    'make components visible
+		    grTextField.Visible = true
+		    gamesLabel.Visible = true
+		    TournamentUpDownArrows.Visible = true
+		    StartDateDisplay.Visible = true
+		    DayUpDownArrows.Visible = true
+		    andLabel.Visible = true
+		    EndDateDisplay.Visible = true
 		  else
-		    'hide components
+		    grTextField.Visible = false
+		    gamesLabel.Visible = false
+		    TournamentUpDownArrows.Visible = false
+		    StartDateDisplay.Visible = false
+		    DayUpDownArrows.Visible = false
+		    andLabel.Visible = false
+		    EndDateDisplay.Visible = false
 		  end if
 		  
 		  OKcheck
@@ -612,6 +624,7 @@ End
 		  end if
 		  
 		  OKcheck
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
