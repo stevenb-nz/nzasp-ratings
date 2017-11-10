@@ -551,19 +551,26 @@ End
 
 	#tag Method, Flags = &h0
 		Sub OKcheck()
-		  dim check as Boolean
+		  dim check1,check2 as Boolean
 		  
-		  check = false
+		  check1 = true
 		  if qpCheckBox.State = CheckBox.CheckedStates.Checked then
+		    if val(grTextField.Text) < 1 then check1 = false
+		    dim d1 as new Date
+		    dim d2 as new Date
+		    d1.SQLDate = StartDateDisplay.text
+		    d2.SQLDate = EndDateDisplay.text
+		    'if d2 <= d1 then check = false
 		    'if qualifying period is set for more than 0 days, and games in qp is set for more than 0, then check = true
 		  end if
+		  check2 = true
 		  if nmCheckBox.State = CheckBox.CheckedStates.Checked then
-		    if val(nmajorsrequiredTextField.text) > 0 and val(outofnmajorsTextField.text) > 0 and val(nmajorsrequiredTextField.text) <= val(outofnmajorsTextField.text) then
-		      check = true
+		    if val(nmajorsrequiredTextField.text) < 1 or val(outofnmajorsTextField.text) < 1 or val(nmajorsrequiredTextField.text) > val(outofnmajorsTextField.text) then
+		      check2 = false
 		    end if
 		  end if
 		  
-		  if check then
+		  if check1 and check2 then
 		    OKButton.Enabled = true
 		  else
 		    OKButton.Enabled = false
@@ -630,6 +637,14 @@ End
 		    majorsLabel.Visible = false
 		  end if
 		  
+		  OKcheck
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events grTextField
+	#tag Event
+		Sub TextChange()
 		  OKcheck
 		  
 		End Sub
