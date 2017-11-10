@@ -534,10 +534,17 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Open()
+		  dim d as new Date
+		  
 		  OKButton.Enabled = false
 		  EndDateDisplay.Text = MainWindow.LDatePicker.Text
 		  
-		  'StartDateDisplay.text = 
+		  d.SQLDate = EndDateDisplay.Text
+		  d.Year = d.Year - 2
+		  d.Day = d.Day + 1
+		  
+		  StartDateDisplay.text = d.SQLDate
+		  
 		End Sub
 	#tag EndEvent
 
