@@ -570,11 +570,12 @@ End
 		    end if
 		  end if
 		  
-		  if check1 and check2 then
+		  if (check1 and check2) and (qpCheckBox.State = CheckBox.CheckedStates.Checked or nmCheckBox.State = CheckBox.CheckedStates.Checked) then
 		    OKButton.Enabled = true
 		  else
 		    OKButton.Enabled = false
 		  end if
+		  
 		End Sub
 	#tag EndMethod
 
