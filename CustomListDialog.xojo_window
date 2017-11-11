@@ -555,13 +555,12 @@ End
 		  
 		  check1 = true
 		  if qpCheckBox.State = CheckBox.CheckedStates.Checked then
-		    if val(grTextField.Text) < 1 then check1 = false
 		    dim d1 as new Date
 		    dim d2 as new Date
 		    d1.SQLDate = StartDateDisplay.text
 		    d2.SQLDate = EndDateDisplay.text
-		    'if d2 <= d1 then check = false
-		    'if qualifying period is set for more than 0 days, and games in qp is set for more than 0, then check = true
+		    if d2.operator_compare(d1) < 1 then check1 = false
+		    if val(grTextField.Text) < 1 then check1 = false
 		  end if
 		  check2 = true
 		  if nmCheckBox.State = CheckBox.CheckedStates.Checked then
