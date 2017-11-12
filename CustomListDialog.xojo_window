@@ -545,6 +545,7 @@ End
 		  
 		  StartDateDisplay.text = d.SQLDate
 		  
+		  MsgBox str(tdates.Ubound)
 		End Sub
 	#tag EndEvent
 
@@ -577,6 +578,11 @@ End
 		  
 		End Sub
 	#tag EndMethod
+
+
+	#tag Property, Flags = &h0
+		tdates() As string
+	#tag EndProperty
 
 
 #tag EndWindowCode
