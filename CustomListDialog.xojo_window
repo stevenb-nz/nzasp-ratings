@@ -540,12 +540,11 @@ End
 		  EndDateDisplay.Text = MainWindow.LDatePicker.Text
 		  
 		  d.SQLDate = EndDateDisplay.Text
-		  d.Year = d.Year - 2
+		  d.year = d.year - 2
 		  d.Day = d.Day + 1
 		  
 		  StartDateDisplay.text = d.SQLDate
 		  
-		  MsgBox str(tdates.Ubound)
 		End Sub
 	#tag EndEvent
 
@@ -666,6 +665,30 @@ End
 #tag Events outofnmajorsTextField
 	#tag Event
 		Sub TextChange()
+		  OKcheck
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events DayUpDownArrows
+	#tag Event
+		Sub Down()
+		  dim d As new Date
+		  
+		  d.SQLDate = StartDateDisplay.Text
+		  d.day = d.day - 1
+		  StartDateDisplay.text = d.SQLDate
+		  OKcheck
+		  
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Up()
+		  dim d As new Date
+		  
+		  d.SQLDate = StartDateDisplay.Text
+		  d.day = d.day + 1
+		  if d.SQLDate <> EndDateDisplay.text then StartDateDisplay.text = d.SQLDate
 		  OKcheck
 		  
 		End Sub
