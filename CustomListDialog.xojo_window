@@ -545,6 +545,19 @@ End
 		  
 		  StartDateDisplay.text = d.SQLDate
 		  
+		  dim sql as string
+		  dim data as RecordSet
+		  
+		  sql = "SELECT list_date from as_at_date WHERE list_date < '"+ EndDateDisplay.Text +"' ORDER BY list_date"
+		  data = app.ratingsDB.SQLSelect(sql)
+		  
+		  dim i as integer
+		  
+		  for i = 1 to data.RecordCount
+		    tdates.Append data.IdxField(1).StringValue
+		    data.MoveNext
+		  next
+		  
 		End Sub
 	#tag EndEvent
 
