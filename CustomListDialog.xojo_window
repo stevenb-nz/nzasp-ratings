@@ -670,6 +670,18 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
+#tag Events TournamentUpDownArrows
+	#tag Event
+		Sub Up()
+		  
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Down()
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag Events DayUpDownArrows
 	#tag Event
 		Sub Down()
@@ -688,8 +700,10 @@ End
 		  
 		  d.SQLDate = StartDateDisplay.Text
 		  d.day = d.day + 1
-		  if d.SQLDate <> EndDateDisplay.text then StartDateDisplay.text = d.SQLDate
-		  OKcheck
+		  if d.SQLDate <> EndDateDisplay.text then
+		    StartDateDisplay.text = d.SQLDate
+		    OKcheck
+		  end if
 		  
 		End Sub
 	#tag EndEvent
