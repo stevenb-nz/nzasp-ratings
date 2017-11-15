@@ -541,7 +541,7 @@ End
 		  
 		  d.SQLDate = EndDateDisplay.Text
 		  d.year = d.year - 2
-		  d.Day = d.Day + 1
+		  d.day = d.day + 1
 		  
 		  StartDateDisplay.text = d.SQLDate
 		  
@@ -552,7 +552,7 @@ End
 		  data = app.ratingsDB.SQLSelect(sql)
 		  
 		  dim i as integer
-		  
+		  MsgBox str(data.RecordCount)
 		  for i = 1 to data.RecordCount
 		    tdates.Append data.IdxField(1).StringValue
 		    data.MoveNext
@@ -572,7 +572,7 @@ End
 		    dim d2 as new Date
 		    d1.SQLDate = StartDateDisplay.text
 		    d2.SQLDate = EndDateDisplay.text
-		    if d2.operator_compare(d1) < 1 then check1 = false
+		    if d2.operator_compare(d1) < 0 then check1 = false
 		    if val(grTextField.Text) < 1 then check1 = false
 		  end if
 		  check2 = true
@@ -710,10 +710,12 @@ End
 	#tag Event
 		Sub Up()
 		  dim d As new Date
+		  dim ed As new Date
 		  
 		  d.SQLDate = StartDateDisplay.Text
 		  d.day = d.day + 1
-		  if d.SQLDate <> EndDateDisplay.text then
+		  ed.SQLDate = EndDateDisplay.text
+		  if ed.operator_compare(d) >= 0 then
 		    StartDateDisplay.text = d.SQLDate
 		    OKcheck
 		  end if
