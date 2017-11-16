@@ -548,13 +548,12 @@ End
 		  dim sql as string
 		  dim data as RecordSet
 		  
-		  sql = "SELECT list_date from as_at_date WHERE list_date < '"+ EndDateDisplay.Text +"' ORDER BY list_date"
+		  sql = "SELECT list_date from as_at_date WHERE list_date <= '"+ EndDateDisplay.Text +"' ORDER BY list_date"
 		  data = app.ratingsDB.SQLSelect(sql)
 		  
 		  dim i as integer
-		  MsgBox str(data.RecordCount)
 		  for i = 1 to data.RecordCount
-		    tdates.Append data.IdxField(1).StringValue
+		    tdates.insert(0, data.IdxField(1).StringValue)
 		    data.MoveNext
 		  next
 		  
@@ -686,11 +685,27 @@ End
 #tag Events TournamentUpDownArrows
 	#tag Event
 		Sub Up()
+		  'dim d As new Date
+		  'dim ed As new Date
+		  '
+		  'd.SQLDate = StartDateDisplay.Text
+		  'd.day = d.day + 1
+		  'ed.SQLDate = EndDateDisplay.text
+		  'if ed.operator_compare(d) >= 0 then
+		  'StartDateDisplay.text = d.SQLDate
+		  'OKcheck
+		  'end if
 		  
 		End Sub
 	#tag EndEvent
 	#tag Event
 		Sub Down()
+		  'dim d As new Date
+		  '
+		  'd.SQLDate = StartDateDisplay.Text
+		  'd.day = d.day - 1
+		  'StartDateDisplay.text = d.SQLDate
+		  'OKcheck
 		  
 		End Sub
 	#tag EndEvent
