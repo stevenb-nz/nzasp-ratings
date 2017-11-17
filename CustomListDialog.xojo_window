@@ -685,27 +685,37 @@ End
 #tag Events TournamentUpDownArrows
 	#tag Event
 		Sub Up()
-		  'dim d As new Date
-		  'dim ed As new Date
-		  '
-		  'd.SQLDate = StartDateDisplay.Text
-		  'd.day = d.day + 1
-		  'ed.SQLDate = EndDateDisplay.text
-		  'if ed.operator_compare(d) >= 0 then
-		  'StartDateDisplay.text = d.SQLDate
-		  'OKcheck
-		  'end if
+		  dim d as new date
+		  dim d1 as new date
+		  dim i as integer
+		  
+		  d.SQLDate = StartDateDisplay.Text
+		  i = -1
+		  do
+		    i = i + 1
+		    d1.SQLDate = tdates(i)
+		  loop until ubound(tdates) = i or d.Operator_Compare(d1) > -1
+		  if i > 0 then
+		    StartDateDisplay.text = tdates(i-1)
+		    OKcheck
+		  end if
 		  
 		End Sub
 	#tag EndEvent
 	#tag Event
 		Sub Down()
-		  'dim d As new Date
-		  '
-		  'd.SQLDate = StartDateDisplay.Text
-		  'd.day = d.day - 1
-		  'StartDateDisplay.text = d.SQLDate
-		  'OKcheck
+		  dim d as new date
+		  dim d1 as new date
+		  dim i as integer
+		  
+		  d.SQLDate = StartDateDisplay.Text
+		  i = -1
+		  do
+		    i = i + 1
+		    d1.SQLDate = tdates(i)
+		  loop until ubound(tdates) = i or d.Operator_Compare(d1) = 1
+		  StartDateDisplay.text = tdates(i)
+		  OKcheck
 		  
 		End Sub
 	#tag EndEvent
