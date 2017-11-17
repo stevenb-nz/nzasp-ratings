@@ -275,6 +275,7 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   2
          TabPanelIndex   =   1
+         TabStop         =   True
          Text            =   ""
          TextAlign       =   2
          TextColor       =   &c00000000
@@ -331,6 +332,7 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   4
          TabPanelIndex   =   1
+         TabStop         =   True
          Text            =   ""
          TextAlign       =   2
          TextColor       =   &c00000000
@@ -387,6 +389,7 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   6
          TabPanelIndex   =   1
+         TabStop         =   True
          Text            =   ""
          TextAlign       =   2
          TextColor       =   &c00000000
@@ -452,6 +455,7 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   8
          TabPanelIndex   =   1
+         TabStop         =   True
          Text            =   ""
          TextAlign       =   2
          TextColor       =   &c00000000
@@ -486,6 +490,7 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   9
          TabPanelIndex   =   1
+         TabStop         =   True
          Text            =   ""
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -706,6 +711,7 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   4
          TabPanelIndex   =   3
+         TabStop         =   True
          Text            =   "(Deceased)"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -793,6 +799,7 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   3
          TabPanelIndex   =   5
+         TabStop         =   True
          Text            =   ""
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -827,6 +834,7 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   4
          TabPanelIndex   =   5
+         TabStop         =   True
          Text            =   ""
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -861,6 +869,7 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   5
          TabPanelIndex   =   5
+         TabStop         =   True
          Text            =   ""
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -927,6 +936,7 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   7
          TabPanelIndex   =   5
+         TabStop         =   True
          Text            =   ""
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -1012,6 +1022,7 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   5
          TabPanelIndex   =   3
+         TabStop         =   True
          Text            =   ""
          TextAlign       =   2
          TextColor       =   &c00000000
@@ -1463,7 +1474,8 @@ End
 
 	#tag Method, Flags = &h0
 		Sub export_custom_list()
-		  CustomListDialog.ShowModal
+		  dim customList As New CustomListDialog
+		  customList.ShowModal
 		  
 		  'dim eileen_mclean_games,i,majors_score,ranking,wcs_qual_games as integer
 		  'dim f1,f2,f3 as FolderItem
