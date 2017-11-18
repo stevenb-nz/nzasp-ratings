@@ -1476,6 +1476,8 @@ End
 		Sub export_custom_list()
 		  dim customList As New CustomListDialog
 		  customList.ShowModal
+		  if customList.qpcheck then msgbox "QP"
+		  if customList.nmcheck then msgbox "NM"
 		  
 		  'dim eileen_mclean_games,i,majors_score,ranking,wcs_qual_games as integer
 		  'dim f1,f2,f3 as FolderItem

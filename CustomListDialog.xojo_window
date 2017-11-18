@@ -592,6 +592,30 @@ End
 
 
 	#tag Property, Flags = &h0
+		gamesrequired As Integer
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		majorsrequired As Integer
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		nmcheck As Boolean
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		outofmajors As Integer
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		qpcheck As Boolean
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		startdate As String
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		tdates() As string
 	#tag EndProperty
 
@@ -601,6 +625,21 @@ End
 #tag Events OKButton
 	#tag Event
 		Sub Action()
+		  if qpCheckBox.State = CheckBox.CheckedStates.Checked then
+		    qpcheck = true
+		    gamesrequired = val(grTextField.Text)
+		    startdate = StartDateDisplay.Text
+		  else
+		    qpcheck = false
+		  end if
+		  if nmCheckBox.State = CheckBox.CheckedStates.Checked then
+		    nmcheck = true
+		    majorsrequired = val(nmajorsrequiredTextField.text)
+		    outofmajors = val(outofnmajorsTextField.text)
+		  else
+		    nmcheck = false
+		  end if
+		  self.close
 		  
 		End Sub
 	#tag EndEvent
