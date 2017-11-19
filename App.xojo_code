@@ -17,6 +17,7 @@ Inherits Application
 		    TournamentImportEntries.Enabled = false
 		    TournamentImportPairings.Enabled = false
 		    TournamentImportResults.Enabled = false
+		    TournamentImportTOUFile.Enabled = false
 		    TournamentResetTournament.Enabled = false
 		    TournamentDeleteTournament.Enabled = false
 		    TournamentSaveExpectancies.Enabled = false
@@ -24,6 +25,7 @@ Inherits Application
 		    TournamentImportEntries.Enabled = true
 		    TournamentImportPairings.Enabled = true
 		    TournamentImportResults.Enabled = true
+		    TournamentImportTOUFile.Enabled = true
 		    TournamentResetTournament.Enabled = true
 		    TournamentDeleteTournament.Enabled = true
 		    TournamentSaveExpectancies.Enabled = true
@@ -234,6 +236,14 @@ Inherits Application
 			MainWindow.calculate_new_ratings
 			MainWindow.load_tournament
 			end if
+			Return True
+			
+		End Function
+	#tag EndMenuHandler
+
+	#tag MenuHandler
+		Function TournamentImportTOUFile() As Boolean Handles TournamentImportTOUFile.Action
+			
 			Return True
 			
 		End Function
