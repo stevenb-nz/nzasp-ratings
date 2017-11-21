@@ -53,7 +53,7 @@ Begin Window MainWindow
       TextUnit        =   0
       Top             =   0
       Underline       =   False
-      Value           =   4
+      Value           =   2
       Visible         =   True
       Width           =   1200
       Begin Listbox AwardDetails
@@ -275,7 +275,6 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   2
          TabPanelIndex   =   1
-         TabStop         =   True
          Text            =   ""
          TextAlign       =   2
          TextColor       =   &c00000000
@@ -332,7 +331,6 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   4
          TabPanelIndex   =   1
-         TabStop         =   True
          Text            =   ""
          TextAlign       =   2
          TextColor       =   &c00000000
@@ -389,7 +387,6 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   6
          TabPanelIndex   =   1
-         TabStop         =   True
          Text            =   ""
          TextAlign       =   2
          TextColor       =   &c00000000
@@ -455,7 +452,6 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   8
          TabPanelIndex   =   1
-         TabStop         =   True
          Text            =   ""
          TextAlign       =   2
          TextColor       =   &c00000000
@@ -490,7 +486,6 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   9
          TabPanelIndex   =   1
-         TabStop         =   True
          Text            =   ""
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -711,7 +706,6 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   4
          TabPanelIndex   =   3
-         TabStop         =   True
          Text            =   "(Deceased)"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -799,7 +793,6 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   3
          TabPanelIndex   =   5
-         TabStop         =   True
          Text            =   ""
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -834,7 +827,6 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   4
          TabPanelIndex   =   5
-         TabStop         =   True
          Text            =   ""
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -869,7 +861,6 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   5
          TabPanelIndex   =   5
-         TabStop         =   True
          Text            =   ""
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -936,7 +927,6 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   7
          TabPanelIndex   =   5
-         TabStop         =   True
          Text            =   ""
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -1022,7 +1012,6 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   5
          TabPanelIndex   =   3
-         TabStop         =   True
          Text            =   ""
          TextAlign       =   2
          TextColor       =   &c00000000
@@ -1116,6 +1105,37 @@ Begin Window MainWindow
          Width           =   1160
          _ScrollOffset   =   0
          _ScrollWidth    =   -1
+      End
+      Begin PushButton EditNameButton
+         AutoDeactivate  =   True
+         Bold            =   False
+         ButtonStyle     =   "0"
+         Cancel          =   False
+         Caption         =   "Edit Name"
+         Default         =   False
+         Enabled         =   False
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "MainTabPanel"
+         Italic          =   False
+         Left            =   928
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   True
+         Scope           =   0
+         TabIndex        =   6
+         TabPanelIndex   =   3
+         TabStop         =   True
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   39
+         Underline       =   False
+         Visible         =   True
+         Width           =   120
       End
    End
 End
@@ -2320,6 +2340,7 @@ End
 		  PlayerDetails.DeleteAllRows
 		  PlayerPicker.DeleteAllRows
 		  ToggleDeceasedButton.Enabled = false
+		  EditNameButton.Enabled = false
 		  DeceasedLabel.Visible = false
 		  
 		  sql = "SELECT id,name from player ORDER by name"
@@ -3349,9 +3370,11 @@ End
 		Sub Change()
 		  if me.ListIndex < 0 then
 		    ToggleDeceasedButton.Enabled = false
+		    EditNameButton.Enabled = false
 		  else
 		    load_deceased_status(me.RowTag(me.ListIndex))
 		    ToggleDeceasedButton.Enabled = true
+		    EditNameButton.Enabled = true
 		    load_player_details(me.RowTag(me.ListIndex))
 		  end if
 		  
@@ -3482,6 +3505,14 @@ End
 		  else
 		    load_club_details(me.RowTag(me.ListIndex))
 		  end if
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events EditNameButton
+	#tag Event
+		Sub Action()
+		  'make a 'new name' dialog, displaymodal, change name if returns okay
 		  
 		End Sub
 	#tag EndEvent
