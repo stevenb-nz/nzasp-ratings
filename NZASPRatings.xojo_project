@@ -8,6 +8,7 @@ BuildSteps=Build Automation;Build Automation.xojo_code;&h56CCD22;&h0;false
 Window=NewTournamentDialog;NewTournamentDialog.xojo_window;&h175F5FFF;&h0;false
 Window=NewClubDialog;NewClubDialog.xojo_window;&h25F9AFFF;&h0;false
 Window=CustomListDialog;CustomListDialog.xojo_window;&h6A809FFF;&h0;false
+Window=AmendNameDialog;AmendNameDialog.xojo_window;&h6F3A47FF;&h0;false
 DefaultWindow=MainWindow
 AppMenuBar=MainMenuBar
 MajorVersion=1
