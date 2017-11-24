@@ -53,7 +53,7 @@ Begin Window MainWindow
       TextUnit        =   0
       Top             =   0
       Underline       =   False
-      Value           =   2
+      Value           =   4
       Visible         =   True
       Width           =   1200
       Begin Listbox AwardDetails
@@ -1977,6 +1977,10 @@ End
 		  dim i as integer
 		  dim sql as string
 		  dim data as RecordSet
+		  
+		  if End_of_year_check.State = CheckBox.CheckedStates.Checked then
+		    year = str(val(year)+1)
+		  end if
 		  
 		  sql = "SELECT lifetime_award.award FROM lifetime_award JOIN year ON lifetime_award.year_id=year.id "+_
 		  "WHERE year.active_year < '"+year+"' and lifetime_award.player_id = "+str(name_id)+" ORDER BY year.active_year DESC"
