@@ -53,7 +53,7 @@ Begin Window MainWindow
       TextUnit        =   0
       Top             =   0
       Underline       =   False
-      Value           =   4
+      Value           =   2
       Visible         =   True
       Width           =   1200
       Begin Listbox AwardDetails
@@ -1106,12 +1106,12 @@ Begin Window MainWindow
          _ScrollOffset   =   0
          _ScrollWidth    =   -1
       End
-      Begin PushButton EditNameButton
+      Begin PushButton AmendNameButton
          AutoDeactivate  =   True
          Bold            =   False
          ButtonStyle     =   "0"
          Cancel          =   False
-         Caption         =   "Edit Name"
+         Caption         =   "Amend Name"
          Default         =   False
          Enabled         =   False
          Height          =   20
@@ -2344,7 +2344,7 @@ End
 		  PlayerDetails.DeleteAllRows
 		  PlayerPicker.DeleteAllRows
 		  ToggleDeceasedButton.Enabled = false
-		  EditNameButton.Enabled = false
+		  AmendNameButton.Enabled = false
 		  DeceasedLabel.Visible = false
 		  
 		  sql = "SELECT id,name from player ORDER by name"
@@ -3374,11 +3374,11 @@ End
 		Sub Change()
 		  if me.ListIndex < 0 then
 		    ToggleDeceasedButton.Enabled = false
-		    EditNameButton.Enabled = false
+		    AmendNameButton.Enabled = false
 		  else
 		    load_deceased_status(me.RowTag(me.ListIndex))
 		    ToggleDeceasedButton.Enabled = true
-		    EditNameButton.Enabled = true
+		    AmendNameButton.Enabled = true
 		    load_player_details(me.RowTag(me.ListIndex))
 		  end if
 		  
@@ -3513,7 +3513,7 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events EditNameButton
+#tag Events AmendNameButton
 	#tag Event
 		Sub Action()
 		  'make a 'new name' dialog, displaymodal, change name if returns okay
