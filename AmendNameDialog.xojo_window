@@ -170,6 +170,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Open()
+		  PlayerNameDisplay.Text = MainWindow.PlayerPicker.Text
 		  OKButton.Enabled = false
 		  
 		End Sub
@@ -187,8 +188,8 @@ End
 		    OKButton.Enabled = false
 		    return
 		  end if
-		  for i = 1 to MainWindow.TournamentPicker.ListCount
-		    if me.Text = Mainwindow.TournamentPicker.list(i-1) then
+		  for i = 1 to MainWindow.PlayerPicker.ListCount
+		    if me.Text = Mainwindow.PlayerPicker.list(i-1) then
 		      OKButton.Enabled = false
 		      return
 		    end if

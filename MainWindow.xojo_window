@@ -3516,7 +3516,7 @@ End
 #tag Events AmendNameButton
 	#tag Event
 		Sub Action()
-		  'make a 'new name' dialog, displaymodal, change name if returns okay
+		  AmendNameDialog.ShowModal
 		  
 		End Sub
 	#tag EndEvent
