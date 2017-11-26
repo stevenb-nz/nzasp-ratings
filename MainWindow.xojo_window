@@ -53,7 +53,7 @@ Begin Window MainWindow
       TextUnit        =   0
       Top             =   0
       Underline       =   False
-      Value           =   2
+      Value           =   0
       Visible         =   True
       Width           =   1200
       Begin Listbox AwardDetails
@@ -503,9 +503,9 @@ Begin Window MainWindow
          AutoHideScrollbars=   True
          Bold            =   False
          Border          =   True
-         ColumnCount     =   12
+         ColumnCount     =   13
          ColumnsResizable=   False
-         ColumnWidths    =   "0%,30%, 10%, 10%,10%,5%, 5%,10%,10%,5%,5%,0%"
+         ColumnWidths    =   "0%,30%, 10%, 10%,10%,5%, 5%,10%,10%,5%,5%,0%,0%"
          DataField       =   ""
          DataSource      =   ""
          DefaultRowHeight=   -1
@@ -521,7 +521,7 @@ Begin Window MainWindow
          Hierarchical    =   False
          Index           =   -2147483648
          InitialParent   =   "MainTabPanel"
-         InitialValue    =   "Id	Player	Start rating	Rating status	Prov rating	Expected wins	Games	Wins	End rating	Grade	Placing	Seeding"
+         InitialValue    =   "Id	Player	Start rating	Rating status	Prov rating	Expected wins	Games	Wins	End rating	Grade	Placing	Seeding Perf rating"
          Italic          =   False
          Left            =   20
          LockBottom      =   True
@@ -1316,8 +1316,56 @@ End
 
 	#tag Method, Flags = &h0
 		Sub calculate_new_ratings()
+		  calculate_perf_ratings
 		  calculate_prov_ratings
 		  calculate_final_ratings
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub calculate_perf_ratings()
+		  'dim current_date,sql as string
+		  'dim data as RecordSet
+		  'dim opponent_list() as string
+		  'dim rating_status as new Dictionary
+		  'dim old_rating as new Dictionary
+		  'dim provwinrate,provdiff,provtotal,wins as double
+		  'dim games,i,t_games as Integer
+		  '
+		  'sql = "SELECT id, player_id, start_rating, rating_status, prov_rating, games, wins from rating_change "+_
+		  '"WHERE tournament_id ="+str(tournamentPicker.RowTag(tournamentPicker.ListIndex))
+		  'data = app.ratingsDB.SQLSelect(sql)
+		  '
+		  'while not data.EOF
+		  'old_rating.value(data.IdxField(2).StringValue) = data.IdxField(3).StringValue
+		  'rating_status.Value(data.IdxField(2).StringValue) = data.IdxField(4).StringValue
+		  'data.MoveNext
+		  'wend
+		  'data.MoveFirst
+		  'while not data.EOF
+		  'if data.IdxField(4).stringvalue <> "(new)" and data.IdxField(4).stringvalue <> "(prov)" then
+		  'app.ratingsDB.SQLExecute("UPDATE rating_change SET prov_rating="+data.IdxField(3).StringValue+_
+		  '" WHERE tournament_id ="+str(tournamentPicker.RowTag(tournamentPicker.ListIndex))+" and player_id = "+data.IdxField(2).StringValue)
+		  'else
+		  'current_date = format(val(MainWindow.TYear.text),"0000")+"-"+format(val(MainWindow.TMonth.text),"00")+"-"+format(val(MainWindow.TDay.text),"00")
+		  't_games = count_games(val(data.idxfield(2).stringvalue),get_prec_as_at_date(current_date))
+		  'opponent_list = get_opponent_list(val(data.IdxField(2).StringValue),tournamentPicker.RowTag(tournamentPicker.ListIndex))
+		  'wins = val(data.IdxField(7).StringValue)
+		  'games = val(data.IdxField(6).StringValue)
+		  'provwinrate = ((wins-games/2)*(games-2)/games+games/2)/games
+		  'provdiff = -log(1/provwinrate - 1)*313
+		  'provtotal = 0
+		  'for i=0 to opponent_list.Ubound
+		  'provtotal = provtotal + val(old_rating.value(opponent_list(i)))
+		  'next
+		  'provtotal = provtotal + provdiff*games
+		  'provtotal = (provtotal + val(data.IdxField(3).StringValue)*t_games) / (games + t_games)
+		  'app.ratingsDB.SQLExecute("UPDATE rating_change SET prov_rating="+str(provtotal)+", end_rating="+str(provtotal)+_
+		  '" WHERE tournament_id ="+str(tournamentPicker.RowTag(tournamentPicker.ListIndex))+" and player_id = "+data.IdxField(2).StringValue)
+		  'end if
+		  'data.MoveNext
+		  'wend
 		  
 		End Sub
 	#tag EndMethod
