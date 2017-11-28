@@ -1329,8 +1329,8 @@ End
 		  dim opponent_list() as string
 		  dim rating_status as new Dictionary
 		  dim old_rating as new Dictionary
-		  dim provwinrate,provdiff,provtotal,wins as double
-		  dim games,i,j,t_games,variance as Integer
+		  dim provwinrate,provdiff,provtotal,wins,variance as double
+		  dim games,i,j,t_games as Integer
 		  
 		  sql = "SELECT id, player_id, start_rating, rating_status, prov_rating, games, wins from rating_change "+_
 		  "WHERE tournament_id ="+str(tournamentPicker.RowTag(tournamentPicker.ListIndex))
@@ -1342,7 +1342,7 @@ End
 		    data.MoveNext
 		  wend
 		  data.MoveFirst
-		  for j = 1 to 10
+		  do
 		    while not data.EOF
 		      if data.IdxField(4).stringvalue <> "(new)" and data.IdxField(4).stringvalue <> "(prov)" then
 		        app.ratingsDB.SQLExecute("UPDATE rating_change SET prov_rating="+data.IdxField(3).StringValue+_
@@ -1377,7 +1377,7 @@ End
 		    wend
 		    MsgBox str(variance)
 		    data.MoveFirst
-		  next
+		  loop until variance < 0.5
 		  
 		  while not data.EOF
 		    if data.IdxField(4).stringvalue <> "(new)" and data.IdxField(4).stringvalue <> "(prov)" then
