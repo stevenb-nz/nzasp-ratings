@@ -202,6 +202,8 @@ End
 #tag Events OKButton
 	#tag Event
 		Sub Action()
+		  app.ratingsDB.SQLExecute("update player set name = '"+PlayerNameDisplay.Text+"' where name = '"+MainWindow.PlayerPicker.Text+"'")
+		  MainWindow.init_player_tab
 		  self.close
 		  
 		End Sub
