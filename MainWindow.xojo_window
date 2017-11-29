@@ -1375,7 +1375,9 @@ End
 		      old_rating.value(data.IdxField(2).StringValue) = data.IdxField(5).StringValue
 		      data.MoveNext
 		    wend
-		    MsgBox str(variance)
+		    #If DebugBuild Then
+		      MsgBox str(variance)
+		    #Endif
 		    data.MoveFirst
 		  loop until variance < 0.5
 		  
