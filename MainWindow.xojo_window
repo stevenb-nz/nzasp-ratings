@@ -1106,7 +1106,7 @@ Begin Window MainWindow
          _ScrollOffset   =   0
          _ScrollWidth    =   -1
       End
-      Begin PushButton AmendNameButton
+      Begin PushButton AmendPNameButton
          AutoDeactivate  =   True
          Bold            =   False
          ButtonStyle     =   "0"
@@ -1133,6 +1133,37 @@ Begin Window MainWindow
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   39
+         Underline       =   False
+         Visible         =   True
+         Width           =   120
+      End
+      Begin PushButton AmendTNameButton
+         AutoDeactivate  =   True
+         Bold            =   False
+         ButtonStyle     =   "0"
+         Cancel          =   False
+         Caption         =   "Amend Name"
+         Default         =   False
+         Enabled         =   False
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "MainTabPanel"
+         Italic          =   False
+         Left            =   422
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   0
+         TabIndex        =   12
+         TabPanelIndex   =   1
+         TabStop         =   True
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   40
          Underline       =   False
          Visible         =   True
          Width           =   120
@@ -3552,7 +3583,15 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events AmendNameButton
+#tag Events AmendPNameButton
+	#tag Event
+		Sub Action()
+		  AmendNameDialog.ShowModal
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events AmendTNameButton
 	#tag Event
 		Sub Action()
 		  AmendNameDialog.ShowModal
