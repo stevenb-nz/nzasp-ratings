@@ -170,7 +170,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Open()
-		  PlayerNameDisplay.Text = MainWindow.PlayerPicker.Text
+		  TournamentNameDisplay.Text = MainWindow.PlayerPicker.Text
 		  OKButton.Enabled = false
 		  
 		End Sub
@@ -202,7 +202,7 @@ End
 #tag Events OKButton
 	#tag Event
 		Sub Action()
-		  app.ratingsDB.SQLExecute("update player set name = '"+PlayerNameDisplay.Text+"' where name = '"+MainWindow.PlayerPicker.Text+"'")
+		  app.ratingsDB.SQLExecute("update player set name = '"+TournamentNameDisplay.Text+"' where name = '"+MainWindow.PlayerPicker.Text+"'")
 		  MainWindow.init_player_tab
 		  self.close
 		  

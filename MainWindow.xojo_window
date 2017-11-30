@@ -2414,7 +2414,7 @@ End
 		  PlayerDetails.DeleteAllRows
 		  PlayerPicker.DeleteAllRows
 		  ToggleDeceasedButton.Enabled = false
-		  AmendNameButton.Enabled = false
+		  AmendPNameButton.Enabled = false
 		  DeceasedLabel.Visible = false
 		  
 		  sql = "SELECT id,name from player ORDER by name"
@@ -3171,6 +3171,11 @@ End
 #tag Events TournamentPicker
 	#tag Event
 		Sub Change()
+		  if me.ListIndex < 0 then
+		    AmendTNameButton.Enabled = false
+		  else
+		    AmendTNameButton.Enabled = true
+		  end if
 		  load_tournament
 		End Sub
 	#tag EndEvent
@@ -3444,11 +3449,11 @@ End
 		Sub Change()
 		  if me.ListIndex < 0 then
 		    ToggleDeceasedButton.Enabled = false
-		    AmendNameButton.Enabled = false
+		    AmendPNameButton.Enabled = false
 		  else
 		    load_deceased_status(me.RowTag(me.ListIndex))
 		    ToggleDeceasedButton.Enabled = true
-		    AmendNameButton.Enabled = true
+		    AmendPNameButton.Enabled = true
 		    load_player_details(me.RowTag(me.ListIndex))
 		  end if
 		  
@@ -3586,7 +3591,7 @@ End
 #tag Events AmendPNameButton
 	#tag Event
 		Sub Action()
-		  AmendNameDialog.ShowModal
+		  AmendPNameDialog.ShowModal
 		  
 		End Sub
 	#tag EndEvent
@@ -3594,7 +3599,7 @@ End
 #tag Events AmendTNameButton
 	#tag Event
 		Sub Action()
-		  AmendNameDialog.ShowModal
+		  AmendTNameDialog.ShowModal
 		  
 		End Sub
 	#tag EndEvent
