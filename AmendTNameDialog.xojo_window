@@ -170,7 +170,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Open()
-		  TournamentNameDisplay.Text = MainWindow.PlayerPicker.Text
+		  TournamentNameDisplay.Text = MainWindow.TournamentPicker.Text
 		  OKButton.Enabled = false
 		  
 		End Sub

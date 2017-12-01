@@ -2451,6 +2451,7 @@ End
 		  
 		  set_tournament
 		  TournamentMenu.Visible = True
+		  AmendTNameButton.Enabled = false
 		  
 		End Sub
 	#tag EndMethod
