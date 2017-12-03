@@ -2913,6 +2913,7 @@ End
 		  data = app.ratingsDB.SQLSelect(sql)
 		  
 		  TournamentPicker.DeleteAllRows
+		  AmendTNameButton.Enabled = false
 		  
 		  while not data.EOF
 		    TournamentPicker.addrow(data.IdxField(2).StringValue)
@@ -3178,6 +3179,7 @@ End
 		    AmendTNameButton.Enabled = true
 		  end if
 		  load_tournament
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
