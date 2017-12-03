@@ -90,6 +90,7 @@ Begin Window AmendPNameDialog
       Selectable      =   False
       TabIndex        =   1
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "Please enter a new name for this player."
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -184,12 +185,12 @@ End
 		Sub TextChange()
 		  dim i as integer
 		  
-		  if me.Text = "" then
+		  if me.Text.trim = "" then
 		    OKButton.Enabled = false
 		    return
 		  end if
 		  for i = 1 to MainWindow.PlayerPicker.ListCount
-		    if me.Text = Mainwindow.PlayerPicker.list(i-1) then
+		    if me.Text.trim = Mainwindow.PlayerPicker.list(i-1) then
 		      OKButton.Enabled = false
 		      return
 		    end if
@@ -202,7 +203,7 @@ End
 #tag Events OKButton
 	#tag Event
 		Sub Action()
-		  app.ratingsDB.SQLExecute("update player set name = '"+PlayerNameDisplay.Text+"' where name = '"+MainWindow.PlayerPicker.Text+"'")
+		  app.ratingsDB.SQLExecute("update player set name = '"+PlayerNameDisplay.Text.trim+"' where name = '"+MainWindow.PlayerPicker.Text+"'")
 		  MainWindow.init_player_tab
 		  self.close
 		  

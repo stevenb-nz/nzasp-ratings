@@ -90,7 +90,6 @@ Begin Window NewClubDialog
       Selectable      =   False
       TabIndex        =   1
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Create a new club with the following name and abbreviation:\n"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -125,7 +124,6 @@ Begin Window NewClubDialog
       Selectable      =   False
       TabIndex        =   2
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   ""
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -184,7 +182,7 @@ End
 	#tag Event
 		Sub TextChange()
 		  OKButton.Enabled = true
-		  if me.Text = "" then
+		  if me.Text.trim = "" then
 		    OKButton.Enabled = false
 		  else
 		    dim sql as string
@@ -192,7 +190,7 @@ End
 		    dim data as RecordSet
 		    data = app.ratingsDB.SQLSelect(sql)
 		    while not data.EOF
-		      if me.Text= data.IdxField(1).StringValue then
+		      if me.Text.trim= data.IdxField(1).StringValue then
 		        OKButton.Enabled = false
 		      end if
 		      data.MoveNext
@@ -205,7 +203,7 @@ End
 #tag Events OKButton
 	#tag Event
 		Sub Action()
-		  NewClubName = ClubName.text
+		  NewClubName = ClubName.text.trim
 		  self.close
 		  
 		End Sub

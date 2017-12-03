@@ -90,7 +90,6 @@ Begin Window AmendTNameDialog
       Selectable      =   False
       TabIndex        =   1
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Please enter a new name for this tourney."
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -185,12 +184,12 @@ End
 		Sub TextChange()
 		  dim i as integer
 		  
-		  if me.Text = "" then
+		  if me.Text.trim = "" then
 		    OKButton.Enabled = false
 		    return
 		  end if
 		  for i = 1 to MainWindow.TournamentPicker.ListCount
-		    if me.Text = Mainwindow.TournamentPicker.list(i-1) then
+		    if me.Text.Trim = Mainwindow.TournamentPicker.list(i-1) then
 		      OKButton.Enabled = false
 		      return
 		    end if
@@ -203,7 +202,7 @@ End
 #tag Events OKButton
 	#tag Event
 		Sub Action()
-		  app.ratingsDB.SQLExecute("update tournament set tournament_name = '"+TournamentNameDisplay.Text+"' where tournament_name = '"+MainWindow.TournamentPicker.Text+"'")
+		  app.ratingsDB.SQLExecute("update tournament set tournament_name = '"+TournamentNameDisplay.Text.trim+"' where tournament_name = '"+MainWindow.TournamentPicker.Text+"'")
 		  MainWindow.init_tournament_tab
 		  self.close
 		  

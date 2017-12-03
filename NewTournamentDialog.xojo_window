@@ -218,12 +218,12 @@ End
 		Sub TextChange()
 		  dim i as integer
 		  
-		  if me.Text = "" then
+		  if me.Text.trim = "" then
 		    OKButton.Enabled = false
 		    return
 		  end if
 		  for i = 1 to MainWindow.TournamentPicker.ListCount
-		    if me.Text = Mainwindow.TournamentPicker.list(i-1) then
+		    if me.Text.trim = Mainwindow.TournamentPicker.list(i-1) then
 		      OKButton.Enabled = false
 		      return
 		    end if
@@ -243,23 +243,23 @@ End
 		  dim output1,output2,output3 as string
 		  
 		  selected_date = format(val(MainWindow.TYear.text),"0000")+"-"+format(val(MainWindow.TMonth.text),"00")+"-"+format(val(MainWindow.TDay.text),"00")
-		  i = app.get_tournament_id(TournamentName.text, selected_date)
+		  i = app.get_tournament_id(TournamentName.text.trim, selected_date)
 		  
-		  f1 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Tournaments").Child(selected_date+" "+TournamentName.text+" entries.csv")
+		  f1 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Tournaments").Child(selected_date+" "+TournamentName.text.trim+" entries.csv")
 		  if not f1.exists then
 		    saveFile1 = TextOutputStream.Create(f1)
 		    output1="Player,Club"
 		    saveFile1.WriteLine (output1)
 		    savefile1.Close
 		  end if
-		  f2 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Tournaments").Child(selected_date+" "+TournamentName.text+" pairings.csv")
+		  f2 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Tournaments").Child(selected_date+" "+TournamentName.text.trim+" pairings.csv")
 		  if not f2.exists then
 		    saveFile2 = TextOutputStream.Create(f2)
 		    output2="Player1,Player2"
 		    saveFile2.WriteLine (output2)
 		    savefile2.Close
 		  end if
-		  f3 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Tournaments").Child(selected_date+" "+TournamentName.text+" results.csv")
+		  f3 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Tournaments").Child(selected_date+" "+TournamentName.text.trim+" results.csv")
 		  if not f3.exists then
 		    saveFile3 = TextOutputStream.Create(f3)
 		    output3="Player,Wins,Place,Grade"
