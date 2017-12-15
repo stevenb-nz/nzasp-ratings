@@ -275,6 +275,7 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   2
          TabPanelIndex   =   1
+         TabStop         =   True
          Text            =   ""
          TextAlign       =   2
          TextColor       =   &c00000000
@@ -331,6 +332,7 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   4
          TabPanelIndex   =   1
+         TabStop         =   True
          Text            =   ""
          TextAlign       =   2
          TextColor       =   &c00000000
@@ -387,6 +389,7 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   6
          TabPanelIndex   =   1
+         TabStop         =   True
          Text            =   ""
          TextAlign       =   2
          TextColor       =   &c00000000
@@ -452,6 +455,7 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   8
          TabPanelIndex   =   1
+         TabStop         =   True
          Text            =   ""
          TextAlign       =   2
          TextColor       =   &c00000000
@@ -486,6 +490,7 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   9
          TabPanelIndex   =   1
+         TabStop         =   True
          Text            =   ""
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -706,6 +711,7 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   4
          TabPanelIndex   =   3
+         TabStop         =   True
          Text            =   "(Deceased)"
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -793,6 +799,7 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   3
          TabPanelIndex   =   5
+         TabStop         =   True
          Text            =   ""
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -827,6 +834,7 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   4
          TabPanelIndex   =   5
+         TabStop         =   True
          Text            =   ""
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -861,6 +869,7 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   5
          TabPanelIndex   =   5
+         TabStop         =   True
          Text            =   ""
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -927,6 +936,7 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   7
          TabPanelIndex   =   5
+         TabStop         =   True
          Text            =   ""
          TextAlign       =   0
          TextColor       =   &c00000000
@@ -1012,6 +1022,7 @@ Begin Window MainWindow
          Selectable      =   False
          TabIndex        =   5
          TabPanelIndex   =   3
+         TabStop         =   True
          Text            =   ""
          TextAlign       =   2
          TextColor       =   &c00000000
@@ -1950,10 +1961,7 @@ End
 		Function game_expectancy(player_rating as integer, opponent_rating as integer) As double
 		  dim expected_game as double
 		  
-		  expected_game = 1 / (1 + Exp(abs(player_rating - opponent_rating) / -313 ) )
-		  if player_rating < opponent_rating then
-		    expected_game = 1 - expected_game
-		  end if
+		  expected_game = 1 / (1 + Exp((player_rating - opponent_rating) / -313 ) )
 		  
 		  return expected_game
 		  
