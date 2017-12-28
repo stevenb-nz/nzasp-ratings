@@ -120,6 +120,14 @@ Inherits Application
 	#tag EndMenuHandler
 
 	#tag MenuHandler
+		Function TournamentConvertTOUFile(index as Integer) As Boolean Handles TournamentConvertTOUFile.Action
+			
+			Return True
+			
+		End Function
+	#tag EndMenuHandler
+
+	#tag MenuHandler
 		Function TournamentDeleteTournament() As Boolean Handles TournamentDeleteTournament.Action
 			Dim n As Integer
 			
@@ -236,14 +244,6 @@ Inherits Application
 			MainWindow.calculate_new_ratings
 			MainWindow.load_tournament
 			end if
-			Return True
-			
-		End Function
-	#tag EndMenuHandler
-
-	#tag MenuHandler
-		Function TournamentImportTOUFile() As Boolean Handles TournamentImportTOUFile.Action
-			
 			Return True
 			
 		End Function

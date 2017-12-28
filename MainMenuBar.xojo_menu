@@ -142,10 +142,10 @@ Begin Menu MainMenuBar
          AutoEnable = False
          Visible = True
       End
-      Begin MenuItem TournamentImportTOUFile
+      Begin MenuItem TournamentConvertTOUFile
          SpecialMenu = 0
-         Text = "Import .TOU File..."
-         Index = -2147483648
+         Text = "Convert .TOU File..."
+         Index = 0
          AutoEnable = True
          Visible = True
       End
