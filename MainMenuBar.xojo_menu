@@ -142,11 +142,11 @@ Begin Menu MainMenuBar
          AutoEnable = False
          Visible = True
       End
-      Begin MenuItem TournamentConvertTOUFile
+      Begin MenuItem TournamentConvertTouFile
          SpecialMenu = 0
-         Text = "Convert .TOU File..."
-         Index = 0
-         AutoEnable = True
+         Text = "Convert .Tou File..."
+         Index = -2147483648
+         AutoEnable = False
          Visible = True
       End
       Begin MenuItem TournamentResetTournament

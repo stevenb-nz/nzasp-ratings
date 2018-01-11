@@ -17,7 +17,7 @@ Inherits Application
 		    TournamentImportEntries.Enabled = false
 		    TournamentImportPairings.Enabled = false
 		    TournamentImportResults.Enabled = false
-		    TournamentImportTOUFile.Enabled = false
+		    TournamentConvertTOUFile.Enabled = false
 		    TournamentResetTournament.Enabled = false
 		    TournamentDeleteTournament.Enabled = false
 		    TournamentSaveExpectancies.Enabled = false
@@ -25,7 +25,7 @@ Inherits Application
 		    TournamentImportEntries.Enabled = true
 		    TournamentImportPairings.Enabled = true
 		    TournamentImportResults.Enabled = true
-		    TournamentImportTOUFile.Enabled = true
+		    TournamentConvertTOUFile.Enabled = true
 		    TournamentResetTournament.Enabled = true
 		    TournamentDeleteTournament.Enabled = true
 		    TournamentSaveExpectancies.Enabled = true
@@ -120,7 +120,7 @@ Inherits Application
 	#tag EndMenuHandler
 
 	#tag MenuHandler
-		Function TournamentConvertTOUFile(index as Integer) As Boolean Handles TournamentConvertTOUFile.Action
+		Function TournamentConvertTouFile() As Boolean Handles TournamentConvertTouFile.Action
 			
 			Return True
 			
