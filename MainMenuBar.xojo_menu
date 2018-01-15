@@ -171,6 +171,20 @@ Begin Menu MainMenuBar
          Visible = True
       End
    End
+   Begin MenuItem AwardsMenu
+      SpecialMenu = 0
+      Text = "&Awards"
+      Index = -2147483648
+      AutoEnable = True
+      Visible = False
+      Begin MenuItem AwardsExportAwards
+         SpecialMenu = 0
+         Text = "Export Awards"
+         Index = -2147483648
+         AutoEnable = False
+         Visible = True
+      End
+   End
    Begin MenuItem ListsMenu
       SpecialMenu = 0
       Text = "&Lists"

@@ -53,7 +53,7 @@ Begin Window MainWindow
       TextUnit        =   0
       Top             =   0
       Underline       =   False
-      Value           =   0
+      Value           =   3
       Visible         =   True
       Width           =   1200
       Begin Listbox AwardDetails
@@ -2339,6 +2339,7 @@ End
 		    AwardDetails.AddRow(data.idxfield(1).stringvalue,yearvalue,playervalue,data.idxfield(3).stringvalue)
 		    data.MoveNext
 		  next
+		  AwardsMenu.Visible = True
 		  
 		  
 		End Sub
@@ -2991,6 +2992,7 @@ End
 	#tag Event
 		Sub Change()
 		  TournamentMenu.Visible = False
+		  AwardsMenu.Visible = False
 		  ListsMenu.Visible = False
 		  select case MainTabPanel.Value
 		  case 0

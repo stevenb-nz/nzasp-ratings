@@ -31,6 +31,7 @@ Inherits Application
 		    TournamentSaveExpectancies.Enabled = true
 		  end if
 		  
+		  AwardsExportAwards.Enabled = MainWindow.AYearPicker.ListIndex > -1
 		  
 		  sortcheck = true
 		  for i = 1 to MainWindow.ListDetails.ListCount-1
