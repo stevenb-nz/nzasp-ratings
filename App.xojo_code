@@ -58,6 +58,14 @@ Inherits Application
 
 
 	#tag MenuHandler
+		Function AwardsExportAwards() As Boolean Handles AwardsExportAwards.Action
+			mainWindow.export_awards
+			Return True
+			
+		End Function
+	#tag EndMenuHandler
+
+	#tag MenuHandler
 		Function FileImportData() As Boolean Handles FileImportData.Action
 			dim f as FolderItem
 			dim t as TextInputStream
