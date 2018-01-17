@@ -130,7 +130,9 @@ Inherits Application
 
 	#tag MenuHandler
 		Function TournamentConvertTouFile() As Boolean Handles TournamentConvertTouFile.Action
-			
+			'open file dialog
+			'check for valid .TOU file?
+			'create entries, pairings, results files
 			Return True
 			
 		End Function
