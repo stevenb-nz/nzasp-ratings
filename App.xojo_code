@@ -130,9 +130,18 @@ Inherits Application
 
 	#tag MenuHandler
 		Function TournamentConvertTouFile() As Boolean Handles TournamentConvertTouFile.Action
-			'open file dialog
-			'check for valid .TOU file?
-			'create entries, pairings, results files
+			dim f as FolderItem
+			dim t as TextInputStream
+			dim s as String
+			
+			f = GetOpenFolderItem("AuPair")
+			if f <> nil then
+			t = TextInputStream.Open(f)
+			while not t.EOF
+			s = t.ReadLine
+			wend
+			t.Close
+			end if
 			Return True
 			
 		End Function
