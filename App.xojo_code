@@ -132,13 +132,24 @@ Inherits Application
 		Function TournamentConvertTouFile() As Boolean Handles TournamentConvertTouFile.Action
 			dim f as FolderItem
 			dim t as TextInputStream
-			dim s as String
+			dim cr,s,s1,s2,s3 as String
+			dim n as integer
 			
 			f = GetOpenFolderItem("AuPair")
 			if f <> nil then
 			t = TextInputStream.Open(f)
+			s1 = t.ReadLine
+			s2 = t.ReadLine
+			s3 = t.ReadLine
+			cr = EndOfLine
+			n = MsgBox(s1+cr+s2+cr+s3+cr+cr+"Are these the first three lines of a .tou file for this tournament?", 36)
+			If n <> 6 Then
+			t.Close
+			return true
+			end if
+			MsgBox "Converting..."
 			while not t.EOF
-			s = t.ReadLine
+			s = t.Readline
 			wend
 			t.Close
 			end if
