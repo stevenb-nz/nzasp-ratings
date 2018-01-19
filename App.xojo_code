@@ -133,6 +133,7 @@ Inherits Application
 			dim f as FolderItem
 			dim t as TextInputStream
 			dim cr,s,s1,s2,s3 as String
+			dim lines() as string
 			dim n as integer
 			
 			f = GetOpenFolderItem("AuPair")
@@ -149,8 +150,9 @@ Inherits Application
 			end if
 			MsgBox "Converting..."
 			while not t.EOF
-			s = t.Readline
+			lines.append t.Readline
 			wend
+			lines.remove(UBound(lines))
 			t.Close
 			end if
 			Return True
