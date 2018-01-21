@@ -132,35 +132,36 @@ Inherits Application
 		Function TournamentConvertTouFile() As Boolean Handles TournamentConvertTouFile.Action
 			dim f as FolderItem
 			dim t as TextInputStream
-			dim cr,s,s1,s2,s3 as String
-			dim lines(), player_name(), player_results() as string
+			dim cr,s,s1 as String
+			dim lines() as string
 			dim i,n as integer
 			
 			f = GetOpenFolderItem("AuPair")
 			if f <> nil then
 			t = TextInputStream.Open(f)
 			s1 = t.ReadLine
-			s2 = t.ReadLine
-			s3 = t.ReadLine
 			cr = EndOfLine
-			n = MsgBox(s1+cr+s2+cr+s3+cr+cr+"Are these the first three lines of a .tou file for this tournament?", 36)
+			n = MsgBox(s1+cr+cr+"Is this the first line of the .tou file for this tournament?", 36)
 			If n <> 6 Then
 			t.Close
 			return true
 			end if
-			MsgBox "Converting..."
 			while not t.EOF
 			lines.append t.Readline
 			wend
 			lines.remove(UBound(lines))
-			for i=0 to UBound(lines)
-			player_name.append left(lines(i),20)
-			'if find('@' in player name, pn = left(pn up to @)
-			'pn = trim(pn)
-			MsgBox player_name(i)
-			player_results.Append right(lines(i),len(lines(i))-20)
-			next
 			t.Close
+			
+			'extract grades, player list, player results
+			
+			'for i=0 to UBound(lines)
+			'player_name.append left(lines(i),20)
+			''if find('@' in player name, pn = left(pn up to @)
+			''pn = trim(pn)
+			'MsgBox player_name(i)
+			'player_results.Append right(lines(i),len(lines(i))-20)
+			'next
+			
 			end if
 			Return True
 			
