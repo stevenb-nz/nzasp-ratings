@@ -133,8 +133,8 @@ Inherits Application
 			dim f as FolderItem
 			dim t as TextInputStream
 			dim cr,s,s1,s2,s3 as String
-			dim lines() as string
-			dim n as integer
+			dim lines(), player_name(), player_results() as string
+			dim i,n as integer
 			
 			f = GetOpenFolderItem("AuPair")
 			if f <> nil then
@@ -153,6 +153,13 @@ Inherits Application
 			lines.append t.Readline
 			wend
 			lines.remove(UBound(lines))
+			for i=0 to UBound(lines)
+			player_name.append left(lines(i),20)
+			'if find('@' in player name, pn = left(pn up to @)
+			'pn = trim(pn)
+			MsgBox player_name(i)
+			player_results.Append right(lines(i),len(lines(i))-20)
+			next
 			t.Close
 			end if
 			Return True
