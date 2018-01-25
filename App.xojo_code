@@ -132,7 +132,7 @@ Inherits Application
 		Function TournamentConvertTouFile() As Boolean Handles TournamentConvertTouFile.Action
 			dim f as FolderItem
 			dim t as TextInputStream
-			dim cr,s,s1 as String
+			dim c,cr,current_grade,s,s1 as String
 			dim lines() as string
 			dim i,n as integer
 			
@@ -147,9 +147,18 @@ Inherits Application
 			return true
 			end if
 			while not t.EOF
-			lines.append t.Readline
+			s = t.Readline
+			c = left(s,1)
+			if c = "*" then
+			if s <> "*** END OF FILE ***" then
+			s1 = t.readline 'discard high word line
+			current_grade = trim(right(s,len(s)-1))
+			MsgBox ">"+current_grade+"<"
+			end
+			else
+			'assign player - name = beginning of line, record = rest of line, grade = current_grade
+			end
 			wend
-			lines.remove(UBound(lines))
 			t.Close
 			
 			'extract grades, player list, player results
