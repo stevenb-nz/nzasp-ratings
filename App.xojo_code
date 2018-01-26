@@ -133,8 +133,10 @@ Inherits Application
 			dim f as FolderItem
 			dim t as TextInputStream
 			dim c,cr,current_grade,s,s1 as String
-			dim lines() as string
-			dim i,n as integer
+			dim grades() as grade
+			dim players() as player
+			dim p as player
+			dim cg,i,n as integer
 			
 			f = GetOpenFolderItem("AuPair")
 			if f <> nil then
@@ -146,31 +148,35 @@ Inherits Application
 			t.Close
 			return true
 			end if
+			cg = 0
 			while not t.EOF
 			s = t.Readline
 			c = left(s,1)
 			if c = "*" then
 			if s <> "*** END OF FILE ***" then
+			grades.Append new grade
 			s1 = t.readline 'discard high word line
-			current_grade = trim(right(s,len(s)-1))
-			MsgBox ">"+current_grade+"<"
+			grades(cg).name = trim(right(s,len(s)-1))
+			grades(cg).sequence = cg + 1
+			cg = cg + 1
 			end
 			else
-			'assign player - name = beginning of line, record = rest of line, grade = current_grade
+			p = new player
+			p.name = left(s,20)
+			''if find('@' in p.name, p.name = left(p.name up to @)
+			''p.name = trim(p.name)
+			'MsgBox p.name
+			p.raw_games = right(s,len(s)-20)
+			p.pgrade = grades(cg-1)
+			players.Append p
 			end
 			wend
 			t.Close
-			
-			'extract grades, player list, player results
-			
-			'for i=0 to UBound(lines)
-			'player_name.append left(lines(i),20)
-			''if find('@' in player name, pn = left(pn up to @)
-			''pn = trim(pn)
-			'MsgBox player_name(i)
-			'player_results.Append right(lines(i),len(lines(i))-20)
-			'next
-			
+			'save 'entries' file
+			'iterate over players, assign raw_games to opponents() and scores(), accumulate wins and spread
+			'save 'pairings file
+			'sort players by grade, wins, spread
+			'save 'results' file
 			end if
 			Return True
 			
