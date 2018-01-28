@@ -90,6 +90,7 @@ Begin Window NewTournamentDialog
       Selectable      =   False
       TabIndex        =   1
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "Create a new tournament with the following name and end date?\n"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -124,6 +125,7 @@ Begin Window NewTournamentDialog
       Selectable      =   False
       TabIndex        =   2
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   ""
       TextAlign       =   0
       TextColor       =   &c00000000
