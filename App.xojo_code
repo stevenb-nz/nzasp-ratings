@@ -163,6 +163,7 @@ Inherits Application
 			else
 			p = new player
 			p.name = left(s,20)
+			
 			''if find('@' in p.name, p.name = left(p.name up to @)
 			''p.name = trim(p.name)
 			'MsgBox p.name
