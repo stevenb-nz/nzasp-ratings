@@ -136,7 +136,7 @@ Inherits Application
 			dim grades() as grade
 			dim players() as player
 			dim p as player
-			dim cg,i,n as integer
+			dim cg,i,n,pa as integer
 			
 			f = GetOpenFolderItem("AuPair")
 			if f <> nil then
@@ -163,10 +163,11 @@ Inherits Application
 			else
 			p = new player
 			p.name = left(s,20)
-			
-			''if find('@' in p.name, p.name = left(p.name up to @)
-			''p.name = trim(p.name)
-			'MsgBox p.name
+			pa = instr(p.name,"@")
+			if pa > 0 then
+			p.name = left(p.name,pa-1)
+			end
+			p.name = trim(p.name)
 			p.raw_games = right(s,len(s)-20)
 			p.pgrade = grades(cg-1)
 			players.Append p
