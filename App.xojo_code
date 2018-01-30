@@ -136,7 +136,7 @@ Inherits Application
 			dim grades() as grade
 			dim players() as player
 			dim p as player
-			dim cg,i,n,pa as integer
+			dim cg,cgp,i,n,pa as integer
 			
 			f = GetOpenFolderItem("AuPair")
 			if f <> nil then
@@ -159,8 +159,10 @@ Inherits Application
 			grades(cg).name = trim(right(s,len(s)-1))
 			grades(cg).sequence = cg + 1
 			cg = cg + 1
+			cgp = 0
 			end
 			else
+			cgp = cgp + 1
 			p = new player
 			p.name = left(s,20)
 			pa = instr(p.name,"@")
@@ -168,8 +170,9 @@ Inherits Application
 			p.name = left(p.name,pa-1)
 			end
 			p.name = trim(p.name)
+			p.grade_sequence = cgp
 			p.raw_games = right(s,len(s)-20)
-			p.pgrade = grades(cg-1)
+			p.player_grade = grades(cg-1)
 			players.Append p
 			end
 			wend

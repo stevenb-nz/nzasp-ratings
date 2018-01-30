@@ -1,6 +1,10 @@
 #tag Class
 Protected Class player
 	#tag Property, Flags = &h0
+		grade_sequence As Integer
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		name As String
 	#tag EndProperty
 
@@ -9,11 +13,11 @@ Protected Class player
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		pgrade As grade
+		placing As Integer
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		placing As Integer
+		player_grade As grade
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -57,6 +61,21 @@ Protected Class player
 		#tag ViewProperty
 			Name="name"
 			Group="Behavior"
+			Type="String"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="placing"
+			Group="Behavior"
+			Type="Integer"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="raw_games"
+			Group="Behavior"
+			Type="String"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="spread"
+			Group="Behavior"
 			Type="Integer"
 		#tag EndViewProperty
 		#tag ViewProperty
@@ -71,6 +90,11 @@ Protected Class player
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="wins"
+			Group="Behavior"
+			Type="double"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class
