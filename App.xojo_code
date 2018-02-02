@@ -177,6 +177,11 @@ Inherits Application
 			end
 			wend
 			t.Close
+			
+			for each pp as player in players
+			MsgBox pp.raw_games
+			next
+			
 			'save 'entries' file
 			
 			'dim selected_date as string
