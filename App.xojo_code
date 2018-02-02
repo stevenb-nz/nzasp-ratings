@@ -136,7 +136,7 @@ Inherits Application
 			dim grades() as grade
 			dim players() as player
 			dim p as player
-			dim cg,cgp,i,n,pa as integer
+			dim cg,cgp,i,j,n,pa as integer
 			
 			f = GetOpenFolderItem("AuPair")
 			if f <> nil then
@@ -179,8 +179,14 @@ Inherits Application
 			t.Close
 			
 			for each pp as player in players
-			MsgBox pp.raw_games
+			j = len(pp.raw_games)/9
+			for i = 1 to j
+			pp.scores.append val(Mid(pp.raw_games,(i-1)*9+3,3))
+			pp.opponents.append val(mid(pp.raw_games,(i-1)*9+7,3))
 			next
+			next
+			
+			
 			
 			'save 'entries' file
 			

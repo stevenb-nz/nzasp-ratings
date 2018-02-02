@@ -9,7 +9,7 @@ Protected Class player
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		opponents() As String
+		opponents() As integer
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -38,6 +38,11 @@ Protected Class player
 
 
 	#tag ViewBehavior
+		#tag ViewProperty
+			Name="grade_sequence"
+			Group="Behavior"
+			Type="Integer"
+		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
 			Visible=true
@@ -72,6 +77,7 @@ Protected Class player
 			Name="raw_games"
 			Group="Behavior"
 			Type="String"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="spread"
