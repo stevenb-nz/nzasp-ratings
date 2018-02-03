@@ -197,28 +197,21 @@ Inherits Application
 			'dim output1,output2,output3 as string
 			'selected_date = format(val(MainWindow.TYear.text),"0000")+"-"+format(val(MainWindow.TMonth.text),"00")+"-"+format(val(MainWindow.TDay.text),"00")
 			'i = app.get_tournament_id(TournamentName.text.trim, selected_date)
-			'f1 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Tournaments").Child(selected_date+" "+TournamentName.text.trim+" entries.csv")
-			'if not f1.exists then
+			'f1 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Tournaments").Child(selected_date+" "+TournamentName.text.trim+" entries from TOU.csv")
 			'saveFile1 = TextOutputStream.Create(f1)
 			'output1="Player,Club"
 			'saveFile1.WriteLine (output1)
 			'savefile1.Close
-			'end if
-			'f2 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Tournaments").Child(selected_date+" "+TournamentName.text.trim+" pairings.csv")
-			'if not f2.exists then
+			'f2 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Tournaments").Child(selected_date+" "+TournamentName.text.trim+" pairings from TOU.csv")
 			'saveFile2 = TextOutputStream.Create(f2)
 			'output2="Player1,Player2"
 			'saveFile2.WriteLine (output2)
 			'savefile2.Close
-			'end if
-			'f3 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Tournaments").Child(selected_date+" "+TournamentName.text.trim+" results.csv")
-			'if not f3.exists then
+			'f3 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Tournaments").Child(selected_date+" "+TournamentName.text.trim+" results from TOU.csv")
 			'saveFile3 = TextOutputStream.Create(f3)
 			'output3="Player,Wins,Place,Grade"
 			'saveFile3.WriteLine (output3)
 			'savefile3.Close
-			'end if
-			'self.close
 			
 			'iterate over players, assign raw_games to opponents() and scores(), accumulate wins and spread
 			'save 'pairings file
