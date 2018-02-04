@@ -132,11 +132,13 @@ Inherits Application
 		Function TournamentConvertTouFile() As Boolean Handles TournamentConvertTouFile.Action
 			dim f as FolderItem
 			dim t as TextInputStream
-			dim c,cr,current_grade,s,s1 as String
+			dim c,cr,current_grade,s,s1,selected_date,tname as String
 			dim grades() as grade
 			dim players() as player
 			dim p as player
 			dim cg,cgp,i,j,n,pa as integer
+			dim f1,f2,f3 as FolderItem
+			dim savefile1,savefile2,savefile3 as TextOutputStream
 			
 			f = GetOpenFolderItem("AuPair")
 			if f <> nil then
@@ -186,37 +188,33 @@ Inherits Application
 			next
 			next
 			
-			
-			
-			'save 'entries' file
-			
-			'dim selected_date as string
-			'dim i as integer
-			'dim f1,f2,f3 as FolderItem
-			'dim savefile1,savefile2,savefile3 as TextOutputStream
-			'dim output1,output2,output3 as string
-			'selected_date = format(val(MainWindow.TYear.text),"0000")+"-"+format(val(MainWindow.TMonth.text),"00")+"-"+format(val(MainWindow.TDay.text),"00")
-			'i = app.get_tournament_id(TournamentName.text.trim, selected_date)
-			'f1 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Tournaments").Child(selected_date+" "+TournamentName.text.trim+" entries from TOU.csv")
-			'saveFile1 = TextOutputStream.Create(f1)
-			'output1="Player,Club"
-			'saveFile1.WriteLine (output1)
-			'savefile1.Close
-			'f2 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Tournaments").Child(selected_date+" "+TournamentName.text.trim+" pairings from TOU.csv")
-			'saveFile2 = TextOutputStream.Create(f2)
-			'output2="Player1,Player2"
-			'saveFile2.WriteLine (output2)
-			'savefile2.Close
-			'f3 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Tournaments").Child(selected_date+" "+TournamentName.text.trim+" results from TOU.csv")
-			'saveFile3 = TextOutputStream.Create(f3)
-			'output3="Player,Wins,Place,Grade"
-			'saveFile3.WriteLine (output3)
-			'savefile3.Close
-			
-			'iterate over players, assign raw_games to opponents() and scores(), accumulate wins and spread
-			'save 'pairings file
-			'sort players by grade, wins, spread
-			'save 'results' file
+			selected_date = MainWindow.get_tournament_date
+			tname = MainWindow.tournamentPicker.Text
+			f1 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Tournaments").Child(selected_date+" "+tname+" entries from TOU.csv")
+			saveFile1 = TextOutputStream.Create(f1)
+			f2 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Tournaments").Child(selected_date+" "+tname+" pairings from TOU.csv")
+			saveFile2 = TextOutputStream.Create(f2)
+			f3 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Tournaments").Child(selected_date+" "+tname+" results from TOU.csv")
+			saveFile3 = TextOutputStream.Create(f3)
+			'iterate over players
+			'saveFile1.WriteLine (player name,??? for club)
+			'iterate over opponents
+			'if pname = opname, then increment player wins, add 50 to player spread, increment player byes
+			'else add (pscore-opscore) to pspread
+			'if pname > opname, then 'saveFile2.WriteLine (player name, opponent name)
+			'if pscore = opscore, then add .5 to pwins
+			'if pscore > opscore, then add 1 to pwins
+			'endif
+			'end each opponent
+			'end each player
+			'iterate over grades
+			'sort players by wins, spread
+			'assign placings
+			'iterate over players in grade
+			'saveFile3.WriteLine (pname, (pwins - pbyes), place, grade)
+			savefile1.Close
+			savefile2.Close
+			savefile3.Close
 			end if
 			Return True
 			

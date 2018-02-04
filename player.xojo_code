@@ -1,6 +1,10 @@
 #tag Class
 Protected Class player
 	#tag Property, Flags = &h0
+		byes As Integer
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		grade_sequence As Integer
 	#tag EndProperty
 

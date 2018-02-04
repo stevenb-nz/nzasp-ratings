@@ -53,7 +53,7 @@ Begin Window MainWindow
       TextUnit        =   0
       Top             =   0
       Underline       =   False
-      Value           =   3
+      Value           =   0
       Visible         =   True
       Width           =   1200
       Begin Listbox AwardDetails
