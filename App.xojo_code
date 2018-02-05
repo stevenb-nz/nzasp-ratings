@@ -196,15 +196,21 @@ Inherits Application
 			saveFile2 = TextOutputStream.Create(f2)
 			f3 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Tournaments").Child(selected_date+" "+tname+" results from TOU.csv")
 			saveFile3 = TextOutputStream.Create(f3)
+			
+			'see kiwi2015 for example of byes, forfeits
+			
 			'iterate over players
 			'saveFile1.WriteLine (player name,??? for club)
 			'iterate over opponents
-			'if pname = opname, then increment player wins, add 50 to player spread, increment player byes
+			'if pscore=1, then increment player wins, add 50 to player spread, increment player byes
+			'else if pscore = 2, subtract 50 from player spread
+			
 			'else add (pscore-opscore) to pspread
 			'if pname > opname, then 'saveFile2.WriteLine (player name, opponent name)
 			'if pscore = opscore, then add .5 to pwins
 			'if pscore > opscore, then add 1 to pwins
 			'endif
+			
 			'end each opponent
 			'end each player
 			'iterate over grades
