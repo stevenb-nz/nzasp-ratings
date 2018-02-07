@@ -186,9 +186,6 @@ Inherits Application
 			pp.winsx2.append val(Mid(pp.raw_games,(i-1)*9+2,1))
 			pp.scores.append val(Mid(pp.raw_games,(i-1)*9+3,3))
 			pp.opponents.append val(mid(pp.raw_games,(i-1)*9+7,3))
-			if pp.name = "Lyres Freeth" then
-			MsgBox str(pp.winsx2(i-1)) + " / " + str(pp.scores(i-1)) + " / " + str(pp.opponents(i-1))
-			end
 			next
 			next
 			
@@ -200,6 +197,14 @@ Inherits Application
 			saveFile2 = TextOutputStream.Create(f2)
 			f3 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Tournaments").Child(selected_date+" "+tname+" results from TOU.csv")
 			saveFile3 = TextOutputStream.Create(f3)
+			
+			for each pp as player in players
+			savefile1.WriteLine pp.name + ",???"
+			for each oo as integer in pp.opponents
+			
+			next
+			next
+			
 			
 			'see kiwi2015 for example of byes, forfeits
 			
