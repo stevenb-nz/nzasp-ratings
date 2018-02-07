@@ -1,7 +1,7 @@
 #tag Class
 Protected Class player
 	#tag Property, Flags = &h0
-		byes As Integer
+		byewins As Integer
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -40,8 +40,17 @@ Protected Class player
 		wins As double
 	#tag EndProperty
 
+	#tag Property, Flags = &h0
+		winsx2() As Integer
+	#tag EndProperty
+
 
 	#tag ViewBehavior
+		#tag ViewProperty
+			Name="byewins"
+			Group="Behavior"
+			Type="Integer"
+		#tag EndViewProperty
 		#tag ViewProperty
 			Name="grade_sequence"
 			Group="Behavior"

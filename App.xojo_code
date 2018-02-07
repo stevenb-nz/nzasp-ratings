@@ -183,8 +183,12 @@ Inherits Application
 			for each pp as player in players
 			j = len(pp.raw_games)/9
 			for i = 1 to j
+			pp.winsx2.append val(Mid(pp.raw_games,(i-1)*9+2,1))
 			pp.scores.append val(Mid(pp.raw_games,(i-1)*9+3,3))
 			pp.opponents.append val(mid(pp.raw_games,(i-1)*9+7,3))
+			if pp.name = "Lyres Freeth" then
+			MsgBox str(pp.winsx2(i-1)) + " / " + str(pp.scores(i-1)) + " / " + str(pp.opponents(i-1))
+			end
 			next
 			next
 			
