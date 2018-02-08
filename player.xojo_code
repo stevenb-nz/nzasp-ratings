@@ -13,10 +13,6 @@ Protected Class player
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		opponents() As integer
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
 		placing As Integer
 	#tag EndProperty
 
@@ -29,7 +25,7 @@ Protected Class player
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		scores() As Integer
+		results() As result
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -38,10 +34,6 @@ Protected Class player
 
 	#tag Property, Flags = &h0
 		wins As double
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		winsx2() As Integer
 	#tag EndProperty
 
 

@@ -134,8 +134,9 @@ Inherits Application
 			dim t as TextInputStream
 			dim c,cr,current_grade,s,s1,selected_date,tname as String
 			dim grades() as grade
-			dim players() as player
+			dim oo2,players() as player
 			dim p as player
+			dim r as result
 			dim cg,cgp,i,j,n,pa as integer
 			dim f1,f2,f3 as FolderItem
 			dim savefile1,savefile2,savefile3 as TextOutputStream
@@ -183,9 +184,11 @@ Inherits Application
 			for each pp as player in players
 			j = len(pp.raw_games)/9
 			for i = 1 to j
-			pp.winsx2.append val(Mid(pp.raw_games,(i-1)*9+2,1))
-			pp.scores.append val(Mid(pp.raw_games,(i-1)*9+3,3))
-			pp.opponents.append val(mid(pp.raw_games,(i-1)*9+7,3))
+			r = new result
+			r.winsx2 = val(Mid(pp.raw_games,(i-1)*9+2,1))
+			r.score = val(Mid(pp.raw_games,(i-1)*9+3,3))
+			r.opponent = val(mid(pp.raw_games,(i-1)*9+7,3))
+			pp.results.append r
 			next
 			next
 			
@@ -200,13 +203,21 @@ Inherits Application
 			
 			for each pp as player in players
 			savefile1.WriteLine pp.name + ",???"
-			for each oo as integer in pp.opponents
-			
+			i = 0
+			for each rr as result in pp.results
+			for each pp2 as player in players
+			if pp.player_grade.name = pp2.player_grade.name and pp2.grade_sequence = rr.opponent then
+			oo2 = pp2
+			end
+			next
+			if rr.score > 2 then
+			'real game
+			else
+			'bye or forfeit - see kiwi2015 for example of byes, forfeits
+			end
+			i = i + 1
 			next
 			next
-			
-			
-			'see kiwi2015 for example of byes, forfeits
 			
 			'iterate over players
 			'saveFile1.WriteLine (player name,??? for club)

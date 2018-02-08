@@ -13,6 +13,7 @@ Window=AmendTNameDialog;AmendTNameDialog.xojo_window;&h00000000755597FF;&h000000
 FileTypeSet=AuPair;AuPair.xojo_filetypeset;&h0000000017EEFFFF;&h0000000000000000;false
 Class=player;player.xojo_code;&h000000005B28C7FF;&h0000000000000000;false
 Class=grade;grade.xojo_code;&h000000006D8337FF;&h0000000000000000;false
+Class=result;result.xojo_code;&h000000005C254FFF;&h0000000000000000;false
 DefaultWindow=MainWindow
 AppMenuBar=MainMenuBar
 MajorVersion=1
