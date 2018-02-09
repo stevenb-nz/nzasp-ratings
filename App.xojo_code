@@ -211,7 +211,9 @@ Inherits Application
 			end
 			next
 			if rr.score > 2 then
-			'real game
+			if pp.name < oo2.name then
+			saveFile2.WriteLine pp.name+","+oo2.name
+			end
 			else
 			'bye or forfeit - see kiwi2015 for example of byes, forfeits
 			end
