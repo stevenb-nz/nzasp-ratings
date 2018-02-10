@@ -205,6 +205,7 @@ Inherits Application
 			savefile1.WriteLine pp.name + ",???"
 			i = 0
 			for each rr as result in pp.results
+			pp.wins = pp.wins + pp.results(i).winsx2 / 2
 			for each pp2 as player in players
 			if pp.player_grade.name = pp2.player_grade.name and pp2.grade_sequence = rr.opponent then
 			oo2 = pp2
@@ -214,32 +215,22 @@ Inherits Application
 			if pp.name < oo2.name then
 			saveFile2.WriteLine pp.name+","+oo2.name
 			end
+			pp.spread = pp.spread + (pp.results(i).score - oo2.results(i).score)
 			else
 			'bye or forfeit - see kiwi2015 for example of byes, forfeits
+			pp.byewins = pp.byewins + pp.results(i).winsx2 / 2
+			pp.spread = pp.spread + (1 - pp.results(i).winsx2) * -50
 			end
 			i = i + 1
 			next
 			next
 			
-			'iterate over players
-			'saveFile1.WriteLine (player name,??? for club)
-			'iterate over opponents
-			'if pscore=1, then increment player wins, add 50 to player spread, increment player byes
-			'else if pscore = 2, subtract 50 from player spread
-			
-			'else add (pscore-opscore) to pspread
-			'if pname > opname, then 'saveFile2.WriteLine (player name, opponent name)
-			'if pscore = opscore, then add .5 to pwins
-			'if pscore > opscore, then add 1 to pwins
-			'endif
-			
-			'end each opponent
-			'end each player
 			'iterate over grades
 			'sort players by wins, spread
 			'assign placings
 			'iterate over players in grade
 			'saveFile3.WriteLine (pname, (pwins - pbyes), place, grade)
+			
 			savefile1.Close
 			savefile2.Close
 			savefile3.Close
