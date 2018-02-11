@@ -217,7 +217,6 @@ Inherits Application
 			end
 			pp.spread = pp.spread + (pp.results(i).score - oo2.results(i).score)
 			else
-			'bye or forfeit - see kiwi2015 for example of byes, forfeits
 			pp.byewins = pp.byewins + pp.results(i).winsx2 / 2
 			pp.spread = pp.spread + (1 - pp.results(i).winsx2) * -50
 			end
@@ -225,11 +224,19 @@ Inherits Application
 			next
 			next
 			
-			'iterate over grades
-			'sort players by wins, spread
-			'assign placings
-			'iterate over players in grade
-			'saveFile3.WriteLine (pname, (pwins - pbyes), place, grade)
+			players.sort(AddressOf mainwindow.playerCompare)
+			
+			i=0
+			j=1
+			for each pp as player in players
+			if pp.player_grade.sequence = j then
+			i = i + 1
+			else
+			j = pp.player_grade.sequence
+			i = 1
+			end
+			saveFile3.WriteLine (pp.name+","+str(pp.wins - pp.byewins)+","+str(i)+","+pp.player_grade.name)
+			next
 			
 			savefile1.Close
 			savefile2.Close

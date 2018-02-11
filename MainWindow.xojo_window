@@ -2776,6 +2776,30 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function playerCompare(player1 as player, player2 as player) As integer
+		  if player1.player_grade.sequence > player2.player_grade.sequence then
+		    return 1
+		  elseIf player1.player_grade.sequence < player2.player_grade.sequence then
+		    return -1
+		  else
+		    if player1.wins > player2.wins then
+		      return -1
+		    elseIf player1.wins < player2.wins then
+		      return 1
+		    else
+		      if player1.spread > player2.spread then
+		        return -1
+		      elseIf player1.spread < player2.spread then
+		        return 1
+		      else
+		        return 0
+		      end
+		    end
+		  end
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub process_name(name as string)
 		  dim club_id, n,name_id,start_rating as integer
 		  dim club, clubname, current_date, preceding_date, rating_status as string
