@@ -53,7 +53,7 @@ Begin Window MainWindow
       TextUnit        =   0
       Top             =   0
       Underline       =   False
-      Value           =   0
+      Value           =   4
       Visible         =   True
       Width           =   1200
       Begin Listbox AwardDetails
@@ -1626,6 +1626,8 @@ End
 		  customList.ShowModal
 		  if customList.qpcheck then msgbox "QP"
 		  if customList.nmcheck then msgbox "NM"
+		  
+		  
 		  
 		  'dim eileen_mclean_games,i,majors_score,ranking,wcs_qual_games as integer
 		  'dim f1,f2,f3 as FolderItem

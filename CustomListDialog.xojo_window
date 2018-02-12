@@ -48,6 +48,7 @@ Begin Window CustomListDialog
       Selectable      =   False
       TabIndex        =   0
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "9999-99-99"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -336,6 +337,7 @@ Begin Window CustomListDialog
       Selectable      =   False
       TabIndex        =   0
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "games required between"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -370,6 +372,7 @@ Begin Window CustomListDialog
       Selectable      =   False
       TabIndex        =   0
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "and"
       TextAlign       =   1
       TextColor       =   &c00000000
@@ -404,6 +407,7 @@ Begin Window CustomListDialog
       Selectable      =   False
       TabIndex        =   0
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "majors required out of"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -438,6 +442,7 @@ Begin Window CustomListDialog
       Selectable      =   False
       TabIndex        =   0
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "majors"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -472,6 +477,7 @@ Begin Window CustomListDialog
       Selectable      =   False
       TabIndex        =   9
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "9999-99-99"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -537,7 +543,11 @@ End
 		  dim d as new Date
 		  
 		  OKButton.Enabled = false
-		  EndDateDisplay.Text = MainWindow.LDatePicker.Text
+		  if MainWindow.End_of_year_check.State = CheckBox.CheckedStates.Checked then
+		    EndDateDisplay.Text = MainWindow.LEoYLabel.text
+		  else
+		    EndDateDisplay.Text = MainWindow.LDatePicker.Text
+		  end
 		  
 		  d.SQLDate = EndDateDisplay.Text
 		  d.year = d.year - 2
@@ -592,6 +602,10 @@ End
 
 
 	#tag Property, Flags = &h0
+		enddate As String
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		gamesrequired As Integer
 	#tag EndProperty
 
@@ -629,6 +643,7 @@ End
 		    qpcheck = true
 		    gamesrequired = val(grTextField.Text)
 		    startdate = StartDateDisplay.Text
+		    enddate = EndDateDisplay.Text
 		  else
 		    qpcheck = false
 		  end if
@@ -853,6 +868,11 @@ End
 		EditorType="Boolean"
 	#tag EndViewProperty
 	#tag ViewProperty
+		Name="gamesrequired"
+		Group="Behavior"
+		Type="Integer"
+	#tag EndViewProperty
+	#tag ViewProperty
 		Name="HasBackColor"
 		Visible=true
 		Group="Background"
@@ -893,6 +913,11 @@ End
 		Name="MacProcID"
 		Group="OS X (Carbon)"
 		InitialValue="0"
+		Type="Integer"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="majorsrequired"
+		Group="Behavior"
 		Type="Integer"
 	#tag EndViewProperty
 	#tag ViewProperty
@@ -961,6 +986,16 @@ End
 		EditorType="String"
 	#tag EndViewProperty
 	#tag ViewProperty
+		Name="nmcheck"
+		Group="Behavior"
+		Type="Boolean"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="outofmajors"
+		Group="Behavior"
+		Type="Integer"
+	#tag EndViewProperty
+	#tag ViewProperty
 		Name="Placement"
 		Visible=true
 		Group="Behavior"
@@ -976,12 +1011,22 @@ End
 		#tag EndEnumValues
 	#tag EndViewProperty
 	#tag ViewProperty
+		Name="qpcheck"
+		Group="Behavior"
+		Type="Boolean"
+	#tag EndViewProperty
+	#tag ViewProperty
 		Name="Resizeable"
 		Visible=true
 		Group="Frame"
 		InitialValue="True"
 		Type="Boolean"
 		EditorType="Boolean"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="startdate"
+		Group="Behavior"
+		Type="String"
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Super"
