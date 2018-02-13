@@ -1624,9 +1624,17 @@ End
 		Sub export_custom_list()
 		  dim customList As New CustomListDialog
 		  customList.ShowModal
-		  if customList.qpcheck then msgbox "QP"
-		  if customList.nmcheck then msgbox "NM"
-		  
+		  if customList.qpcheck then
+		    'return list of players who have played sufficient games in qualifying period
+		    if customList.nmcheck then
+		      'filter out any who have not played required number of majors out of last n majors
+		    end
+		  else
+		    if customList.nmcheck then
+		      'return list of players who have played required number of majors out of last n majors
+		    end
+		  end
+		  'save (sorted) list of players
 		  
 		  
 		  'dim eileen_mclean_games,i,majors_score,ranking,wcs_qual_games as integer
