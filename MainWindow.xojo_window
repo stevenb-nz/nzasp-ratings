@@ -1622,9 +1622,19 @@ End
 
 	#tag Method, Flags = &h0
 		Sub export_custom_list()
+		  dim sql as string
+		  dim data as RecordSet
+		  
 		  dim customList As New CustomListDialog
 		  customList.ShowModal
 		  if customList.qpcheck then
+		    'sql = ""+_
+		    '""
+		    'data = app.ratingsDB.SQLSelect(sql)
+		    
+		    'select count(player.name), tournament.tournament_name, as_at_date.list_date from player join rating_change on player.id = rating_change.player_id join 
+		    'tournament on rating_change.tournament_id = tournament.id join as_at_date on as_at_date.id = tournament.as_at_date_id group by as_at_date.list_date, tournament.tournament_name;
+		    
 		    'return list of players who have played sufficient games in qualifying period
 		    if customList.nmcheck then
 		      'filter out any who have not played required number of majors out of last n majors
