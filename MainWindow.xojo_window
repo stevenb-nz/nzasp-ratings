@@ -1628,14 +1628,19 @@ End
 		  dim customList As New CustomListDialog
 		  customList.ShowModal
 		  if customList.qpcheck then
-		    'sql = ""+_
-		    '""
-		    'data = app.ratingsDB.SQLSelect(sql)
+		    sql = "select player.name, sum(rating_change.games) from "+_
+		    "player join rating_change on player.id = rating_change.player_id join tournament on rating_change.tournament_id = tournament.id join as_at_date on as_at_date.id = tournament.as_at_date_id "+_
+		    "where as_at_date.list_date >= '" + customList.startdate + "' and as_at_date.list_date <= '" + customList.enddate + "' "+_
+		    "group by player.name"
+		    data = app.ratingsDB.SQLSelect(sql)
 		    
-		    'select count(player.name), tournament.tournament_name, as_at_date.list_date from player join rating_change on player.id = rating_change.player_id join 
-		    'tournament on rating_change.tournament_id = tournament.id join as_at_date on as_at_date.id = tournament.as_at_date_id group by as_at_date.list_date, tournament.tournament_name;
+		    while not data.EOF
+		      if val(data.idxfield(2).StringValue) >= customList.gamesrequired then
+		        MsgBox data.IdxField(1).StringValue + " - " + data.idxfield(2).StringValue
+		      end
+		      data.MoveNext
+		    wend
 		    
-		    'return list of players who have played sufficient games in qualifying period
 		    if customList.nmcheck then
 		      'filter out any who have not played required number of majors out of last n majors
 		    end
