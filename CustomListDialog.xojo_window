@@ -9,7 +9,7 @@ Begin Window CustomListDialog
    FullScreen      =   False
    FullScreenButton=   False
    HasBackColor    =   False
-   Height          =   225
+   Height          =   227
    ImplicitInstance=   True
    LiveResize      =   True
    MacProcID       =   0
@@ -55,10 +55,10 @@ Begin Window CustomListDialog
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   86
+      Top             =   152
       Transparent     =   True
       Underline       =   False
-      Visible         =   False
+      Visible         =   True
       Width           =   85
    End
    Begin PushButton OKButton
@@ -87,7 +87,7 @@ Begin Window CustomListDialog
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   185
+      Top             =   187
       Underline       =   False
       Visible         =   True
       Width           =   80
@@ -118,15 +118,15 @@ Begin Window CustomListDialog
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   185
+      Top             =   187
       Underline       =   False
       Visible         =   True
       Width           =   80
    End
-   Begin CheckBox qpCheckBox
+   Begin CheckBox ngCheckBox
       AutoDeactivate  =   True
       Bold            =   False
-      Caption         =   "Qualifying period?"
+      Caption         =   "Required number of games?"
       DataField       =   ""
       DataSource      =   ""
       Enabled         =   True
@@ -153,7 +153,7 @@ Begin Window CustomListDialog
       Underline       =   False
       Value           =   False
       Visible         =   True
-      Width           =   134
+      Width           =   200
    End
    Begin CheckBox nmCheckBox
       AutoDeactivate  =   True
@@ -181,13 +181,13 @@ Begin Window CustomListDialog
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   119
+      Top             =   86
       Underline       =   False
       Value           =   False
       Visible         =   True
       Width           =   200
    End
-   Begin TextField grTextField
+   Begin TextField ngTextField
       AcceptTabs      =   False
       Alignment       =   3
       AutoDeactivate  =   True
@@ -266,50 +266,7 @@ Begin Window CustomListDialog
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   151
-      Underline       =   False
-      UseFocusRing    =   True
-      Visible         =   False
-      Width           =   40
-   End
-   Begin TextField outofnmajorsTextField
-      AcceptTabs      =   False
-      Alignment       =   3
-      AutoDeactivate  =   True
-      AutomaticallyCheckSpelling=   False
-      BackColor       =   &cFFFFFF00
-      Bold            =   False
-      Border          =   True
-      CueText         =   ""
-      DataField       =   ""
-      DataSource      =   ""
-      Enabled         =   True
-      Format          =   ""
-      Height          =   22
-      HelpTag         =   ""
-      Index           =   -2147483648
-      InitialParent   =   ""
-      Italic          =   False
-      Left            =   225
-      LimitText       =   0
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      Mask            =   ""
-      Password        =   False
-      ReadOnly        =   False
-      Scope           =   0
-      TabIndex        =   6
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Text            =   ""
-      TextColor       =   &c00000000
-      TextFont        =   "System"
-      TextSize        =   0.0
-      TextUnit        =   0
-      Top             =   150
+      Top             =   118
       Underline       =   False
       UseFocusRing    =   True
       Visible         =   False
@@ -350,7 +307,7 @@ Begin Window CustomListDialog
       Visible         =   False
       Width           =   153
    End
-   Begin Label andLabel
+   Begin Label toLabel
       AutoDeactivate  =   True
       Bold            =   False
       DataField       =   ""
@@ -373,16 +330,16 @@ Begin Window CustomListDialog
       TabIndex        =   0
       TabPanelIndex   =   0
       TabStop         =   True
-      Text            =   "and"
+      Text            =   "to"
       TextAlign       =   1
       TextColor       =   &c00000000
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   86
+      Top             =   152
       Transparent     =   True
       Underline       =   False
-      Visible         =   False
+      Visible         =   True
       Width           =   30
    End
    Begin Label requiredLabel
@@ -414,13 +371,13 @@ Begin Window CustomListDialog
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   151
+      Top             =   118
       Transparent     =   True
       Underline       =   False
       Visible         =   False
       Width           =   141
    End
-   Begin Label majorsLabel
+   Begin Label betweenLabel
       AutoDeactivate  =   True
       Bold            =   False
       DataField       =   ""
@@ -431,7 +388,7 @@ Begin Window CustomListDialog
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   277
+      Left            =   250
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -443,17 +400,17 @@ Begin Window CustomListDialog
       TabIndex        =   0
       TabPanelIndex   =   0
       TabStop         =   True
-      Text            =   "majors"
+      Text            =   "between"
       TextAlign       =   0
       TextColor       =   &c00000000
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   152
+      Top             =   119
       Transparent     =   True
       Underline       =   False
       Visible         =   False
-      Width           =   45
+      Width           =   55
    End
    Begin Label StartDateDisplay
       AutoDeactivate  =   True
@@ -484,10 +441,10 @@ Begin Window CustomListDialog
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   86
+      Top             =   152
       Transparent     =   True
       Underline       =   False
-      Visible         =   False
+      Visible         =   True
       Width           =   85
    End
    Begin UpDownArrows TournamentUpDownArrows
@@ -508,8 +465,8 @@ Begin Window CustomListDialog
       TabIndex        =   10
       TabPanelIndex   =   0
       TabStop         =   True
-      Top             =   86
-      Visible         =   False
+      Top             =   152
+      Visible         =   True
       Width           =   13
    End
    Begin UpDownArrows DayUpDownArrows
@@ -530,9 +487,44 @@ Begin Window CustomListDialog
       TabIndex        =   11
       TabPanelIndex   =   0
       TabStop         =   True
-      Top             =   86
-      Visible         =   False
+      Top             =   152
+      Visible         =   True
       Width           =   13
+   End
+   Begin Label outofnmajorsLabel
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   22
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   218
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   12
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   "0"
+      TextAlign       =   2
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   118
+      Transparent     =   True
+      Underline       =   False
+      Visible         =   False
+      Width           =   20
    End
 End
 #tag EndWindow
@@ -667,7 +659,7 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events qpCheckBox
+#tag Events ngCheckBox
 	#tag Event
 		Sub Action()
 		  if me.state = CheckBox.CheckedStates.Checked then
@@ -713,7 +705,7 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events grTextField
+#tag Events ngTextField
 	#tag Event
 		Sub TextChange()
 		  OKcheck
@@ -725,14 +717,6 @@ End
 	#tag Event
 		Sub TextChange()
 		  OKcheck
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events outofnmajorsTextField
-	#tag Event
-		Sub TextChange()
-		  OKcheck
-		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -830,6 +814,11 @@ End
 		Group="OS X (Carbon)"
 		InitialValue="False"
 		Type="Boolean"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="enddate"
+		Group="Behavior"
+		Type="String"
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Frame"
@@ -1027,6 +1016,7 @@ End
 		Name="startdate"
 		Group="Behavior"
 		Type="String"
+		EditorType="MultiLineEditor"
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Super"
