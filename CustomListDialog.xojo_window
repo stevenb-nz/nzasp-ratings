@@ -547,6 +547,8 @@ End
 		  
 		  StartDateDisplay.text = d.SQLDate
 		  
+		  set_out_of_masters
+		  
 		  dim sql as string
 		  dim data as RecordSet
 		  
@@ -565,29 +567,44 @@ End
 
 	#tag Method, Flags = &h0
 		Sub OKcheck()
-		  dim check1,check2 as Boolean
+		  'dim check1,check2 as Boolean
+		  '
+		  'check1 = true
+		  'if qpCheckBox.State = CheckBox.CheckedStates.Checked then
+		  'dim d1 as new Date
+		  'dim d2 as new Date
+		  'd1.SQLDate = StartDateDisplay.text
+		  'd2.SQLDate = EndDateDisplay.text
+		  'if d2.operator_compare(d1) < 0 then check1 = false
+		  'if val(grTextField.Text) < 1 then check1 = false
+		  'end if
+		  'check2 = true
+		  'if nmCheckBox.State = CheckBox.CheckedStates.Checked then
+		  'if val(nmajorsrequiredTextField.text) < 1 or val(outofnmajorsTextField.text) < 1 or val(nmajorsrequiredTextField.text) > val(outofnmajorsTextField.text) then
+		  'check2 = false
+		  'end if
+		  'end if
+		  '
+		  'if (check1 and check2) and (qpCheckBox.State = CheckBox.CheckedStates.Checked or nmCheckBox.State = CheckBox.CheckedStates.Checked) then
+		  'OKButton.Enabled = true
+		  'else
+		  'OKButton.Enabled = false
+		  'end if
 		  
-		  check1 = true
-		  if qpCheckBox.State = CheckBox.CheckedStates.Checked then
-		    dim d1 as new Date
-		    dim d2 as new Date
-		    d1.SQLDate = StartDateDisplay.text
-		    d2.SQLDate = EndDateDisplay.text
-		    if d2.operator_compare(d1) < 0 then check1 = false
-		    if val(grTextField.Text) < 1 then check1 = false
-		  end if
-		  check2 = true
-		  if nmCheckBox.State = CheckBox.CheckedStates.Checked then
-		    if val(nmajorsrequiredTextField.text) < 1 or val(outofnmajorsTextField.text) < 1 or val(nmajorsrequiredTextField.text) > val(outofnmajorsTextField.text) then
-		      check2 = false
-		    end if
-		  end if
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub set_out_of_masters()
+		  dim sql as string
+		  dim data as RecordSet
 		  
-		  if (check1 and check2) and (qpCheckBox.State = CheckBox.CheckedStates.Checked or nmCheckBox.State = CheckBox.CheckedStates.Checked) then
-		    OKButton.Enabled = true
-		  else
-		    OKButton.Enabled = false
-		  end if
+		  sql = "SELECT tournament.id from tournament join as_at_date on as_at_date.id = tournament.as_at_date_id "+_
+		  "where as_at_date.list_date >= '" + startDateDisplay.Text + "' and as_at_date.list_date <= '" + EndDateDisplay.Text + "' "+_
+		  "and (tournament_name like 'Master%' or tournament_name like 'National%')"
+		  data = app.ratingsDB.SQLSelect(sql)
+		  
+		  outofnmajorsLabel.Text = str(data.RecordCount)
 		  
 		End Sub
 	#tag EndMethod
@@ -631,22 +648,22 @@ End
 #tag Events OKButton
 	#tag Event
 		Sub Action()
-		  if qpCheckBox.State = CheckBox.CheckedStates.Checked then
-		    qpcheck = true
-		    gamesrequired = val(grTextField.Text)
-		    startdate = StartDateDisplay.Text
-		    enddate = EndDateDisplay.Text
-		  else
-		    qpcheck = false
-		  end if
-		  if nmCheckBox.State = CheckBox.CheckedStates.Checked then
-		    nmcheck = true
-		    majorsrequired = val(nmajorsrequiredTextField.text)
-		    outofmajors = val(outofnmajorsTextField.text)
-		  else
-		    nmcheck = false
-		  end if
-		  self.close
+		  'if qpCheckBox.State = CheckBox.CheckedStates.Checked then
+		  'qpcheck = true
+		  'gamesrequired = val(grTextField.Text)
+		  'startdate = StartDateDisplay.Text
+		  'enddate = EndDateDisplay.Text
+		  'else
+		  'qpcheck = false
+		  'end if
+		  'if nmCheckBox.State = CheckBox.CheckedStates.Checked then
+		  'nmcheck = true
+		  'majorsrequired = val(nmajorsrequiredTextField.text)
+		  'outofmajors = val(outofnmajorsTextField.text)
+		  'else
+		  'nmcheck = false
+		  'end if
+		  'self.close
 		  
 		End Sub
 	#tag EndEvent
@@ -662,25 +679,25 @@ End
 #tag Events ngCheckBox
 	#tag Event
 		Sub Action()
-		  if me.state = CheckBox.CheckedStates.Checked then
-		    grTextField.Visible = true
-		    gamesLabel.Visible = true
-		    TournamentUpDownArrows.Visible = true
-		    StartDateDisplay.Visible = true
-		    DayUpDownArrows.Visible = true
-		    andLabel.Visible = true
-		    EndDateDisplay.Visible = true
-		  else
-		    grTextField.Visible = false
-		    gamesLabel.Visible = false
-		    TournamentUpDownArrows.Visible = false
-		    StartDateDisplay.Visible = false
-		    DayUpDownArrows.Visible = false
-		    andLabel.Visible = false
-		    EndDateDisplay.Visible = false
-		  end if
-		  
-		  OKcheck
+		  'if me.state = CheckBox.CheckedStates.Checked then
+		  'grTextField.Visible = true
+		  'gamesLabel.Visible = true
+		  'TournamentUpDownArrows.Visible = true
+		  'StartDateDisplay.Visible = true
+		  'DayUpDownArrows.Visible = true
+		  'andLabel.Visible = true
+		  'EndDateDisplay.Visible = true
+		  'else
+		  'grTextField.Visible = false
+		  'gamesLabel.Visible = false
+		  'TournamentUpDownArrows.Visible = false
+		  'StartDateDisplay.Visible = false
+		  'DayUpDownArrows.Visible = false
+		  'andLabel.Visible = false
+		  'EndDateDisplay.Visible = false
+		  'end if
+		  '
+		  'OKcheck
 		  
 		End Sub
 	#tag EndEvent
@@ -688,19 +705,19 @@ End
 #tag Events nmCheckBox
 	#tag Event
 		Sub Action()
-		  if me.state = CheckBox.CheckedStates.Checked then
-		    nmajorsrequiredTextField.Visible = true
-		    requiredLabel.Visible = true
-		    outofnmajorsTextField.Visible = true
-		    majorsLabel.Visible = true
-		  else
-		    nmajorsrequiredTextField.Visible = false
-		    requiredLabel.Visible = false
-		    outofnmajorsTextField.Visible = false
-		    majorsLabel.Visible = false
-		  end if
-		  
-		  OKcheck
+		  'if me.state = CheckBox.CheckedStates.Checked then
+		  'nmajorsrequiredTextField.Visible = true
+		  'requiredLabel.Visible = true
+		  'outofnmajorsTextField.Visible = true
+		  'majorsLabel.Visible = true
+		  'else
+		  'nmajorsrequiredTextField.Visible = false
+		  'requiredLabel.Visible = false
+		  'outofnmajorsTextField.Visible = false
+		  'majorsLabel.Visible = false
+		  'end if
+		  '
+		  'OKcheck
 		  
 		End Sub
 	#tag EndEvent
@@ -735,6 +752,7 @@ End
 		  loop until ubound(tdates) = i or d.Operator_Compare(d1) > -1
 		  if i > 0 then
 		    StartDateDisplay.text = tdates(i-1)
+		    set_out_of_masters
 		    OKcheck
 		  end if
 		  
@@ -753,6 +771,7 @@ End
 		    d1.SQLDate = tdates(i)
 		  loop until ubound(tdates) = i or d.Operator_Compare(d1) = 1
 		  StartDateDisplay.text = tdates(i)
+		  set_out_of_masters
 		  OKcheck
 		  
 		End Sub
@@ -766,6 +785,7 @@ End
 		  d.SQLDate = StartDateDisplay.Text
 		  d.day = d.day - 1
 		  StartDateDisplay.text = d.SQLDate
+		  set_out_of_masters
 		  OKcheck
 		  
 		End Sub
@@ -780,6 +800,7 @@ End
 		  ed.SQLDate = EndDateDisplay.text
 		  if ed.operator_compare(d) >= 0 then
 		    StartDateDisplay.text = d.SQLDate
+		    set_out_of_masters
 		    OKcheck
 		  end if
 		  
@@ -819,6 +840,7 @@ End
 		Name="enddate"
 		Group="Behavior"
 		Type="String"
+		EditorType="MultiLineEditor"
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Frame"

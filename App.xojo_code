@@ -218,7 +218,7 @@ Inherits Application
 			pp.spread = pp.spread + (pp.results(i).score - oo2.results(i).score)
 			else
 			pp.byewins = pp.byewins + pp.results(i).winsx2 / 2
-			pp.spread = pp.spread + (1 - pp.results(i).winsx2) * -50
+			pp.spread = pp.spread + pp.results(i).winsx2 * 25
 			end
 			i = i + 1
 			next
