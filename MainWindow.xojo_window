@@ -1627,7 +1627,7 @@ End
 		  
 		  dim customList As New CustomListDialog
 		  customList.ShowModal
-		  sql = "select player.name, sum(rating_change.games) from "+_
+		  sql = "select player.name,player.id,sum(rating_change.games) from "+_
 		  "player join rating_change on player.id = rating_change.player_id join tournament on rating_change.tournament_id = tournament.id join as_at_date on as_at_date.id = tournament.as_at_date_id "+_
 		  "where as_at_date.list_date >= '" + customList.startdate + "' and as_at_date.list_date <= '" + customList.enddate + "' "+_
 		  "group by player.name"
@@ -1635,7 +1635,7 @@ End
 		  
 		  while not data.EOF
 		    if customList.ngcheck then
-		      if val(data.idxfield(2).StringValue) < customList.gamesrequired then
+		      if val(data.idxfield(3).StringValue) < customList.gamesrequired then
 		        data.MoveNext
 		      end
 		    end
@@ -1649,7 +1649,9 @@ End
 		    MsgBox data.IdxField(1).StringValue
 		    data.MoveNext
 		  wend
-		  'save sorted list
+		  'add rating & seeding at end of qualifying period to each remaining player
+		  'sort list of remaining players by rating, seeding
+		  'save list
 		  
 		  
 		  'dim eileen_mclean_games,i,majors_score,ranking,wcs_qual_games as integer
