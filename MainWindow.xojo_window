@@ -1627,29 +1627,29 @@ End
 		  
 		  dim customList As New CustomListDialog
 		  customList.ShowModal
-		  if customList.qpcheck then
-		    sql = "select player.name, sum(rating_change.games) from "+_
-		    "player join rating_change on player.id = rating_change.player_id join tournament on rating_change.tournament_id = tournament.id join as_at_date on as_at_date.id = tournament.as_at_date_id "+_
-		    "where as_at_date.list_date >= '" + customList.startdate + "' and as_at_date.list_date <= '" + customList.enddate + "' "+_
-		    "group by player.name"
-		    data = app.ratingsDB.SQLSelect(sql)
-		    
-		    while not data.EOF
-		      if val(data.idxfield(2).StringValue) >= customList.gamesrequired then
-		        MsgBox data.IdxField(1).StringValue + " - " + data.idxfield(2).StringValue
+		  sql = "select player.name, sum(rating_change.games) from "+_
+		  "player join rating_change on player.id = rating_change.player_id join tournament on rating_change.tournament_id = tournament.id join as_at_date on as_at_date.id = tournament.as_at_date_id "+_
+		  "where as_at_date.list_date >= '" + customList.startdate + "' and as_at_date.list_date <= '" + customList.enddate + "' "+_
+		  "group by player.name"
+		  data = app.ratingsDB.SQLSelect(sql)
+		  
+		  while not data.EOF
+		    if customList.ngcheck then
+		      if val(data.idxfield(2).StringValue) < customList.gamesrequired then
+		        data.MoveNext
 		      end
-		      data.MoveNext
-		    wend
-		    
-		    if customList.nmcheck then
-		      'filter out any who have not played required number of majors out of last n majors
 		    end
-		  else
 		    if customList.nmcheck then
-		      'return list of players who have played required number of majors out of last n majors
+		      'count majors for player
+		      if false then' player_majors_count < customList.majorsrequired then
+		        data.MoveNext
+		      end
 		    end
-		  end
-		  'save (sorted) list of players
+		    'add player to list
+		    MsgBox data.IdxField(1).StringValue
+		    data.MoveNext
+		  wend
+		  'save sorted list
 		  
 		  
 		  'dim eileen_mclean_games,i,majors_score,ranking,wcs_qual_games as integer

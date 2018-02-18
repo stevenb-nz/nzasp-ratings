@@ -342,7 +342,7 @@ Begin Window CustomListDialog
       Visible         =   True
       Width           =   30
    End
-   Begin Label requiredLabel
+   Begin Label majorsRequiredLabel
       AutoDeactivate  =   True
       Bold            =   False
       DataField       =   ""
@@ -567,29 +567,8 @@ End
 
 	#tag Method, Flags = &h0
 		Sub OKcheck()
-		  'dim check1,check2 as Boolean
-		  '
-		  'check1 = true
-		  'if qpCheckBox.State = CheckBox.CheckedStates.Checked then
-		  'dim d1 as new Date
-		  'dim d2 as new Date
-		  'd1.SQLDate = StartDateDisplay.text
-		  'd2.SQLDate = EndDateDisplay.text
-		  'if d2.operator_compare(d1) < 0 then check1 = false
-		  'if val(grTextField.Text) < 1 then check1 = false
-		  'end if
-		  'check2 = true
-		  'if nmCheckBox.State = CheckBox.CheckedStates.Checked then
-		  'if val(nmajorsrequiredTextField.text) < 1 or val(outofnmajorsTextField.text) < 1 or val(nmajorsrequiredTextField.text) > val(outofnmajorsTextField.text) then
-		  'check2 = false
-		  'end if
-		  'end if
-		  '
-		  'if (check1 and check2) and (qpCheckBox.State = CheckBox.CheckedStates.Checked or nmCheckBox.State = CheckBox.CheckedStates.Checked) then
-		  'OKButton.Enabled = true
-		  'else
-		  'OKButton.Enabled = false
-		  'end if
+		  OKButton.Enabled = (ngCheckBox.State = CheckBox.CheckedStates.Checked and val(ngTextField.Text) > 0 ) or _
+		  (nmCheckBox.State = CheckBox.CheckedStates.Checked and val(nmajorsrequiredTextField.text) > 0 and val(outofnmajorsLabel.text) >= val(nmajorsrequiredTextField.text) )
 		  
 		End Sub
 	#tag EndMethod
@@ -623,15 +602,15 @@ End
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
+		ngcheck As Boolean
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		nmcheck As Boolean
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
 		outofmajors As Integer
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		qpcheck As Boolean
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -648,22 +627,22 @@ End
 #tag Events OKButton
 	#tag Event
 		Sub Action()
-		  'if qpCheckBox.State = CheckBox.CheckedStates.Checked then
-		  'qpcheck = true
-		  'gamesrequired = val(grTextField.Text)
-		  'startdate = StartDateDisplay.Text
-		  'enddate = EndDateDisplay.Text
-		  'else
-		  'qpcheck = false
-		  'end if
-		  'if nmCheckBox.State = CheckBox.CheckedStates.Checked then
-		  'nmcheck = true
-		  'majorsrequired = val(nmajorsrequiredTextField.text)
-		  'outofmajors = val(outofnmajorsTextField.text)
-		  'else
-		  'nmcheck = false
-		  'end if
-		  'self.close
+		  startdate = StartDateDisplay.Text
+		  enddate = EndDateDisplay.Text
+		  if ngCheckBox.State = CheckBox.CheckedStates.Checked then
+		    ngcheck = true
+		    gamesrequired = val(ngTextField.Text)
+		  else
+		    ngcheck = false
+		  end if
+		  if nmCheckBox.State = CheckBox.CheckedStates.Checked then
+		    nmcheck = true
+		    majorsrequired = val(nmajorsrequiredTextField.text)
+		    outofmajors = val(outofnmajorsLabel.text)
+		  else
+		    nmcheck = false
+		  end if
+		  self.close
 		  
 		End Sub
 	#tag EndEvent
@@ -679,25 +658,15 @@ End
 #tag Events ngCheckBox
 	#tag Event
 		Sub Action()
-		  'if me.state = CheckBox.CheckedStates.Checked then
-		  'grTextField.Visible = true
-		  'gamesLabel.Visible = true
-		  'TournamentUpDownArrows.Visible = true
-		  'StartDateDisplay.Visible = true
-		  'DayUpDownArrows.Visible = true
-		  'andLabel.Visible = true
-		  'EndDateDisplay.Visible = true
-		  'else
-		  'grTextField.Visible = false
-		  'gamesLabel.Visible = false
-		  'TournamentUpDownArrows.Visible = false
-		  'StartDateDisplay.Visible = false
-		  'DayUpDownArrows.Visible = false
-		  'andLabel.Visible = false
-		  'EndDateDisplay.Visible = false
-		  'end if
-		  '
-		  'OKcheck
+		  if me.state = CheckBox.CheckedStates.Checked then
+		    ngTextField.Visible = true
+		    gamesLabel.Visible = true
+		  else
+		    ngTextField.Visible = false
+		    gamesLabel.Visible = false
+		  end if
+		  
+		  OKcheck
 		  
 		End Sub
 	#tag EndEvent
@@ -705,19 +674,19 @@ End
 #tag Events nmCheckBox
 	#tag Event
 		Sub Action()
-		  'if me.state = CheckBox.CheckedStates.Checked then
-		  'nmajorsrequiredTextField.Visible = true
-		  'requiredLabel.Visible = true
-		  'outofnmajorsTextField.Visible = true
-		  'majorsLabel.Visible = true
-		  'else
-		  'nmajorsrequiredTextField.Visible = false
-		  'requiredLabel.Visible = false
-		  'outofnmajorsTextField.Visible = false
-		  'majorsLabel.Visible = false
-		  'end if
-		  '
-		  'OKcheck
+		  if me.state = CheckBox.CheckedStates.Checked then
+		    nmajorsrequiredTextField.Visible = true
+		    majorsRequiredLabel.Visible = true
+		    outofnmajorsLabel.Visible = true
+		    betweenLabel.Visible = true
+		  else
+		    nmajorsrequiredTextField.Visible = false
+		    majorsRequiredLabel.Visible = false
+		    outofnmajorsLabel.Visible = false
+		    betweenLabel.Visible = false
+		  end if
+		  
+		  OKcheck
 		  
 		End Sub
 	#tag EndEvent
@@ -997,6 +966,11 @@ End
 		EditorType="String"
 	#tag EndViewProperty
 	#tag ViewProperty
+		Name="ngcheck"
+		Group="Behavior"
+		Type="Boolean"
+	#tag EndViewProperty
+	#tag ViewProperty
 		Name="nmcheck"
 		Group="Behavior"
 		Type="Boolean"
@@ -1020,11 +994,6 @@ End
 			"3 - Parent Window Screen"
 			"4 - Stagger"
 		#tag EndEnumValues
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="qpcheck"
-		Group="Behavior"
-		Type="Boolean"
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Resizeable"
