@@ -1624,6 +1624,8 @@ End
 		Sub export_custom_list()
 		  dim sql as string
 		  dim data as RecordSet
+		  dim temp_player as CLPlayer
+		  dim player_list() as CLPlayer
 		  
 		  dim customList As New CustomListDialog
 		  customList.ShowModal
@@ -1634,24 +1636,23 @@ End
 		  data = app.ratingsDB.SQLSelect(sql)
 		  
 		  while not data.EOF
-		    if customList.ngcheck then
-		      if val(data.idxfield(3).StringValue) < customList.gamesrequired then
-		        data.MoveNext
-		      end
+		    if not(customList.ngcheck and val(data.idxfield(3).StringValue) < customList.gamesrequired) then
+		      temp_player = new CLPlayer
+		      temp_player.name = data.IdxField(1).StringValue
+		      temp_player.id = val(data.IdxField(2).StringValue)
+		      temp_player.games_in_qp = val(data.IdxField(3).StringValue)
+		      player_list.Append temp_player
 		    end
-		    if customList.nmcheck then
-		      'count majors for player
-		      if false then' player_majors_count < customList.majorsrequired then
-		        data.MoveNext
-		      end
-		    end
-		    'add player to list
-		    MsgBox data.IdxField(1).StringValue
 		    data.MoveNext
 		  wend
-		  'add rating & seeding at end of qualifying period to each remaining player
+		  
+		  for each clp as CLPlayer in player_list
+		    MsgBox clp.name
+		    'look up and add majors_in_qp, (rating, seeding) as at end of qp, for clp
+		  next
+		  
 		  'sort list of remaining players by rating, seeding
-		  'save list
+		  'save players in list, filtering by number of majors if selected
 		  
 		  
 		  'dim eileen_mclean_games,i,majors_score,ranking,wcs_qual_games as integer
