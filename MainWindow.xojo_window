@@ -1647,8 +1647,26 @@ End
 		  wend
 		  
 		  for each clp as CLPlayer in player_list
-		    MsgBox clp.name
-		    'look up and add majors_in_qp, (rating, seeding) as at end of qp, for clp
+		    'look up and add number of majors in qp for player
+		    sql = "select count(tournament.id) from rating_change join tournament on rating_change.tournament_id = tournament.id join as_at_date on as_at_date.id = tournament.as_at_date_id"+_
+		    " where as_at_date.list_date >= '" + customList.startdate + "' and as_at_date.list_date <= '" + customList.enddate + "' and rating_change.player_id = " + str(clp.id) +_
+		    " and (tournament_name like 'Master%' or tournament_name like 'National%')"
+		    data = app.ratingsDB.SQLSelect(sql)
+		    clp.majors_in_qp = val(data.IdxField(1).StringValue)
+		    
+		    'look up and add rating and seeding as at end of qp for player
+		    
+		    'sql = "select player.name,player.id,sum(rating_change.games) from "+_
+		    '"player join rating_change on player.id = rating_change.player_id join tournament on rating_change.tournament_id = tournament.id join as_at_date on as_at_date.id = tournament.as_at_date_id "+_
+		    '"where as_at_date.list_date >= '" + customList.startdate + "' and as_at_date.list_date <= '" + customList.enddate + "' "+_
+		    '"group by player.name"
+		    'data = app.ratingsDB.SQLSelect(sql)
+		    '
+		    'sql = "select player.name,player.id,sum(rating_change.games) from "+_
+		    '"player join rating_change on player.id = rating_change.player_id join tournament on rating_change.tournament_id = tournament.id join as_at_date on as_at_date.id = tournament.as_at_date_id "+_
+		    '"where as_at_date.list_date >= '" + customList.startdate + "' and as_at_date.list_date <= '" + customList.enddate + "' "+_
+		    '"group by player.name"
+		    'data = app.ratingsDB.SQLSelect(sql)
 		  next
 		  
 		  'sort list of remaining players by rating, seeding

@@ -578,12 +578,12 @@ End
 		  dim sql as string
 		  dim data as RecordSet
 		  
-		  sql = "SELECT tournament.id from tournament join as_at_date on as_at_date.id = tournament.as_at_date_id "+_
+		  sql = "SELECT count(tournament.id) from tournament join as_at_date on as_at_date.id = tournament.as_at_date_id "+_
 		  "where as_at_date.list_date >= '" + startDateDisplay.Text + "' and as_at_date.list_date <= '" + EndDateDisplay.Text + "' "+_
 		  "and (tournament_name like 'Master%' or tournament_name like 'National%')"
 		  data = app.ratingsDB.SQLSelect(sql)
 		  
-		  outofnmajorsLabel.Text = str(data.RecordCount)
+		  outofnmajorsLabel.Text = data.IdxField(1).StringValue
 		  
 		End Sub
 	#tag EndMethod
