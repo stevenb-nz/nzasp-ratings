@@ -1451,6 +1451,30 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function clpCompare(clp1 as CLPlayer, clp2 as CLPlayer) As integer
+		  'if player1.player_grade.sequence > player2.player_grade.sequence then
+		  'return 1
+		  'elseIf player1.player_grade.sequence < player2.player_grade.sequence then
+		  'return -1
+		  'else
+		  'if player1.wins > player2.wins then
+		  'return -1
+		  'elseIf player1.wins < player2.wins then
+		  'return 1
+		  'else
+		  'if player1.spread > player2.spread then
+		  'return -1
+		  'elseIf player1.spread < player2.spread then
+		  'return 1
+		  'else
+		  'return 0
+		  'end
+		  'end
+		  'end
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function count_2_years_games(name_id as integer, current_date as string) As integer
 		  dim i,two_years_games as integer
 		  dim current_minus_two as string
@@ -1647,29 +1671,23 @@ End
 		  wend
 		  
 		  for each clp as CLPlayer in player_list
-		    'look up and add number of majors in qp for player
 		    sql = "select count(tournament.id) from rating_change join tournament on rating_change.tournament_id = tournament.id join as_at_date on as_at_date.id = tournament.as_at_date_id"+_
 		    " where as_at_date.list_date >= '" + customList.startdate + "' and as_at_date.list_date <= '" + customList.enddate + "' and rating_change.player_id = " + str(clp.id) +_
 		    " and (tournament_name like 'Master%' or tournament_name like 'National%')"
 		    data = app.ratingsDB.SQLSelect(sql)
 		    clp.majors_in_qp = val(data.IdxField(1).StringValue)
 		    
-		    'look up and add rating and seeding as at end of qp for player
+		    clp.rating = get_latest_rating(clp.id,customList.enddate)
 		    
-		    'sql = "select player.name,player.id,sum(rating_change.games) from "+_
-		    '"player join rating_change on player.id = rating_change.player_id join tournament on rating_change.tournament_id = tournament.id join as_at_date on as_at_date.id = tournament.as_at_date_id "+_
-		    '"where as_at_date.list_date >= '" + customList.startdate + "' and as_at_date.list_date <= '" + customList.enddate + "' "+_
-		    '"group by player.name"
-		    'data = app.ratingsDB.SQLSelect(sql)
-		    '
-		    'sql = "select player.name,player.id,sum(rating_change.games) from "+_
-		    '"player join rating_change on player.id = rating_change.player_id join tournament on rating_change.tournament_id = tournament.id join as_at_date on as_at_date.id = tournament.as_at_date_id "+_
-		    '"where as_at_date.list_date >= '" + customList.startdate + "' and as_at_date.list_date <= '" + customList.enddate + "' "+_
-		    '"group by player.name"
-		    'data = app.ratingsDB.SQLSelect(sql)
+		    sql = "select list_entry.ranking from list_entry join as_at_date on list_entry.as_at_date_id = as_at_date.id "+_
+		    "where list_entry.player_id = "+str(clp.id)+" and as_at_date.list_date <= '" + customList.enddate + "' order by as_at_date.list_date desc"
+		    data = app.ratingsDB.SQLSelect(sql)
+		    clp.seeding = if(data.RecordCount = 0, 0, val(data.IdxField(1).StringValue))
 		  next
 		  
 		  'sort list of remaining players by rating, seeding
+		  'player_list.sort(AddressOf mainwindow.clpCompare)
+		  
 		  'save players in list, filtering by number of majors if selected
 		  
 		  

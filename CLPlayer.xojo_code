@@ -21,11 +21,21 @@ Protected Class CLPlayer
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		rating_status As string
+		seeding As integer
 	#tag EndProperty
 
 
 	#tag ViewBehavior
+		#tag ViewProperty
+			Name="games_in_qp"
+			Group="Behavior"
+			Type="Integer"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="id"
+			Group="Behavior"
+			Type="Integer"
+		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
 			Visible=true
@@ -41,6 +51,11 @@ Protected Class CLPlayer
 			Type="Integer"
 		#tag EndViewProperty
 		#tag ViewProperty
+			Name="majors_in_qp"
+			Group="Behavior"
+			Type="Integer"
+		#tag EndViewProperty
+		#tag ViewProperty
 			Name="name"
 			Visible=true
 			Group="ID"
@@ -49,7 +64,17 @@ Protected Class CLPlayer
 		#tag ViewProperty
 			Name="name"
 			Group="Behavior"
+			Type="String"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="rating"
+			Group="Behavior"
 			Type="Integer"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="seeding"
+			Group="Behavior"
+			Type="string"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
