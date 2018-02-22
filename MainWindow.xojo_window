@@ -1452,25 +1452,19 @@ End
 
 	#tag Method, Flags = &h0
 		Function clpCompare(clp1 as CLPlayer, clp2 as CLPlayer) As integer
-		  'if player1.player_grade.sequence > player2.player_grade.sequence then
-		  'return 1
-		  'elseIf player1.player_grade.sequence < player2.player_grade.sequence then
-		  'return -1
-		  'else
-		  'if player1.wins > player2.wins then
-		  'return -1
-		  'elseIf player1.wins < player2.wins then
-		  'return 1
-		  'else
-		  'if player1.spread > player2.spread then
-		  'return -1
-		  'elseIf player1.spread < player2.spread then
-		  'return 1
-		  'else
-		  'return 0
-		  'end
-		  'end
-		  'end
+		  if clp1.rating > clp2.rating then
+		    return -1
+		  ElseIf clp1.rating < clp2.rating then
+		    return 1
+		  else
+		    if clp1.seeding < clp2.seeding then
+		      return -1
+		    elseif clp1.seeding > clp2.seeding then
+		      return 1
+		    else
+		      return 0
+		    end
+		  end
 		End Function
 	#tag EndMethod
 
@@ -1650,6 +1644,8 @@ End
 		  dim data as RecordSet
 		  dim temp_player as CLPlayer
 		  dim player_list() as CLPlayer
+		  dim f as FolderItem
+		  dim savefile as TextOutputStream
 		  
 		  dim customList As New CustomListDialog
 		  customList.ShowModal
@@ -1685,10 +1681,17 @@ End
 		    clp.seeding = if(data.RecordCount = 0, 0, val(data.IdxField(1).StringValue))
 		  next
 		  
-		  'sort list of remaining players by rating, seeding
-		  'player_list.sort(AddressOf mainwindow.clpCompare)
+		  player_list.sort(AddressOf mainwindow.clpCompare)
 		  
-		  'save players in list, filtering by number of majors if selected
+		  f = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Rankings").Child(customList.enddate+" Custom list.csv")
+		  savefile = TextOutputStream.Create(f)
+		  for each clp as CLPlayer in player_list
+		    'if clp.majors_in_qp >= customList.majorsrequired then
+		    savefile.WriteLine(clp.name+","+str(clp.games_in_qp)+","+str(clp.majors_in_qp)+","+str(clp.rating)+","+str(clp.seeding))
+		    'to do - include lifetime awards, include seeding only if rating equal
+		    'end
+		  next
+		  savefile.Close
 		  
 		  
 		  'dim eileen_mclean_games,i,majors_score,ranking,wcs_qual_games as integer
@@ -1696,21 +1699,6 @@ End
 		  'dim savefile1,savefile2,savefile3 as TextOutputStream
 		  'dim list_date,last_masters,last_nationals,output1,output2,output3 as string
 		  'dim nats, tts, wcs as Boolean
-		  '
-		  'if End_of_year_check.State = CheckBox.CheckedStates.Unchecked then
-		  'list_date = LDatePicker.List(LDatePicker.ListIndex)
-		  'else
-		  'list_date = left(LDatePicker.List(LDatePicker.ListIndex),4)+"-12-31"
-		  'end if
-		  'nats = isnats(list_date)
-		  'wcs = nats and iswcs(list_date)
-		  'tts = not wcs
-		  'if nats then
-		  'last_nationals = last_nats(list_date)
-		  'if wcs then
-		  'last_masters = last_mast(list_date)
-		  'end if
-		  'end if
 		  '
 		  'f1 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Rankings").Child(list_date+" Rankings.csv")
 		  'f2 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Rankings").Child(list_date+" Ratings by rating.csv")
