@@ -1686,10 +1686,10 @@ End
 		  f = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Rankings").Child(customList.enddate+" Custom list.csv")
 		  savefile = TextOutputStream.Create(f)
 		  for each clp as CLPlayer in player_list
-		    'if clp.majors_in_qp >= customList.majorsrequired then
-		    savefile.WriteLine(clp.name+","+str(clp.games_in_qp)+","+str(clp.majors_in_qp)+","+str(clp.rating)+","+str(clp.seeding))
-		    'to do - include lifetime awards, include seeding only if rating equal
-		    'end
+		    if not(customList.nmcheck and clp.majors_in_qp < customList.majorsrequired) then
+		      savefile.WriteLine(clp.name+","+str(clp.games_in_qp)+","+str(clp.majors_in_qp)+","+str(clp.rating)+","+str(clp.seeding))
+		      'to do - include lifetime awards, include seeding only if rating equal
+		    end
 		  next
 		  savefile.Close
 		  
