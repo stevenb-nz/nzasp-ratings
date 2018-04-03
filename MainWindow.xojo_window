@@ -53,7 +53,7 @@ Begin Window MainWindow
       TextUnit        =   0
       Top             =   0
       Underline       =   False
-      Value           =   4
+      Value           =   0
       Visible         =   True
       Width           =   1200
       Begin Listbox AwardDetails
@@ -1440,7 +1440,7 @@ End
 		        provtotal = provtotal + val(old_rating.value(opponent_list(i)))
 		      next
 		      provtotal = provtotal + provdiff*games
-		      provtotal = (provtotal + val(data.IdxField(3).StringValue)*t_games) / (games + t_games)
+		      provtotal = (provtotal + val(data.IdxField(3).StringValue)*t_games) / (games + t_games) 'move this to after final ratings for players with established ratings have been calculated in next revision of system
 		      app.ratingsDB.SQLExecute("UPDATE rating_change SET prov_rating="+str(provtotal)+", end_rating="+str(provtotal)+_
 		      " WHERE tournament_id ="+str(tournamentPicker.RowTag(tournamentPicker.ListIndex))+" and player_id = "+data.IdxField(2).StringValue)
 		    end if
