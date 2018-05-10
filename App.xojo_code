@@ -17,7 +17,8 @@ Inherits Application
 		    TournamentImportEntries.Enabled = false
 		    TournamentImportPairings.Enabled = false
 		    TournamentImportResults.Enabled = false
-		    TournamentConvertTOUFile.Enabled = false
+		    TournamentConvertTOUFileDraw.Enabled = false
+		    TournamentConvertTOUFileResults.Enabled = false
 		    TournamentResetTournament.Enabled = false
 		    TournamentDeleteTournament.Enabled = false
 		    TournamentSaveExpectancies.Enabled = false
@@ -25,7 +26,8 @@ Inherits Application
 		    TournamentImportEntries.Enabled = true
 		    TournamentImportPairings.Enabled = true
 		    TournamentImportResults.Enabled = true
-		    TournamentConvertTOUFile.Enabled = true
+		    TournamentConvertTOUFileDraw.Enabled = true
+		    TournamentConvertTOUFileResults.Enabled = true
 		    TournamentResetTournament.Enabled = true
 		    TournamentDeleteTournament.Enabled = true
 		    TournamentSaveExpectancies.Enabled = true
@@ -129,7 +131,101 @@ Inherits Application
 	#tag EndMenuHandler
 
 	#tag MenuHandler
-		Function TournamentConvertTouFile() As Boolean Handles TournamentConvertTouFile.Action
+		Function TournamentConvertTouFileDraw() As Boolean Handles TournamentConvertTouFileDraw.Action
+			dim f as FolderItem
+			dim t as TextInputStream
+			dim c,cr,current_grade,s,s1,selected_date,tname as String
+			dim grades() as grade
+			dim oo2,players() as player
+			dim p as player
+			dim r as result
+			dim cg,cgp,i,j,n,pa as integer
+			dim f1,f2 as FolderItem
+			dim savefile1,savefile2 as TextOutputStream
+			
+			f = GetOpenFolderItem("AuPair")
+			if f <> nil then
+			t = TextInputStream.Open(f)
+			s1 = t.ReadLine
+			cr = EndOfLine
+			n = MsgBox(s1+cr+cr+"Is this the first line of the .tou file for this tournament?", 36)
+			If n <> 6 Then
+			t.Close
+			return true
+			end if
+			cg = 0
+			while not t.EOF
+			s = t.Readline
+			c = left(s,1)
+			if c = "*" then
+			if s <> "*** END OF FILE ***" then
+			grades.Append new grade
+			s1 = t.readline 'discard high word line
+			grades(cg).name = trim(right(s,len(s)-1))
+			grades(cg).sequence = cg + 1
+			cg = cg + 1
+			cgp = 0
+			end
+			else
+			cgp = cgp + 1
+			p = new player
+			p.name = left(s,20)
+			pa = instr(p.name,"@")
+			if pa > 0 then
+			p.name = left(p.name,pa-1)
+			end
+			p.name = trim(p.name)
+			p.grade_sequence = cgp
+			p.raw_games = right(s,len(s)-20)
+			p.player_grade = grades(cg-1)
+			players.Append p
+			end
+			wend
+			t.Close
+			
+			for each pp as player in players
+			j = len(pp.raw_games)/9
+			for i = 1 to j
+			r = new result
+			r.opponent = val(mid(pp.raw_games,(i-1)*9+7,3))
+			pp.results.append r
+			next
+			next
+			
+			selected_date = MainWindow.get_tournament_date
+			tname = MainWindow.tournamentPicker.Text
+			f1 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Tournaments").Child(selected_date+" "+tname+" entries from TOU.csv")
+			saveFile1 = TextOutputStream.Create(f1)
+			f2 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Tournaments").Child(selected_date+" "+tname+" pairings from TOU.csv")
+			saveFile2 = TextOutputStream.Create(f2)
+			
+			for each pp as player in players
+			savefile1.WriteLine pp.name + ",???"
+			i = 0
+			for each rr as result in pp.results
+			for each pp2 as player in players
+			if pp.player_grade.name = pp2.player_grade.name and pp2.grade_sequence = rr.opponent then
+			oo2 = pp2
+			end
+			next
+			if pp.name < oo2.name then
+			saveFile2.WriteLine pp.name+","+oo2.name
+			end
+			
+			i = i + 1
+			next
+			next
+			
+			savefile1.Close
+			savefile2.Close
+			end if
+			Return True
+			
+		End Function
+	#tag EndMenuHandler
+
+	#tag MenuHandler
+		Function TournamentConvertTouFileResults() As Boolean Handles TournamentConvertTouFileResults.Action
 			dim f as FolderItem
 			dim t as TextInputStream
 			dim c,cr,current_grade,s,s1,selected_date,tname as String
@@ -282,7 +378,7 @@ Inherits Application
 			u = u+name+", "
 			end if
 			club = if(params.Ubound > 0, params(1), "")
-			if club<>"" then
+			if club<>"" and club<>"???" then
 			if MainWindow.get_club_id(club) < 1 then
 			v = v+club+", "
 			end if

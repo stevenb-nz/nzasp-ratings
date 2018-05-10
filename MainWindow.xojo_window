@@ -52,6 +52,7 @@ Begin Window MainWindow
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   0
+      Transparent     =   False
       Underline       =   False
       Value           =   0
       Visible         =   True
@@ -100,6 +101,7 @@ Begin Window MainWindow
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   70
+         Transparent     =   False
          Underline       =   False
          UseFocusRing    =   True
          Visible         =   True
@@ -134,6 +136,7 @@ Begin Window MainWindow
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   38
+         Transparent     =   False
          Underline       =   False
          Visible         =   True
          Width           =   80
@@ -165,6 +168,7 @@ Begin Window MainWindow
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   38
+         Transparent     =   False
          Underline       =   False
          Visible         =   True
          Width           =   80
@@ -196,6 +200,7 @@ Begin Window MainWindow
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   37
+         Transparent     =   False
          Underline       =   False
          Visible         =   True
          Width           =   240
@@ -227,6 +232,7 @@ Begin Window MainWindow
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   37
+         Transparent     =   False
          Underline       =   False
          Visible         =   True
          Width           =   80
@@ -250,6 +256,7 @@ Begin Window MainWindow
          TabPanelIndex   =   1
          TabStop         =   True
          Top             =   38
+         Transparent     =   False
          Visible         =   True
          Width           =   13
       End
@@ -307,6 +314,7 @@ Begin Window MainWindow
          TabPanelIndex   =   1
          TabStop         =   True
          Top             =   39
+         Transparent     =   False
          Visible         =   True
          Width           =   13
       End
@@ -364,6 +372,7 @@ Begin Window MainWindow
          TabPanelIndex   =   1
          TabStop         =   True
          Top             =   39
+         Transparent     =   False
          Visible         =   True
          Width           =   13
       End
@@ -429,6 +438,7 @@ Begin Window MainWindow
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   38
+         Transparent     =   False
          Underline       =   False
          Visible         =   True
          Width           =   320
@@ -547,6 +557,7 @@ Begin Window MainWindow
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   71
+         Transparent     =   False
          Underline       =   False
          UseFocusRing    =   True
          Visible         =   True
@@ -573,6 +584,7 @@ Begin Window MainWindow
          TabPanelIndex   =   1
          TabStop         =   True
          Top             =   38
+         Transparent     =   False
          Visible         =   True
          Width           =   13
       End
@@ -620,6 +632,7 @@ Begin Window MainWindow
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   70
+         Transparent     =   False
          Underline       =   False
          UseFocusRing    =   True
          Visible         =   True
@@ -654,6 +667,7 @@ Begin Window MainWindow
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   39
+         Transparent     =   False
          Underline       =   False
          Visible         =   True
          Width           =   120
@@ -685,6 +699,7 @@ Begin Window MainWindow
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   39
+         Transparent     =   False
          Underline       =   False
          Visible         =   True
          Width           =   240
@@ -751,6 +766,7 @@ Begin Window MainWindow
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   38
+         Transparent     =   False
          Underline       =   False
          Visible         =   True
          Width           =   120
@@ -774,6 +790,7 @@ Begin Window MainWindow
          TabPanelIndex   =   5
          TabStop         =   True
          Top             =   38
+         Transparent     =   False
          Visible         =   True
          Width           =   13
       End
@@ -909,6 +926,7 @@ Begin Window MainWindow
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   39
+         Transparent     =   False
          Underline       =   False
          Value           =   False
          Visible         =   True
@@ -993,6 +1011,7 @@ Begin Window MainWindow
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   73
+         Transparent     =   False
          Underline       =   False
          UseFocusRing    =   True
          Visible         =   True
@@ -1062,6 +1081,7 @@ Begin Window MainWindow
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   38
+         Transparent     =   False
          Underline       =   False
          Visible         =   True
          Width           =   160
@@ -1110,6 +1130,7 @@ Begin Window MainWindow
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   70
+         Transparent     =   False
          Underline       =   False
          UseFocusRing    =   True
          Visible         =   True
@@ -1144,6 +1165,7 @@ Begin Window MainWindow
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   39
+         Transparent     =   False
          Underline       =   False
          Visible         =   True
          Width           =   120
@@ -1175,6 +1197,7 @@ Begin Window MainWindow
          TextSize        =   0.0
          TextUnit        =   0
          Top             =   40
+         Transparent     =   False
          Underline       =   False
          Visible         =   True
          Width           =   120
@@ -2748,7 +2771,7 @@ End
 		  
 		  name_id = app.get_name_id(name)
 		  
-		  if club<>"" then
+		  if club<>"" and club<>"???" then
 		    if get_club_id(club) < 1 then
 		      dim newClub as new NewClubDialog
 		      newClub.ClubName.Text = ""
