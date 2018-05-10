@@ -1726,6 +1726,7 @@ End
 		  dim old_rating_status,new_rating_status,output as string
 		  
 		  f = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Expectancies").Child(get_tournament_date+" "+get_tournament_name+".csv")
+		  
 		  saveFile = TextOutputStream.Create(f)
 		  load_tournament
 		  for i = 1 to TournamentDetails.ListCount
@@ -1757,6 +1758,10 @@ End
 		  next
 		  saveFile.Close
 		  
+		  Exception e As IOException
+		    MsgBox("File already exists, and is open?")
+		    Return
+		    
 		End Sub
 	#tag EndMethod
 

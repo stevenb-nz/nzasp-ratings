@@ -58,6 +58,16 @@ Inherits Application
 		End Sub
 	#tag EndEvent
 
+	#tag Event
+		Function UnhandledException(error As RuntimeException) As Boolean
+		  Dim msg As String = "An error occurred. Please notify the author.  Stack: "
+		  MsgBox(msg + Join(error.Stack, EndOfLine))
+		  
+		  Quit
+		  Return True
+		End Function
+	#tag EndEvent
+
 
 	#tag MenuHandler
 		Function AwardsExportAwards() As Boolean Handles AwardsExportAwards.Action
