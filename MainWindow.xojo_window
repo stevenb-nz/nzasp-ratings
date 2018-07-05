@@ -1771,6 +1771,7 @@ End
 		  dim f as FolderItem
 		  dim savefile as TextOutputStream
 		  dim award,club,equalseed,list_date,s,status as string
+		  dim name_id as integer
 		  dim allratings as new JSONItem
 		  dim ratings_records as new JSONItem
 		  dim d as new Date
@@ -1793,6 +1794,10 @@ End
 		    end if
 		    rating = round(val(ListDetails.cell(i-1,2)))
 		    ratings_record.Value("Rating") = rating
+		    name_id = get_name_id(ListDetails.cell(i-1,1))
+		    if played_this_date(name_id,list_date) then
+		      ratings_record.Value("RatingChange") = "( "+str(rating - get_latest_rating(name_id,get_prec_as_at_date(list_date)),"+#,###")+" )"
+		    end
 		    lastseed = val(ListDetails.cell(i-1,3))
 		    equalseed = get_list_seed(ListDetails.cell(i-1,7))
 		    ratings_record.Value("Seed") = i
@@ -2738,6 +2743,24 @@ End
 		  next
 		  
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function played_this_date(name_id as integer, current_date as string) As boolean
+		  dim sql as string
+		  dim data as RecordSet
+		  sql = "SELECT * FROM rating_change "+_
+		  "JOIN tournament ON rating_change.tournament_id=tournament.id JOIN as_at_date ON tournament.as_at_date_id=as_at_date.id "+_
+		  "WHERE rating_change.player_id = "+str(name_id)+" and as_at_date.list_date = '"+current_date+"'"
+		  data = app.ratingsDB.SQLSelect(sql)
+		  
+		  if data.RecordCount = 0 then
+		    return false
+		  else
+		    return true
+		  end if
+		  
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
