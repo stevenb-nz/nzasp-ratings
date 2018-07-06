@@ -1767,6 +1767,8 @@ End
 
 	#tag Method, Flags = &h0
 		Sub export_json()
+		  'if exists allratings.json, read it in, check if this date included, and, if not, add this date's data to allratings.json (including new index structure)
+		  
 		  dim games,i,lastseed,ranking,rating as integer
 		  dim f as FolderItem
 		  dim savefile as TextOutputStream
