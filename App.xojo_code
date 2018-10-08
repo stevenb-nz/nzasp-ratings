@@ -19,6 +19,7 @@ Inherits Application
 		    TournamentImportResults.Enabled = false
 		    TournamentConvertTOUFileDraw.Enabled = false
 		    TournamentConvertTOUFileResults.Enabled = false
+		    TournamentReloadTournament.Enabled = false
 		    TournamentResetTournament.Enabled = false
 		    TournamentDeleteTournament.Enabled = false
 		    TournamentSaveExpectancies.Enabled = false
@@ -28,6 +29,7 @@ Inherits Application
 		    TournamentImportResults.Enabled = true
 		    TournamentConvertTOUFileDraw.Enabled = true
 		    TournamentConvertTOUFileResults.Enabled = true
+		    TournamentReloadTournament.Enabled = true
 		    TournamentResetTournament.Enabled = true
 		    TournamentDeleteTournament.Enabled = true
 		    TournamentSaveExpectancies.Enabled = true

@@ -2902,7 +2902,7 @@ End
 
 	#tag Method, Flags = &h0
 		Sub reload_tournament()
-		  dim i, tournament_id as integer
+		  dim i, player_id, tournament_id as integer
 		  dim name(-1) as string
 		  dim seed(-1) as integer
 		  
@@ -2912,36 +2912,19 @@ End
 		  
 		  for i = 1 to TournamentDetails.ListCount
 		    name.Append TournamentDetails.Cell(i-1,1)
-		    seed.Append TournamentDetails.cell(i-1,11)
+		    seed.Append val(TournamentDetails.cell(i-1,11))
 		  next
 		  
 		  TournamentDetails.DeleteAllRows
 		  
 		  for i = 0 to UBound(name)
 		    process_name(name(i))
+		    player_id = get_name_id(name(i))
+		    app.ratingsDB.SQLExecute("UPDATE rating_change SET seeding="+str(seed(i))+_
+		    " WHERE tournament_id ="+str(tournament_id)+" and player_id = "+str(player_id))
 		  next
 		  
 		  load_tournament
-		  
-		  
-		  
-		  ' ratingsDB.SQLExecute("CREATE TABLE rating_change(id Integer, tournament_id Integer, player_id Integer, start_rating Float, rating_status VarChar, prov_rating Float, "+_
-		  ' "expected_wins Float, games Smallint, wins Float, end_rating Float, grade VarChar, placing Smallint, seeding Smallint, PRIMARY KEY(id));")
-		  
-		  
-		  'dim i,player_id as integer
-		  'dim player as string
-		  '
-		  'TournamentDetails.ColumnSortDirection(2) = Listbox.SortDescending
-		  'TournamentDetails.SortedColumn = 2
-		  'TournamentDetails.Sort
-		  'for i = 1 to TournamentDetails.ListCount
-		  'TournamentDetails.Cell(i-1,11) = str(i)
-		  'player = TournamentDetails.Cell(i-1,1)
-		  'player_id = get_name_id(player)
-		  'app.ratingsDB.SQLExecute("UPDATE rating_change SET seeding="+str(i)+_
-		  '" WHERE tournament_id ="+str(tournamentPicker.RowTag(tournamentPicker.ListIndex))+" and player_id = "+str(player_id))
-		  'next
 		  
 		End Sub
 	#tag EndMethod
