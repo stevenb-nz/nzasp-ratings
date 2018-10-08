@@ -486,6 +486,20 @@ Inherits Application
 	#tag EndMenuHandler
 
 	#tag MenuHandler
+		Function TournamentReloadTournament() As Boolean Handles TournamentReloadTournament.Action
+			Dim n As Integer
+			
+			n = MsgBox("Do you really want to reload all the data for this tournament?", 36)
+			If n = 6 Then
+			MainWindow.reload_tournament
+			End If
+			
+			Return True
+			
+		End Function
+	#tag EndMenuHandler
+
+	#tag MenuHandler
 		Function TournamentResetTournament() As Boolean Handles TournamentResetTournament.Action
 			Dim n As Integer
 			

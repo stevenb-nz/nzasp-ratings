@@ -156,6 +156,13 @@ Begin Menu MainMenuBar
          AutoEnable = False
          Visible = True
       End
+      Begin MenuItem TournamentReloadTournament
+         SpecialMenu = 0
+         Text = "Reload Tournament..."
+         Index = -2147483648
+         AutoEnable = False
+         Visible = True
+      End
       Begin MenuItem TournamentResetTournament
          SpecialMenu = 0
          Text = "Reset Tournament..."
