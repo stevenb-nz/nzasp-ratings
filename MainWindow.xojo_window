@@ -1354,6 +1354,9 @@ End
 		      gain = (wins-expectancy) * kfactor
 		      if gain > games*gainfactor then
 		        accelerator = gain - games*gainfactor
+		        #if DebugBuild then
+		          MsgBox data.idxfield(2).stringvalue + ": "+str(accelerator)
+		        #Endif
 		        for i=0 to opponent_list.Ubound
 		          feedback_points.value(opponent_list(i)) = str( val(feedback_points.value(opponent_list(i))) + accelerator*0.05)
 		        next
