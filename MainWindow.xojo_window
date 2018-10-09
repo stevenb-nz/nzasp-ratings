@@ -2921,7 +2921,7 @@ End
 		  for i = 0 to UBound(name)
 		    process_name(name(i))
 		    player_id = get_name_id(name(i))
-		    app.ratingsDB.SQLExecute("UPDATE rating_change SET seeding="+str(i)+_
+		    app.ratingsDB.SQLExecute("UPDATE rating_change SET seeding="+str(i+1)+_
 		    " WHERE tournament_id ="+str(tournament_id)+" and player_id = "+str(player_id))
 		  next
 		  
