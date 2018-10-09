@@ -2907,7 +2907,6 @@ End
 		Sub reload_tournament()
 		  dim i, player_id, tournament_id as integer
 		  dim name(-1) as string
-		  dim seed(-1) as integer
 		  
 		  tournament_id = TournamentPicker.RowTag(TournamentPicker.ListIndex)
 		  app.ratingsDB.SQLExecute("DELETE FROM rated_game WHERE tournament_id = "+str(tournament_id))
@@ -2915,7 +2914,6 @@ End
 		  
 		  for i = 1 to TournamentDetails.ListCount
 		    name.Append TournamentDetails.Cell(i-1,1)
-		    seed.Append val(TournamentDetails.cell(i-1,11))
 		  next
 		  
 		  TournamentDetails.DeleteAllRows
@@ -2923,7 +2921,7 @@ End
 		  for i = 0 to UBound(name)
 		    process_name(name(i))
 		    player_id = get_name_id(name(i))
-		    app.ratingsDB.SQLExecute("UPDATE rating_change SET seeding="+str(seed(i))+_
+		    app.ratingsDB.SQLExecute("UPDATE rating_change SET seeding="+str(i)+_
 		    " WHERE tournament_id ="+str(tournament_id)+" and player_id = "+str(player_id))
 		  next
 		  
@@ -2968,15 +2966,15 @@ End
 	#tag Method, Flags = &h0
 		Sub set_seedings()
 		  dim i,player_id as integer
-		  dim player as string
+		  dim player_name as string
 		  
 		  TournamentDetails.ColumnSortDirection(2) = Listbox.SortDescending
 		  TournamentDetails.SortedColumn = 2
 		  TournamentDetails.Sort
 		  for i = 1 to TournamentDetails.ListCount
 		    TournamentDetails.Cell(i-1,11) = str(i)
-		    player = TournamentDetails.Cell(i-1,1)
-		    player_id = get_name_id(player)
+		    player_name = TournamentDetails.Cell(i-1,1)
+		    player_id = get_name_id(player_name)
 		    app.ratingsDB.SQLExecute("UPDATE rating_change SET seeding="+str(i)+_
 		    " WHERE tournament_id ="+str(tournamentPicker.RowTag(tournamentPicker.ListIndex))+" and player_id = "+str(player_id))
 		  next
