@@ -2150,9 +2150,9 @@ End
 
 	#tag Method, Flags = &h0
 		Function get_list_rating_status(games as integer, games_2 as integer) As string
-		  if games < 30 and games_2 = 0 then
+		  if games < prov_threshold and games_2 = 0 then
 		    return "(prov/hist)"
-		  elseif games < 30 then
+		  elseif games < prov_threshold then
 		    return "(prov)"
 		  elseif games_2 = 0 then
 		    return "(hist)"
@@ -2302,7 +2302,7 @@ End
 		  
 		  if games = 0 then
 		    return "(new)"
-		  elseif games <30 then
+		  elseif games <prov_threshold then
 		    return "(prov)"
 		  elseif games_2 = 0 then
 		    return "(hist)"
