@@ -54,7 +54,7 @@ Begin Window MainWindow
       Top             =   0
       Transparent     =   False
       Underline       =   False
-      Value           =   0
+      Value           =   4
       Visible         =   True
       Width           =   1200
       Begin Listbox AwardDetails
@@ -1731,6 +1731,7 @@ End
 		  f = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Expectancies").Child(get_tournament_date+" "+get_tournament_name+".csv")
 		  
 		  saveFile = TextOutputStream.Create(f)
+		  set_rating_options(get_tournament_date)
 		  load_tournament
 		  for i = 1 to TournamentDetails.ListCount
 		    output = ""
@@ -1786,6 +1787,7 @@ End
 		  else
 		    list_date = left(LDatePicker.List(LDatePicker.ListIndex),4)+"-12-31"
 		  end if
+		  set_list_options(list_date)
 		  d.SQLDate = list_date
 		  
 		  allratings.Value("Date") = "as at "+d.LongDate
@@ -1859,6 +1861,7 @@ End
 		  else
 		    list_date = left(LDatePicker.List(LDatePicker.ListIndex),4)+"-12-31"
 		  end if
+		  set_list_options(list_date)
 		  nats = isnats(list_date)
 		  wcs = nats and iswcs(list_date)
 		  tts = not wcs
@@ -2824,6 +2827,7 @@ End
 		  if data.RecordCount < 1 then
 		    current_date = format(val(MainWindow.TYear.text),"0000")+"-"+format(val(MainWindow.TMonth.text),"00")+"-"+format(val(MainWindow.TDay.text),"00")
 		    preceding_date = get_prec_as_at_date(current_date)
+		    set_rating_options(preceding_date)
 		    start_rating = get_latest_rating(name_id,preceding_date)
 		    rating_status = get_tourn_rating_status(name_id,preceding_date)
 		    
@@ -2965,12 +2969,22 @@ End
 
 	#tag Method, Flags = &h0
 		Sub set_list_options(list_date as string)
+		  if val(right(list_date,4)) <2017 then
+		    prov_threshold = 35
+		  else
+		    prov_threshold = 30
+		  end
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub set_rating_options(rating_date as string)
+		  if val(right(rating_date,4)) <2017 then
+		    prov_threshold = 35
+		  else
+		    prov_threshold = 30
+		  end
 		  
 		End Sub
 	#tag EndMethod
@@ -3087,6 +3101,11 @@ End
 		  
 		End Sub
 	#tag EndMethod
+
+
+	#tag Property, Flags = &h0
+		prov_threshold As Integer
+	#tag EndProperty
 
 
 #tag EndWindowCode
