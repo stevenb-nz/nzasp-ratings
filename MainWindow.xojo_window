@@ -2964,6 +2964,18 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub set_list_options(list_date as string)
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub set_rating_options(rating_date as string)
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub set_seedings()
 		  dim i,player_id as integer
 		  dim player_name as string
