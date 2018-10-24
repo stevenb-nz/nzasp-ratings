@@ -2971,7 +2971,7 @@ End
 
 	#tag Method, Flags = &h0
 		Sub set_list_options(list_date as string)
-		  if val(right(list_date,4)) <2017 then
+		  if val(left(list_date,4)) <2017 then
 		    prov_threshold = 35
 		  else
 		    prov_threshold = 30
@@ -2982,7 +2982,7 @@ End
 
 	#tag Method, Flags = &h0
 		Sub set_rating_options(rating_date as string)
-		  if val(right(rating_date,4)) <2017 then
+		  if val(left(rating_date,4)) <2017 then
 		    prov_threshold = 35
 		  else
 		    prov_threshold = 30
