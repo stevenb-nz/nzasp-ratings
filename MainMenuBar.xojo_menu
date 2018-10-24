@@ -215,6 +215,16 @@ Begin Menu MainMenuBar
          AutoEnable = False
          Visible = True
       End
+      Begin MenuItem ListsExportasPrevious
+         SpecialMenu = 0
+         Text = "Export as Previous"
+         Index = -2147483648
+         ShortcutKey = "D"
+         Shortcut = "Cmd+D"
+         MenuModifier = True
+         AutoEnable = False
+         Visible = True
+      End
       Begin MenuItem ListsExportLists
          SpecialMenu = 0
          Text = "Export Lists"

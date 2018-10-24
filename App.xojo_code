@@ -47,6 +47,7 @@ Inherits Application
 		  if MainWindow.End_of_year_check.State = CheckBox.CheckedStates.Checked then
 		    ListsSaveSeeds.Enabled = false
 		  end if
+		  ListsExportasPrevious.Enabled = sortcheck
 		  ListsExportLists.Enabled = sortcheck
 		  ListsCustomList.Enabled = sortcheck
 		  
@@ -125,9 +126,18 @@ Inherits Application
 	#tag EndMenuHandler
 
 	#tag MenuHandler
+		Function ListsExportasPrevious() As Boolean Handles ListsExportasPrevious.Action
+			MainWindow.export_json(false)
+			
+			Return True
+			
+		End Function
+	#tag EndMenuHandler
+
+	#tag MenuHandler
 		Function ListsExportLists() As Boolean Handles ListsExportLists.Action
 			MainWindow.save_seeds
-			MainWindow.export_json
+			MainWindow.export_json(true)
 			MainWindow.export_lists
 			Return True
 			

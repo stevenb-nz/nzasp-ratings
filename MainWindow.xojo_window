@@ -1770,9 +1770,7 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub export_json()
-		  'if exists allratings.json, read it in, check if this date included, and, if not, add this date's data to allratings.json (including new index structure)
-		  
+		Sub export_json(current as boolean)
 		  dim games,i,lastseed,ranking,rating as integer
 		  dim f as FolderItem
 		  dim savefile as TextOutputStream
@@ -1840,7 +1838,11 @@ End
 		  s = allratings.ToString
 		  s = s.ReplaceAll("\/","/")
 		  
-		  f = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Rankings").Child("allratings.json")
+		  if current then
+		    f = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Rankings").Child("currentlists.json")
+		  else
+		    f = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Rankings").Child("previouslists.json")
+		  end
 		  saveFile = TextOutputStream.Create(f)
 		  saveFile.WriteLine (s)
 		  savefile.Close
@@ -3964,6 +3966,11 @@ End
 		Visible=true
 		Group="Position"
 		InitialValue="600"
+		Type="Integer"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="prov_threshold"
+		Group="Behavior"
 		Type="Integer"
 	#tag EndViewProperty
 #tag EndViewBehavior
