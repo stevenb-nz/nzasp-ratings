@@ -129,6 +129,9 @@ Inherits Application
 			dim eoystate as Boolean
 			dim current,i as integer
 			
+			MainWindow.save_seeds
+			MainWindow.export_json(true)
+			MainWindow.export_lists
 			if MainWindow.End_of_year_check.state = CheckBox.CheckedStates.Unchecked then
 			eoystate = false
 			else
@@ -158,9 +161,6 @@ Inherits Application
 			MainWindow.LDatePicker.ListIndex = current
 			end
 			end
-			MainWindow.save_seeds
-			MainWindow.export_json(true)
-			MainWindow.export_lists
 			Return True
 			
 		End Function
