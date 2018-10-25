@@ -47,7 +47,6 @@ Inherits Application
 		  if MainWindow.End_of_year_check.State = CheckBox.CheckedStates.Checked then
 		    ListsSaveSeeds.Enabled = false
 		  end if
-		  ListsExportasPrevious.Enabled = sortcheck
 		  ListsExportLists.Enabled = sortcheck
 		  ListsCustomList.Enabled = sortcheck
 		  
@@ -126,19 +125,39 @@ Inherits Application
 	#tag EndMenuHandler
 
 	#tag MenuHandler
-		Function ListsExportasPrevious() As Boolean Handles ListsExportasPrevious.Action
-			MainWindow.export_json(false)
-			
-			Return True
-			
-		End Function
-	#tag EndMenuHandler
-
-	#tag MenuHandler
 		Function ListsExportLists() As Boolean Handles ListsExportLists.Action
-			'change date to previous date
-			'MainWindow.export_json(false)
-			'restore current date
+			dim eoystate as Boolean
+			dim current,i as integer
+			
+			if MainWindow.End_of_year_check.state = CheckBox.CheckedStates.Unchecked then
+			eoystate = false
+			else
+			eoystate = true
+			end
+			current = MainWindow.LDatePicker.ListIndex
+			if eoystate then
+			MainWindow.End_of_year_check.state = CheckBox.CheckedStates.Unchecked 
+			i = 1
+			while current + i < MainWindow.LDatePicker.ListCount and left(MainWindow.LDatePicker.List(current),4) = left(MainWindow.LDatePicker.List(current+i),4)
+			i = i+1
+			wend
+			MainWindow.LDatePicker.ListIndex = current+(i-1)
+			MainWindow.export_json(false)
+			MainWindow.LDatePicker.ListIndex = current
+			MainWindow.End_of_year_check.state = CheckBox.CheckedStates.Checked
+			else
+			if left(MainWindow.LDatePicker.List(current-1),4) <> left(MainWindow.LDatePicker.List(current),4) then
+			MainWindow.LDatePicker.ListIndex = current-1
+			MainWindow.End_of_year_check.state = CheckBox.CheckedStates.Checked
+			MainWindow.export_json(false)
+			MainWindow.End_of_year_check.state = CheckBox.CheckedStates.Unchecked 
+			MainWindow.LDatePicker.ListIndex = current
+			else
+			MainWindow.LDatePicker.ListIndex = current-1
+			MainWindow.export_json(false)
+			MainWindow.LDatePicker.ListIndex = current
+			end
+			end
 			MainWindow.save_seeds
 			MainWindow.export_json(true)
 			MainWindow.export_lists
