@@ -88,6 +88,7 @@ Begin Window CustomListDialog
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   187
+      Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   80
@@ -119,6 +120,7 @@ Begin Window CustomListDialog
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   187
+      Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   80
@@ -150,6 +152,7 @@ Begin Window CustomListDialog
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   20
+      Transparent     =   False
       Underline       =   False
       Value           =   False
       Visible         =   True
@@ -182,6 +185,7 @@ Begin Window CustomListDialog
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   86
+      Transparent     =   False
       Underline       =   False
       Value           =   False
       Visible         =   True
@@ -224,6 +228,7 @@ Begin Window CustomListDialog
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   52
+      Transparent     =   False
       Underline       =   False
       UseFocusRing    =   True
       Visible         =   False
@@ -267,6 +272,7 @@ Begin Window CustomListDialog
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   118
+      Transparent     =   False
       Underline       =   False
       UseFocusRing    =   True
       Visible         =   False
@@ -466,6 +472,7 @@ Begin Window CustomListDialog
       TabPanelIndex   =   0
       TabStop         =   True
       Top             =   152
+      Transparent     =   False
       Visible         =   True
       Width           =   13
    End
@@ -488,6 +495,7 @@ Begin Window CustomListDialog
       TabPanelIndex   =   0
       TabStop         =   True
       Top             =   152
+      Transparent     =   False
       Visible         =   True
       Width           =   13
    End

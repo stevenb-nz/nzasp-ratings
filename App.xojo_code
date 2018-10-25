@@ -136,6 +136,9 @@ Inherits Application
 
 	#tag MenuHandler
 		Function ListsExportLists() As Boolean Handles ListsExportLists.Action
+			'change date to previous date
+			'MainWindow.export_json(false)
+			'restore current date
 			MainWindow.save_seeds
 			MainWindow.export_json(true)
 			MainWindow.export_lists
