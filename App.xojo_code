@@ -154,12 +154,11 @@ Inherits Application
 			MainWindow.End_of_year_check.state = CheckBox.CheckedStates.Checked
 			MainWindow.export_json(false)
 			MainWindow.End_of_year_check.state = CheckBox.CheckedStates.Unchecked 
-			MainWindow.LDatePicker.ListIndex = current
 			else
 			MainWindow.LDatePicker.ListIndex = current-1
 			MainWindow.export_json(false)
-			MainWindow.LDatePicker.ListIndex = current
 			end
+			MainWindow.LDatePicker.ListIndex = current
 			end
 			Return True
 			
