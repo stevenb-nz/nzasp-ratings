@@ -2971,8 +2971,11 @@ End
 
 	#tag Method, Flags = &h0
 		Sub set_list_options(list_date as string)
-		  if val(left(list_date,4)) <2017 then
+		  Select Case val(left(list_date,4))
+		  case is < 2017
 		    prov_threshold = 35
+		  case 2017 to 2018
+		    prov_threshold = 30
 		  else
 		    prov_threshold = 30
 		  end
@@ -2982,10 +2985,16 @@ End
 
 	#tag Method, Flags = &h0
 		Sub set_rating_options(rating_date as string)
-		  if val(left(rating_date,4)) <2017 then
+		  Select Case val(left(rating_date,4))
+		  case is < 2017
 		    prov_threshold = 35
+		    'rating_system = "pre-2017"
+		  case 2017 to 2018
+		    prov_threshold = 30
+		    'rating_system = "2017"
 		  else
 		    prov_threshold = 30
+		    'rating_system = "ws tweak"
 		  end
 		  
 		End Sub
