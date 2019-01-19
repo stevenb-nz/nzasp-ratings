@@ -15,6 +15,7 @@ Class=player;player.xojo_code;&h000000005B28C7FF;&h0000000000000000;false
 Class=grade;grade.xojo_code;&h000000006D8337FF;&h0000000000000000;false
 Class=result;result.xojo_code;&h000000005C254FFF;&h0000000000000000;false
 Class=CLPlayer;CLPlayer.xojo_code;&h000000006AA8AFFF;&h0000000000000000;false
+RawData=normsdistinv;Data/normsdistinv.txt;&h000000006E24A7FF;&h0000000000000000;false
 DefaultWindow=MainWindow
 AppMenuBar=MainMenuBar
 MajorVersion=1
