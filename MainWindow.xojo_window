@@ -1274,6 +1274,8 @@ End
 		  dim old_rating as new Dictionary
 		  dim unknown as Boolean
 		  
+		  set_rating_options(get_tournament_date)
+		  
 		  sql = "SELECT id,player_id,start_rating, rating_status from rating_change WHERE tournament_id ="_
 		  +str(tournamentPicker.RowTag(tournamentPicker.ListIndex))
 		  data = app.ratingsDB.SQLSelect(sql)
@@ -1288,10 +1290,10 @@ End
 		    opponent_list = get_opponent_list(val(data.IdxField(2).StringValue),tournamentPicker.RowTag(tournamentPicker.ListIndex))
 		    games = opponent_list.Ubound+1
 		    expectancy = 0
-		    if rating_status.Value(data.IdxField(2).StringValue)<>"(new)" and rating_status.Value(data.IdxField(2).StringValue)<>"(prov)" then
+		    if rating_status.Value(data.IdxField(2).StringValue)<>"(new)" and (prov_system = "(new)" or rating_status.Value(data.IdxField(2).StringValue)<>"(prov)") then
 		      unknown = false
 		      for i=0 to opponent_list.Ubound
-		        if rating_status.Value(opponent_list(i)) = "(new)" or rating_status.Value(opponent_list(i)) = "(prov)" then
+		        if rating_status.Value(opponent_list(i)) = "(new)" or (prov_system <> "(new)" and rating_status.Value(opponent_list(i)) = "(prov)") then
 		          unknown = true
 		        end if
 		      next
@@ -1316,44 +1318,56 @@ End
 
 	#tag Method, Flags = &h0
 		Sub calculate_final_ratings()
-		  dim sql as string
+		  dim current_date,sql as string
 		  dim data as RecordSet
 		  dim opponent_list() as string
-		  dim games,i as integer
-		  dim accelerator, expectancy, final_rating, gain, gainfactor, kfactor, wins as double
+		  dim games,i,t_games as integer
+		  dim accelerator, accel_threshold, expectancy, final_rating, gain, kfactor, provfinal, wins as double
+		  dim accel_bool as Boolean
 		  dim rating_status as new Dictionary
 		  dim prov_rating as new Dictionary
 		  dim feedback_points as new Dictionary
 		  
-		  sql = "SELECT id, player_id, rating_status, prov_rating, games, wins from rating_change "+_
+		  sql = "SELECT id, player_id, start_rating, rating_status, prov_rating, games, wins from rating_change "+_
 		  "WHERE tournament_id ="+str(tournamentPicker.RowTag(tournamentPicker.ListIndex))
 		  data = app.ratingsDB.SQLSelect(sql)
 		  
 		  while not data.EOF
-		    prov_rating.value(data.IdxField(2).StringValue) = data.IdxField(4).StringValue
-		    rating_status.Value(data.IdxField(2).StringValue) = data.IdxField(3).StringValue
+		    prov_rating.value(data.IdxField(2).StringValue) = data.IdxField(5).StringValue
+		    rating_status.Value(data.IdxField(2).StringValue) = data.IdxField(4).StringValue
 		    feedback_points.Value(data.IdxField(2).StringValue) = "0.0"
 		    data.MoveNext
 		  wend
 		  data.MoveFirst
 		  while not data.EOF
 		    opponent_list = get_opponent_list(val(data.IdxField(2).StringValue),tournamentPicker.RowTag(tournamentPicker.ListIndex))
-		    final_rating = val(data.IdxField(4).StringValue)
+		    final_rating = val(data.IdxField(5).StringValue)
 		    games = opponent_list.Ubound+1
-		    wins = val(data.IdxField(6).StringValue)
+		    wins = val(data.IdxField(7).StringValue)
 		    expectancy = 0
 		    accelerator = 0
-		    if rating_status.Value(data.IdxField(2).StringValue)<>"(prov)" and rating_status.Value(data.IdxField(2).StringValue)<>"(new)" then
+		    accel_bool = (acc_application = "(est)" and rating_status.Value(data.IdxField(2).StringValue)<>"(prov)")_
+		    or (acc_application = "(prov/hist)" and (rating_status.Value(data.IdxField(2).StringValue) = "(prov)" or rating_status.Value(data.IdxField(2).StringValue) = "(hist)"))
+		    if (prov_system = "(new)" or rating_status.Value(data.IdxField(2).StringValue)<>"(prov)") and rating_status.Value(data.IdxField(2).StringValue)<>"(new)" then
 		      for i=0 to opponent_list.Ubound
 		        expectancy = expectancy + game_expectancy( final_rating, val(prov_rating.value(opponent_list(i))) )
 		      next
 		      app.ratingsDB.SQLExecute("UPDATE rating_change SET games="+str(games)+", expected_wins="+str(round(expectancy*10)/10)+_
 		      " WHERE tournament_id ="+str(tournamentPicker.RowTag(tournamentPicker.ListIndex))+" and player_id = "+data.IdxField(2).StringValue)
-		      kfactor = ( (3000-final_rating)/1000 )*games
-		      gainfactor = (3000-final_rating)/300
+		      if multiplier_games_bool then
+		        kfactor = ( (3000-final_rating)/1000 )*games
+		        if accel_bool then
+		          accel_threshold = ((3000-final_rating)*(7/acc_7_over))*games
+		        end
+		      else
+		        kfactor = ( (3000-final_rating)/1000 )*multiplier_multiplier
+		        if accel_bool then
+		          accel_threshold = ((3000-final_rating)*(7/acc_7_over))*multiplier_multiplier
+		        end
+		      end
 		      gain = (wins-expectancy) * kfactor
-		      if gain > games*gainfactor then
-		        accelerator = gain - games*gainfactor
+		      if accel_bool and (gain > accel_threshold) then
+		        accelerator = gain - accel_threshold
 		        #if DebugBuild then
 		          MsgBox data.idxfield(2).stringvalue + ": "+str(accelerator)
 		        #Endif
@@ -1361,29 +1375,63 @@ End
 		          feedback_points.value(opponent_list(i)) = str( val(feedback_points.value(opponent_list(i))) + accelerator*0.05)
 		        next
 		      end if
-		      final_rating = final_rating + gain + accelerator
+		      if accel_bool then
+		        final_rating = final_rating + gain + accelerator
+		      else
+		        final_rating = final_rating + gain
+		      end
 		      app.ratingsDB.SQLExecute("UPDATE rating_change SET end_rating="+str(final_rating)+_
 		      " WHERE tournament_id ="+str(tournamentPicker.RowTag(tournamentPicker.ListIndex))+" and player_id = "+data.IdxField(2).StringValue)
 		    end if
 		    data.MoveNext
 		  wend
+		  if prov_ws_fix_bool then
+		    data.MoveFirst
+		    while not data.EOF
+		      if (prov_system <> "(new)" and rating_status.Value(data.IdxField(2).StringValue)="(prov)") or rating_status.Value(data.IdxField(2).StringValue)="(new)" then
+		        current_date = format(val(MainWindow.TYear.text),"0000")+"-"+format(val(MainWindow.TMonth.text),"00")+"-"+format(val(MainWindow.TDay.text),"00")
+		        games = val(data.IdxField(6).StringValue)
+		        t_games = count_games(val(data.idxfield(2).stringvalue),get_prec_as_at_date(current_date))
+		        provfinal = (val(data.IdxField(5).StringValue)*games + val(data.IdxField(3).StringValue)*t_games) / (games + t_games)
+		        app.ratingsDB.SQLExecute("UPDATE rating_change SET end_rating="+str(provfinal)+_
+		        " WHERE tournament_id ="+str(tournamentPicker.RowTag(tournamentPicker.ListIndex))+" and player_id = "+data.IdxField(2).StringValue)
+		      end if
+		      data.MoveNext
+		    wend
+		  end
 		  sql = "SELECT id, player_id, games, end_rating from rating_change "+_
 		  "WHERE tournament_id ="+str(tournamentPicker.RowTag(tournamentPicker.ListIndex))
 		  data = app.ratingsDB.SQLSelect(sql)
 		  while not data.EOF
+		    accel_bool = acc_application = "(est)" or acc_application = "(prov/hist)"
 		    games = val(data.IdxField(3).StringValue)
 		    final_rating = val(data.IdxField(4).StringValue)
-		    final_rating = round(final_rating + val(feedback_points.Value(data.IdxField(2).StringValue)) + games / 3)
+		    if ppoints_bool then
+		      if accel_bool then
+		        final_rating = round(final_rating + val(feedback_points.Value(data.IdxField(2).StringValue)) + games / ppoints_rate)
+		      else
+		        final_rating = round(final_rating + games / ppoints_rate)
+		      end
+		    else
+		      if accel_bool then
+		        final_rating = round(final_rating + val(feedback_points.Value(data.IdxField(2).StringValue)))
+		      else
+		        final_rating = round(final_rating)
+		      end
+		    end
 		    if final_rating < 0 then final_rating = 0
 		    app.ratingsDB.SQLExecute("UPDATE rating_change SET end_rating="+str(final_rating)+_
 		    " WHERE tournament_id ="+str(tournamentPicker.RowTag(tournamentPicker.ListIndex))+" and player_id = "+data.IdxField(2).StringValue)
 		    data.MoveNext
 		  wend
+		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub calculate_new_ratings()
+		  set_rating_options(get_tournament_date)
+		  
 		  calculate_prov_ratings
 		  calculate_final_ratings
 		  
@@ -1397,7 +1445,7 @@ End
 		  dim opponent_list() as string
 		  dim rating_status as new Dictionary
 		  dim old_rating as new Dictionary
-		  dim provwinrate,provdiff,provtotal,wins,variance as double
+		  dim prov,provwinrate,provdiff,provtotal,wins,variance as double
 		  dim games,i,j,t_games as Integer
 		  
 		  sql = "SELECT id, player_id, start_rating, rating_status, prov_rating, games, wins from rating_change "+_
@@ -1412,11 +1460,10 @@ End
 		  data.MoveFirst
 		  do
 		    while not data.EOF
-		      if data.IdxField(4).stringvalue <> "(new)" and data.IdxField(4).stringvalue <> "(prov)" then
+		      if data.IdxField(4).stringvalue <> "(new)" and (prov_system = "(new)" or data.IdxField(4).stringvalue <> "(prov)") then
 		        app.ratingsDB.SQLExecute("UPDATE rating_change SET prov_rating="+data.IdxField(3).StringValue+_
 		        " WHERE tournament_id ="+str(tournamentPicker.RowTag(tournamentPicker.ListIndex))+" and player_id = "+data.IdxField(2).StringValue)
 		      else
-		        current_date = format(val(MainWindow.TYear.text),"0000")+"-"+format(val(MainWindow.TMonth.text),"00")+"-"+format(val(MainWindow.TDay.text),"00")
 		        opponent_list = get_opponent_list(val(data.IdxField(2).StringValue),tournamentPicker.RowTag(tournamentPicker.ListIndex))
 		        wins = val(data.IdxField(7).StringValue)
 		        games = val(data.IdxField(6).StringValue)
@@ -1444,18 +1491,22 @@ End
 		      data.MoveNext
 		    wend
 		    #If DebugBuild Then
-		      MsgBox str(variance)
+		      if variance > 0 then
+		        MsgBox str(variance)
+		      end
 		    #Endif
 		    data.MoveFirst
 		  loop until variance < 0.5
 		  
 		  while not data.EOF
-		    if data.IdxField(4).stringvalue <> "(new)" and data.IdxField(4).stringvalue <> "(prov)" then
+		    if data.IdxField(4).stringvalue <> "(new)" and (prov_system = "(new)" or data.IdxField(4).stringvalue <> "(prov)") then
 		      app.ratingsDB.SQLExecute("UPDATE rating_change SET prov_rating="+data.IdxField(3).StringValue+_
 		      " WHERE tournament_id ="+str(tournamentPicker.RowTag(tournamentPicker.ListIndex))+" and player_id = "+data.IdxField(2).StringValue)
 		    else
-		      current_date = format(val(MainWindow.TYear.text),"0000")+"-"+format(val(MainWindow.TMonth.text),"00")+"-"+format(val(MainWindow.TDay.text),"00")
-		      t_games = count_games(val(data.idxfield(2).stringvalue),get_prec_as_at_date(current_date))
+		      if not prov_ws_fix_bool then
+		        current_date = format(val(MainWindow.TYear.text),"0000")+"-"+format(val(MainWindow.TMonth.text),"00")+"-"+format(val(MainWindow.TDay.text),"00")
+		        t_games = count_games(val(data.idxfield(2).stringvalue),get_prec_as_at_date(current_date))
+		      end
 		      opponent_list = get_opponent_list(val(data.IdxField(2).StringValue),tournamentPicker.RowTag(tournamentPicker.ListIndex))
 		      wins = val(data.IdxField(7).StringValue)
 		      games = val(data.IdxField(6).StringValue)
@@ -1466,9 +1517,15 @@ End
 		        provtotal = provtotal + val(old_rating.value(opponent_list(i)))
 		      next
 		      provtotal = provtotal + provdiff*games
-		      provtotal = (provtotal + val(data.IdxField(3).StringValue)*t_games) / (games + t_games) 'move this to after final ratings for players with established ratings have been calculated in next revision of system
-		      app.ratingsDB.SQLExecute("UPDATE rating_change SET prov_rating="+str(provtotal)+", end_rating="+str(provtotal)+_
-		      " WHERE tournament_id ="+str(tournamentPicker.RowTag(tournamentPicker.ListIndex))+" and player_id = "+data.IdxField(2).StringValue)
+		      if prov_ws_fix_bool then
+		        prov = provtotal / games
+		        app.ratingsDB.SQLExecute("UPDATE rating_change SET prov_rating="+str(prov)+_
+		        " WHERE tournament_id ="+str(tournamentPicker.RowTag(tournamentPicker.ListIndex))+" and player_id = "+data.IdxField(2).StringValue)
+		      else
+		        provtotal = (provtotal + val(data.IdxField(3).StringValue)*t_games) / (games + t_games)
+		        app.ratingsDB.SQLExecute("UPDATE rating_change SET prov_rating="+str(provtotal)+", end_rating="+str(provtotal)+_
+		        " WHERE tournament_id ="+str(tournamentPicker.RowTag(tournamentPicker.ListIndex))+" and player_id = "+data.IdxField(2).StringValue)
+		      end
 		    end if
 		    data.MoveNext
 		  wend
@@ -2986,15 +3043,41 @@ End
 	#tag Method, Flags = &h0
 		Sub set_rating_options(rating_date as string)
 		  Select Case val(left(rating_date,4))
-		  case is < 2017
+		  case is < 1999
+		    rating_curve = 1988
+		  case 1999 to 2016
+		    acc_7_over = 0
+		    acc_application = ""
+		    multiplier_games_bool = false
+		    multiplier_multiplier = 20
+		    ppoints_bool = false
+		    ppoints_rate = 0
+		    prov_system = "(prov)"
 		    prov_threshold = 35
-		    'rating_system = "pre-2017"
+		    prov_ws_fix_bool = false
+		    rating_curve = 1999
 		  case 2017 to 2018
+		    acc_7_over = 2100
+		    acc_application = "(est)"
+		    multiplier_games_bool = true
+		    multiplier_multiplier = 0
+		    ppoints_bool = true
+		    ppoints_rate = 3
+		    prov_system = "(prov) averaged"
 		    prov_threshold = 30
-		    'rating_system = "2017"
+		    prov_ws_fix_bool = false
+		    rating_curve = 2017
 		  else
+		    acc_7_over = 2000
+		    acc_application = "(prov/hist)"
+		    multiplier_games_bool = false
+		    multiplier_multiplier = 15
+		    ppoints_bool = false
+		    ppoints_rate = 0
+		    prov_system = "(new)"
 		    prov_threshold = 30
-		    'rating_system = "ws tweak"
+		    prov_ws_fix_bool = false
+		    rating_curve = 2019
 		  end
 		  
 		End Sub
@@ -3115,7 +3198,43 @@ End
 
 
 	#tag Property, Flags = &h0
+		acc_7_over As Integer
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		acc_application As String
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		multiplier_games_bool As Boolean
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		multiplier_multiplier As Integer
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		ppoints_bool As Boolean
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		ppoints_rate As Integer
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		prov_system As String
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		prov_threshold As Integer
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		prov_ws_fix_bool As Boolean
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		rating_curve As Integer
 	#tag EndProperty
 
 
