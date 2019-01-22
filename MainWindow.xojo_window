@@ -1293,7 +1293,7 @@ End
 		    if rating_status.Value(data.IdxField(2).StringValue)<>"(new)" and (prov_system = "(new)" or rating_status.Value(data.IdxField(2).StringValue)<>"(prov)") then
 		      unknown = false
 		      for i=0 to opponent_list.Ubound
-		        if rating_status.Value(opponent_list(i)) = "(new)" or (prov_system <> "(new)" and rating_status.Value(opponent_list(i)) = "(prov)") then
+		        if rating_status.Value(opponent_list(i)) = "(new)" or (prov_system = "(prov) averaged" and rating_status.Value(opponent_list(i)) = "(prov)") then
 		          unknown = true
 		        end if
 		      next
@@ -1388,7 +1388,7 @@ End
 		  if prov_ws_fix_bool then
 		    data.MoveFirst
 		    while not data.EOF
-		      if (prov_system <> "(new)" and rating_status.Value(data.IdxField(2).StringValue)="(prov)") or rating_status.Value(data.IdxField(2).StringValue)="(new)" then
+		      if (prov_system = "(prov) averaged" and rating_status.Value(data.IdxField(2).StringValue)="(prov)") or rating_status.Value(data.IdxField(2).StringValue)="(new)" then
 		        current_date = format(val(MainWindow.TYear.text),"0000")+"-"+format(val(MainWindow.TMonth.text),"00")+"-"+format(val(MainWindow.TDay.text),"00")
 		        games = val(data.IdxField(6).StringValue)
 		        t_games = count_games(val(data.idxfield(2).stringvalue),get_prec_as_at_date(current_date))
@@ -4098,6 +4098,53 @@ End
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="prov_threshold"
+		Group="Behavior"
+		Type="Integer"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="acc_7_over"
+		Group="Behavior"
+		Type="Integer"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="acc_application"
+		Group="Behavior"
+		Type="String"
+		EditorType="MultiLineEditor"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="multiplier_games_bool"
+		Group="Behavior"
+		Type="Boolean"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="multiplier_multiplier"
+		Group="Behavior"
+		Type="Integer"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ppoints_bool"
+		Group="Behavior"
+		Type="Boolean"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ppoints_rate"
+		Group="Behavior"
+		Type="Integer"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="prov_system"
+		Group="Behavior"
+		Type="String"
+		EditorType="MultiLineEditor"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="prov_ws_fix_bool"
+		Group="Behavior"
+		Type="Boolean"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="rating_curve"
 		Group="Behavior"
 		Type="Integer"
 	#tag EndViewProperty
