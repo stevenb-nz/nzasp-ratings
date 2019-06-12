@@ -63,6 +63,7 @@ Begin Window AmendTNameDialog
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   52
+      Transparent     =   False
       Underline       =   False
       UseFocusRing    =   True
       Visible         =   True
@@ -90,6 +91,7 @@ Begin Window AmendTNameDialog
       Selectable      =   False
       TabIndex        =   1
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "Please enter a new name for this tourney."
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -129,6 +131,7 @@ Begin Window AmendTNameDialog
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   85
+      Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   80
@@ -160,6 +163,7 @@ Begin Window AmendTNameDialog
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   85
+      Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   80

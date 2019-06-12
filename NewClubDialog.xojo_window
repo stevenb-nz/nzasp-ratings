@@ -63,6 +63,7 @@ Begin Window NewClubDialog
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   52
+      Transparent     =   False
       Underline       =   False
       UseFocusRing    =   True
       Visible         =   True
@@ -90,6 +91,7 @@ Begin Window NewClubDialog
       Selectable      =   False
       TabIndex        =   1
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   "Create a new club with the following name and abbreviation:\n"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -124,6 +126,7 @@ Begin Window NewClubDialog
       Selectable      =   False
       TabIndex        =   2
       TabPanelIndex   =   0
+      TabStop         =   True
       Text            =   ""
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -163,6 +166,7 @@ Begin Window NewClubDialog
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   85
+      Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   80
