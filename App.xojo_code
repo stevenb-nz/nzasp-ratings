@@ -19,7 +19,6 @@ Inherits Application
 		    TournamentImportResults.Enabled = false
 		    TournamentConvertTOUFileDraw.Enabled = false
 		    TournamentConvertTOUFileResults.Enabled = false
-		    TournamentReloadTournament.Enabled = false
 		    TournamentResetTournament.Enabled = false
 		    TournamentDeleteTournament.Enabled = false
 		    TournamentSaveExpectancies.Enabled = false
@@ -29,7 +28,6 @@ Inherits Application
 		    TournamentImportResults.Enabled = true
 		    TournamentConvertTOUFileDraw.Enabled = true
 		    TournamentConvertTOUFileResults.Enabled = true
-		    TournamentReloadTournament.Enabled = true
 		    TournamentResetTournament.Enabled = true
 		    TournamentDeleteTournament.Enabled = true
 		    TournamentSaveExpectancies.Enabled = true
@@ -519,27 +517,8 @@ Inherits Application
 	#tag EndMenuHandler
 
 	#tag MenuHandler
-		Function TournamentReloadTournament() As Boolean Handles TournamentReloadTournament.Action
-			Dim n As Integer
-			
-			n = MsgBox("Do you really want to reload all the data for this tournament?", 36)
-			If n = 6 Then
-			MainWindow.reload_tournament
-			End If
-			
-			Return True
-			
-		End Function
-	#tag EndMenuHandler
-
-	#tag MenuHandler
 		Function TournamentResetTournament() As Boolean Handles TournamentResetTournament.Action
-			Dim n As Integer
-			
-			n = MsgBox("Do you really want to delete all the data for this tournament?", 36)
-			If n = 6 Then
-			MainWindow.reset_tournament
-			End If
+			ResetTournamentDialog.ShowModal
 			
 			Return True
 			

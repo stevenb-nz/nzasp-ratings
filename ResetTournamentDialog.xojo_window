@@ -145,7 +145,7 @@ Begin Window ResetTournamentDialog
          Width           =   200
       End
    End
-   Begin PushButton PushButton1
+   Begin PushButton OKButton
       AutoDeactivate  =   True
       Bold            =   False
       ButtonStyle     =   "0"
@@ -177,7 +177,7 @@ Begin Window ResetTournamentDialog
       Visible         =   True
       Width           =   80
    End
-   Begin PushButton PushButton2
+   Begin PushButton CancelButton
       AutoDeactivate  =   True
       Bold            =   False
       ButtonStyle     =   "0"
@@ -215,6 +215,44 @@ End
 #tag WindowCode
 #tag EndWindowCode
 
+#tag Events OKButton
+	#tag Event
+		Sub Action()
+		  'Dim n As Integer
+		  '
+		  'n = MsgBox("Do you really want to reload all the data for this tournament?", 36)
+		  'If n = 6 Then
+		  'MainWindow.reload_tournament
+		  'End If
+		  '
+		  'Return True
+		  '
+		  'Dim n As Integer
+		  '
+		  'n = MsgBox("Do you really want to delete all the data for this tournament?", 36)
+		  'If n = 6 Then
+		  'MainWindow.reset_tournament
+		  'End If
+		  '
+		  'Return True
+		  
+		  
+		  
+		  
+		  
+		  self.Close
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events CancelButton
+	#tag Event
+		Sub Action()
+		  self.Close
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag ViewBehavior
 	#tag ViewProperty
 		Name="Name"
