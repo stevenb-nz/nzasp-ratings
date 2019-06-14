@@ -2967,7 +2967,19 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub reload_tournament()
+		Sub reload_entries()
+		  dim tournament_id as integer
+		  
+		  tournament_id = TournamentPicker.RowTag(TournamentPicker.ListIndex)
+		  app.ratingsDB.SQLExecute("DELETE FROM rated_game WHERE tournament_id = "+str(tournament_id))
+		  app.ratingsDB.SQLExecute("DELETE FROM rating_change WHERE tournament_id = "+str(tournament_id))
+		  TournamentDetails.DeleteAllRows
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub reload_pairings()
 		  dim i, player_id, tournament_id as integer
 		  dim name(-1) as string
 		  
@@ -2994,13 +3006,28 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub reset_tournament()
-		  dim tournament_id as integer
+		Sub reload_results()
+		  dim i, player_id, tournament_id as integer
+		  dim name(-1) as string
 		  
 		  tournament_id = TournamentPicker.RowTag(TournamentPicker.ListIndex)
 		  app.ratingsDB.SQLExecute("DELETE FROM rated_game WHERE tournament_id = "+str(tournament_id))
 		  app.ratingsDB.SQLExecute("DELETE FROM rating_change WHERE tournament_id = "+str(tournament_id))
+		  
+		  for i = 1 to TournamentDetails.ListCount
+		    name.Append TournamentDetails.Cell(i-1,1)
+		  next
+		  
 		  TournamentDetails.DeleteAllRows
+		  
+		  for i = 0 to UBound(name)
+		    process_name(name(i))
+		    player_id = get_name_id(name(i))
+		    app.ratingsDB.SQLExecute("UPDATE rating_change SET seeding="+str(i+1)+_
+		    " WHERE tournament_id ="+str(tournament_id)+" and player_id = "+str(player_id))
+		  next
+		  
+		  load_tournament
 		  
 		End Sub
 	#tag EndMethod
