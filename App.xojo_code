@@ -390,7 +390,7 @@ Inherits Application
 			
 			n = MsgBox("Do you really want to delete this tournament?", 36)
 			If n = 6 Then
-			MainWindow.reset_tournament
+			MainWindow.remove_entries
 			MainWindow.delete_tournament
 			End If
 			

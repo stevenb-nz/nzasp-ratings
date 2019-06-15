@@ -2967,7 +2967,7 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub reload_entries()
+		Sub remove_entries()
 		  dim tournament_id as integer
 		  
 		  tournament_id = TournamentPicker.RowTag(TournamentPicker.ListIndex)
@@ -2979,7 +2979,7 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub reload_pairings()
+		Sub remove_pairings()
 		  dim i, player_id, tournament_id as integer
 		  dim name(-1) as string
 		  
@@ -3006,7 +3006,7 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub reload_results()
+		Sub remove_results()
 		  dim i, player_id, tournament_id as integer
 		  dim name(-1) as string
 		  

@@ -29,7 +29,7 @@ Begin Window ResetTournamentDialog
    Begin GroupBox ReloadGroupBox
       AutoDeactivate  =   True
       Bold            =   False
-      Caption         =   "Reload..."
+      Caption         =   "Remove..."
       Enabled         =   True
       Height          =   140
       HelpTag         =   ""
@@ -213,8 +213,28 @@ End
 #tag EndWindow
 
 #tag WindowCode
+	#tag Event
+		Sub Open()
+		  selectedButton = 1
+		  
+		End Sub
+	#tag EndEvent
+
+
+	#tag Property, Flags = &h0
+		selectedButton As Integer
+	#tag EndProperty
+
+
 #tag EndWindowCode
 
+#tag Events ReloadButton
+	#tag Event
+		Sub Action(index as Integer)
+		  selectedButton = index
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag Events OKButton
 	#tag Event
 		Sub Action()
@@ -236,9 +256,14 @@ End
 		  '
 		  'Return True
 		  
-		  
-		  
-		  
+		  select case selectedButton
+		  case 0
+		    'MsgBox "remove entries"
+		  case 1
+		    'MsgBox "remove pairings"
+		  case 2
+		    'MsgBox "remove results"
+		  end
 		  
 		  self.Close
 		  
