@@ -238,31 +238,13 @@ End
 #tag Events OKButton
 	#tag Event
 		Sub Action()
-		  'Dim n As Integer
-		  '
-		  'n = MsgBox("Do you really want to reload all the data for this tournament?", 36)
-		  'If n = 6 Then
-		  'MainWindow.reload_tournament
-		  'End If
-		  '
-		  'Return True
-		  '
-		  'Dim n As Integer
-		  '
-		  'n = MsgBox("Do you really want to delete all the data for this tournament?", 36)
-		  'If n = 6 Then
-		  'MainWindow.reset_tournament
-		  'End If
-		  '
-		  'Return True
-		  
 		  select case selectedButton
 		  case 0
-		    'MsgBox "remove entries"
+		    MainWindow.remove_entries
 		  case 1
-		    'MsgBox "remove pairings"
+		    MainWindow.remove_pairings
 		  case 2
-		    'MsgBox "remove results"
+		    MainWindow.remove_results
 		  end
 		  
 		  self.Close
@@ -502,5 +484,10 @@ End
 		InitialValue="True"
 		Type="Boolean"
 		EditorType="Boolean"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="selectedButton"
+		Group="Behavior"
+		Type="Integer"
 	#tag EndViewProperty
 #tag EndViewBehavior
