@@ -3008,26 +3008,9 @@ End
 	#tag Method, Flags = &h0
 		Sub remove_results()
 		  dim i, player_id, tournament_id as integer
-		  dim name(-1), pairing(-1) as string
-		  dim sql as string
-		  dim data0,data1,data2 as RecordSet
+		  dim name(-1) as string
 		  
 		  tournament_id = TournamentPicker.RowTag(TournamentPicker.ListIndex)
-		  
-		  sql = "SELECT player1_id,player2_id FROM rated_game WHERE tournament_id = "+str(tournament_id)
-		  data0 = app.ratingsDB.SQLSelect(sql)
-		  
-		  while not data0.EOF
-		    sql = "SELECT name FROM player WHERE id = "+data0.IdxField(1).StringValue
-		    data1 = app.ratingsDB.SQLSelect(sql)
-		    sql = "SELECT name FROM player WHERE id = "+data0.IdxField(2).StringValue
-		    data2 = app.ratingsDB.SQLSelect(sql)
-		    
-		    pairing.Append data1.IdxField(1).StringValue+","+data2.IdxField(1).StringValue
-		    
-		    data0.MoveNext
-		  wend
-		  
 		  app.ratingsDB.SQLExecute("DELETE FROM rated_game WHERE tournament_id = "+str(tournament_id))
 		  app.ratingsDB.SQLExecute("DELETE FROM rating_change WHERE tournament_id = "+str(tournament_id))
 		  
@@ -3043,12 +3026,6 @@ End
 		    app.ratingsDB.SQLExecute("UPDATE rating_change SET seeding="+str(i+1)+_
 		    " WHERE tournament_id ="+str(tournament_id)+" and player_id = "+str(player_id))
 		  next
-		  
-		  for i = 0 to UBound(pairing)
-		    process_pair(pairing(i))
-		  next
-		  
-		  calculate_expectancies
 		  
 		  load_tournament
 		  
