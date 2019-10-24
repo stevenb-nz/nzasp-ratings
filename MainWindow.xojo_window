@@ -54,7 +54,7 @@ Begin Window MainWindow
       Top             =   0
       Transparent     =   False
       Underline       =   False
-      Value           =   4
+      Value           =   0
       Visible         =   True
       Width           =   1200
       Begin Listbox AwardDetails
@@ -1201,6 +1201,41 @@ Begin Window MainWindow
          Underline       =   False
          Visible         =   True
          Width           =   120
+      End
+      Begin Label endDateLabel
+         AutoDeactivate  =   True
+         Bold            =   False
+         DataField       =   ""
+         DataSource      =   ""
+         Enabled         =   True
+         Height          =   20
+         HelpTag         =   ""
+         Index           =   -2147483648
+         InitialParent   =   "MainTabPanel"
+         Italic          =   False
+         Left            =   767
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   13
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Text            =   "Tournament end date:"
+         TextAlign       =   2
+         TextColor       =   &c00000000
+         TextFont        =   "System"
+         TextSize        =   0.0
+         TextUnit        =   0
+         Top             =   39
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   140
       End
    End
 End
