@@ -2077,6 +2077,53 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub export_player_history()
+		  'dim f as FolderItem
+		  'dim saveFile as TextOutputStream
+		  'dim i as integer
+		  'dim names() as string
+		  'dim names2() as string
+		  'dim awards() as string
+		  'dim awards2() as string
+		  'dim output as string
+		  '
+		  'f = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Awards_after_"+AYearPicker.Text+".csv")
+		  'saveFile = TextOutputStream.Create(f)
+		  'for i = 1 to AwardDetails.ListCount
+		  'if AwardDetails.Cell(i-1,1) <= AYearPicker.Text then
+		  'names.Append AwardDetails.Cell(i-1,2)
+		  'awards.Append AwardDetails.Cell(i-1,3)
+		  'end if
+		  'next
+		  'names.SortWith(awards)
+		  'for i = 1 to names.ubound
+		  'if names(i-1) = names(i) then
+		  'if awards(i-1) = "GM" then
+		  'awards(i) = "GM"
+		  'end if
+		  'if awards(i) = "GM" then
+		  'awards(i-1) = "GM"
+		  'end if
+		  'end if
+		  'next
+		  'for i= 1 to names.Ubound
+		  'if names(i-1) <> names(i) then
+		  'names2.append names(i-1)
+		  'awards2.append awards(i-1)
+		  'end
+		  'next
+		  'names2.append names(names.Ubound)
+		  'awards2.append awards(awards.Ubound)
+		  'for i = 0 to names2.Ubound
+		  'output = names2(i)+","+awards2(i)
+		  'saveFile.WriteLine (output)
+		  'next
+		  'saveFile.Close
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function game_expectancy(player_rating as integer, opponent_rating as integer) As double
 		  dim expected_game as double
 		  
@@ -2553,6 +2600,7 @@ End
 		    PlayerPicker.RowTag(i-1) = data.IdxField(1).StringValue
 		    data.MoveNext
 		  next
+		  PlayerMenu.Visible = True
 		  
 		End Sub
 	#tag EndMethod
@@ -3329,6 +3377,7 @@ End
 	#tag Event
 		Sub Change()
 		  TournamentMenu.Visible = False
+		  PlayerMenu.Visible = False
 		  AwardsMenu.Visible = False
 		  ListsMenu.Visible = False
 		  select case MainTabPanel.Value

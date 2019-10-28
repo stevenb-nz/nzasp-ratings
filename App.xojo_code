@@ -33,6 +33,8 @@ Inherits Application
 		    TournamentSaveExpectancies.Enabled = true
 		  end if
 		  
+		  PlayerExportPlayerHistory.Enabled = MainWindow.PlayerPicker.ListIndex > -1
+		  
 		  AwardsExportAwards.Enabled = MainWindow.AYearPicker.ListIndex > -1
 		  
 		  sortcheck = true
@@ -166,6 +168,14 @@ Inherits Application
 	#tag MenuHandler
 		Function ListsSaveSeeds() As Boolean Handles ListsSaveSeeds.Action
 			mainWindow.save_seeds
+			Return True
+			
+		End Function
+	#tag EndMenuHandler
+
+	#tag MenuHandler
+		Function PlayerExportPlayerHistory() As Boolean Handles PlayerExportPlayerHistory.Action
+			mainWindow.export_player_history
 			Return True
 			
 		End Function
