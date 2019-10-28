@@ -54,7 +54,7 @@ Begin Window MainWindow
       Top             =   0
       Transparent     =   False
       Underline       =   False
-      Value           =   0
+      Value           =   2
       Visible         =   True
       Width           =   1200
       Begin Listbox AwardDetails

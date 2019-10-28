@@ -178,6 +178,20 @@ Begin Menu MainMenuBar
          Visible = True
       End
    End
+   Begin MenuItem PlayerMenu
+      SpecialMenu = 0
+      Text = "&Player"
+      Index = -2147483648
+      AutoEnable = True
+      Visible = False
+      Begin MenuItem PlayerExportPlayerHistory
+         SpecialMenu = 0
+         Text = "Export Player History"
+         Index = -2147483648
+         AutoEnable = False
+         Visible = True
+      End
+   End
    Begin MenuItem AwardsMenu
       SpecialMenu = 0
       Text = "&Awards"
