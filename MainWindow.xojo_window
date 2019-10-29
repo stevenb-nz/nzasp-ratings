@@ -2083,14 +2083,18 @@ End
 		  dim i,j as integer
 		  dim output as string
 		  
-		  f = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Player_history_for_"+PlayerPicker.Text+".csv")
+		  f = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Player_history_for_"+PlayerPicker.Text.replaceall(" ","_").replaceall("'","")+".csv")
 		  saveFile = TextOutputStream.Create(f)
 		  output = "Date,Tournament,Start rating,Games,Wins,End rating,Grade,Place,Total wins,Total games,per cent"
 		  saveFile.WriteLine (output)
 		  for i = 0 to PlayerDetails.listcount-1
 		    output = PlayerDetails.Cell(i,1)
 		    for j = 2 to 11
-		      output = output + "," + PlayerDetails.Cell(i,j)
+		      if PlayerDetails.cell(i,j).InStr(",") < 0 then
+		        output = output + "," + PlayerDetails.Cell(i,j)
+		      else
+		        output = output + "," + chr(34) + PlayerDetails.Cell(i,j) + chr(34)
+		      end
 		    next
 		    saveFile.WriteLine (output)
 		  next
