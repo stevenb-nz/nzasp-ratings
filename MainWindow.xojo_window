@@ -1993,19 +1993,21 @@ End
 		      output1 = output1 + "," + ListDetails.cell(i-1,6)
 		      output1 = output1 + "," + str(round((val(ListDetails.cell(i-1,5))/val(ListDetails.cell(i-1,6)))*100))+"%"
 		      saveFile1.WriteLine (output1)
-		      current_player_id = ListDetails.cell(i-1,0)
-		      sql = "SELECT * FROM rating_change JOIN tournament ON rating_change.tournament_id=tournament.id JOIN as_at_date ON tournament.as_at_date_id=as_at_date.id"+_
-		      "WHERE as_at_date.list_date='"+list_date+"' and rating_change.player_id='"+current_player_id+"'"
-		      data = app.ratingsDB.SQLSelect(sql)
-		      'if not data.EOF then
-		      'output4 = str(ranking)
-		      'output4 = output4 + "," + ListDetails.cell(i-1,1) + get_current_award(val(ListDetails.cell(i-1,0)),left(list_date,4))
-		      'output4 = output4 + "," + str(round(val(ListDetails.cell(i-1,2))))
-		      'output4 = output4 + "," + ListDetails.cell(i-1,5)
-		      'output4 = output4 + "," + ListDetails.cell(i-1,6)
-		      'output4 = output4 + "," + str(round((val(ListDetails.cell(i-1,5))/val(ListDetails.cell(i-1,6)))*100))+"%"
-		      'saveFile4.WriteLine (output4)
-		      'end if
+		      if ranking < 21 then
+		        current_player_id = ListDetails.cell(i-1,0)
+		        sql = "SELECT * FROM rating_change JOIN tournament ON rating_change.tournament_id=tournament.id JOIN as_at_date ON tournament.as_at_date_id=as_at_date.id "+_
+		        "WHERE as_at_date.list_date='"+list_date+"' and rating_change.player_id='"+current_player_id+"'"
+		        data = app.ratingsDB.SQLSelect(sql)
+		        if data.RecordCount = 1 then
+		          output4 = str(ranking)
+		          output4 = output4 + "," + ListDetails.cell(i-1,1) + get_current_award(val(ListDetails.cell(i-1,0)),left(list_date,4))
+		          output4 = output4 + "," + str(round(val(ListDetails.cell(i-1,2))))
+		          output4 = output4 + "," + ListDetails.cell(i-1,5)
+		          output4 = output4 + "," + ListDetails.cell(i-1,6)
+		          output4 = output4 + "," + str(round((val(ListDetails.cell(i-1,5))/val(ListDetails.cell(i-1,6)))*100))+"%"
+		          saveFile4.WriteLine (output4)
+		        end if
+		      end if
 		    end if
 		    output2=""
 		    if val(ListDetails.cell(i-1,4)) > 0 then
