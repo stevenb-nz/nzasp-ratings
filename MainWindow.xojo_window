@@ -54,7 +54,7 @@ Begin Window MainWindow
       Top             =   0
       Transparent     =   False
       Underline       =   False
-      Value           =   2
+      Value           =   4
       Visible         =   True
       Width           =   1200
       Begin Listbox AwardDetails
@@ -1945,9 +1945,10 @@ End
 	#tag Method, Flags = &h0
 		Sub export_lists()
 		  dim eileen_mclean_games,i,majors_score,ranking,wcs_qual_games as integer
-		  dim f1,f2,f3 as FolderItem
-		  dim savefile1,savefile2,savefile3 as TextOutputStream
-		  dim list_date,last_masters,last_nationals,output1,output2,output3 as string
+		  dim f1,f2,f3,f4 as FolderItem
+		  dim savefile1,savefile2,savefile3,savefile4 as TextOutputStream
+		  dim current_player_id,list_date,last_masters,last_nationals,output1,output2,output3,output4,sql as string
+		  dim data as RecordSet
 		  dim nats, tts, wcs as Boolean
 		  
 		  if End_of_year_check.State = CheckBox.CheckedStates.Unchecked then
@@ -1971,14 +1972,18 @@ End
 		  if wcs then
 		    f3 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Rankings").Child(list_date+" Worlds qualifiers.csv")
 		  end if
+		  f4 = SpecialFolder.Documents.Child("Scrabble").Child("Ratings").Child("NZASP").Child("Rankings").Child(list_date+" Rankings top 20.csv")
 		  saveFile1 = TextOutputStream.Create(f1)
 		  saveFile2 = TextOutputStream.Create(f2)
 		  if wcs then
 		    saveFile3 = TextOutputStream.Create(f3)
 		  end if
+		  saveFile4 = TextOutputStream.Create(f4)
+		  
 		  ranking = 0
 		  for i = 1 to ListDetails.ListCount
 		    output1=""
+		    output4=""
 		    if val(ListDetails.cell(i-1,4)) >= 40 then
 		      ranking = ranking + 1
 		      output1 = str(ranking)
@@ -1988,6 +1993,19 @@ End
 		      output1 = output1 + "," + ListDetails.cell(i-1,6)
 		      output1 = output1 + "," + str(round((val(ListDetails.cell(i-1,5))/val(ListDetails.cell(i-1,6)))*100))+"%"
 		      saveFile1.WriteLine (output1)
+		      current_player_id = ListDetails.cell(i-1,0)
+		      sql = "SELECT * FROM rating_change JOIN tournament ON rating_change.tournament_id=tournament.id JOIN as_at_date ON tournament.as_at_date_id=as_at_date.id"+_
+		      "WHERE as_at_date.list_date='"+list_date+"' and rating_change.player_id='"+current_player_id+"'"
+		      data = app.ratingsDB.SQLSelect(sql)
+		      'if not data.EOF then
+		      'output4 = str(ranking)
+		      'output4 = output4 + "," + ListDetails.cell(i-1,1) + get_current_award(val(ListDetails.cell(i-1,0)),left(list_date,4))
+		      'output4 = output4 + "," + str(round(val(ListDetails.cell(i-1,2))))
+		      'output4 = output4 + "," + ListDetails.cell(i-1,5)
+		      'output4 = output4 + "," + ListDetails.cell(i-1,6)
+		      'output4 = output4 + "," + str(round((val(ListDetails.cell(i-1,5))/val(ListDetails.cell(i-1,6)))*100))+"%"
+		      'saveFile4.WriteLine (output4)
+		      'end if
 		    end if
 		    output2=""
 		    if val(ListDetails.cell(i-1,4)) > 0 then
@@ -2021,6 +2039,7 @@ End
 		  if wcs then
 		    savefile3.Close
 		  end if
+		  savefile4.Close
 		  
 		  ListDetails.ColumnSortDirection(1) = Listbox.SortAscending
 		  ListDetails.SortedColumn = 1
