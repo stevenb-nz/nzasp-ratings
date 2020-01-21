@@ -156,6 +156,13 @@ Begin Menu MainMenuBar
          AutoEnable = False
          Visible = True
       End
+      Begin MenuItem TournamentLaunchRRPairings
+         SpecialMenu = 0
+         Text = "Launch RR Pairings"
+         Index = -2147483648
+         AutoEnable = True
+         Visible = True
+      End
       Begin MenuItem TournamentResetTournament
          SpecialMenu = 0
          Text = "Reset Tournament..."

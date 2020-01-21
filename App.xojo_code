@@ -517,6 +517,18 @@ Inherits Application
 	#tag EndMenuHandler
 
 	#tag MenuHandler
+		Function TournamentLaunchRRPairings() As Boolean Handles TournamentLaunchRRPairings.Action
+			dim f as FolderItem
+			
+			f = SpecialFolder.Applications.Child("RR Pairings.app")
+			f.Launch
+			
+			Return True
+			
+		End Function
+	#tag EndMenuHandler
+
+	#tag MenuHandler
 		Function TournamentNewTournament() As Boolean Handles TournamentNewTournament.Action
 			NewTournamentDialog.ShowModal
 			
