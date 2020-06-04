@@ -1597,6 +1597,8 @@ End
 		  'current_minus_two = current_minus_two - 14 weeks
 		  'end
 		  
+		  'resumption-date = ?
+		  
 		  dim sql as string
 		  dim data as RecordSet
 		  sql = "SELECT games FROM rating_change "+_
