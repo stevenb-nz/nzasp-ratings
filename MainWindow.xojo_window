@@ -1593,6 +1593,10 @@ End
 		  
 		  current_minus_two = str(val(left(current_date,4))-2)+right(current_date,6)
 		  
+		  'if resumption_date is-before current_date and resumption_date is-after current_minus_two then
+		  'current_minus_two = current_minus_two - 14 weeks
+		  'end
+		  
 		  dim sql as string
 		  dim data as RecordSet
 		  sql = "SELECT games FROM rating_change "+_
