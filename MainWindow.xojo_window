@@ -1696,12 +1696,17 @@ End
 		  dim res_date as String
 		  dim sus_weeks as Integer
 		  
+		  res_date = "2020-07-01"
+		  sus_weeks = 14
 		  
-		  'if resumption_date is-before current_date and resumption_date is-after current_minus_two then
-		  'current_minus_two = current_minus_two - 14 weeks
-		  'end
-		  
-		  'resumption-date = ?
+		  if current_date > res_date and cdate_less_2 < res_date then
+		    d = new Date
+		    d.SQLDate = cdate_less_2
+		    d.TotalSeconds = d.TotalSeconds - 60*60*24*7*sus_weeks
+		    return d.SQLDate
+		  else
+		    return cdate_less_2
+		  end
 		  
 		End Function
 	#tag EndMethod
