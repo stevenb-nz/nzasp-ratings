@@ -1592,7 +1592,7 @@ End
 		  dim current_minus_two as string
 		  
 		  current_minus_two = str(val(left(current_date,4))-2)+right(current_date,6)
-		  current_minus_two = covidise(current_minus_two)
+		  current_minus_two = covidise(current_date,current_minus_two)
 		  
 		  dim sql as string
 		  dim data as RecordSet
@@ -1691,7 +1691,12 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function covidise(2b4_cdate as string) As String
+		Function covidise(current_date as string, cdate_less_2 as String) As String
+		  dim d as Date
+		  dim res_date as String
+		  dim sus_weeks as Integer
+		  
+		  
 		  'if resumption_date is-before current_date and resumption_date is-after current_minus_two then
 		  'current_minus_two = current_minus_two - 14 weeks
 		  'end
