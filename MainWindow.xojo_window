@@ -1592,12 +1592,7 @@ End
 		  dim current_minus_two as string
 		  
 		  current_minus_two = str(val(left(current_date,4))-2)+right(current_date,6)
-		  
-		  'if resumption_date is-before current_date and resumption_date is-after current_minus_two then
-		  'current_minus_two = current_minus_two - 14 weeks
-		  'end
-		  
-		  'resumption-date = ?
+		  current_minus_two = covidise(current_minus_two)
 		  
 		  dim sql as string
 		  dim data as RecordSet
@@ -1691,6 +1686,17 @@ End
 		    next
 		    return wcs_qual_games
 		  end if
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function covidise(2b4_cdate as string) As String
+		  'if resumption_date is-before current_date and resumption_date is-after current_minus_two then
+		  'current_minus_two = current_minus_two - 14 weeks
+		  'end
+		  
+		  'resumption-date = ?
 		  
 		End Function
 	#tag EndMethod
