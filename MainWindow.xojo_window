@@ -1250,6 +1250,8 @@ End
 		  dim gl2y,atg as integer
 		  
 		  current_minus_two = str(val(left(current_date,4))-2)+right(current_date,6)
+		  current_minus_two = covidise2(current_date,current_minus_two)
+		  current_minus_two = covidise1(current_date,current_minus_two)
 		  
 		  sql = "SELECT games,wins,end_rating,list_date FROM rating_change "+_
 		  "JOIN tournament ON rating_change.tournament_id=tournament.id JOIN as_at_date ON tournament.as_at_date_id=as_at_date.id "+_
