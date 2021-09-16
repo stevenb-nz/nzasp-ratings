@@ -1250,6 +1250,7 @@ End
 		  dim gl2y,atg as integer
 		  
 		  current_minus_two = str(val(left(current_date,4))-2)+right(current_date,6)
+		  current_minus_two = covidise3(current_date,current_minus_two)
 		  current_minus_two = covidise2(current_date,current_minus_two)
 		  current_minus_two = covidise1(current_date,current_minus_two)
 		  
@@ -1594,6 +1595,7 @@ End
 		  dim current_minus_two as string
 		  
 		  current_minus_two = str(val(left(current_date,4))-2)+right(current_date,6)
+		  current_minus_two = covidise3(current_date,current_minus_two)
 		  current_minus_two = covidise2(current_date,current_minus_two)
 		  current_minus_two = covidise1(current_date,current_minus_two)
 		  
@@ -1721,6 +1723,27 @@ End
 		  dim sus_weeks as Integer
 		  
 		  res_date = "2020-09-16"
+		  sus_weeks = 5
+		  
+		  if current_date > res_date and cdate_less_2 < res_date then
+		    d = new Date
+		    d.SQLDate = cdate_less_2
+		    d.TotalSeconds = d.TotalSeconds - 60*60*24*7*sus_weeks
+		    return d.SQLDate
+		  else
+		    return cdate_less_2
+		  end
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function covidise3(current_date as string, cdate_less_2 as String) As String
+		  dim d as Date
+		  dim res_date as String
+		  dim sus_weeks as Integer
+		  
+		  res_date = "2021-09-15"
 		  sus_weeks = 5
 		  
 		  if current_date > res_date and cdate_less_2 < res_date then
